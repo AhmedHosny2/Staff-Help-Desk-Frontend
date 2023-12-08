@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-
+import Login from './pages/login/login';
 // Imported Components
 import NavbarComponent from './components/navbar/navbar.jsx';
 
@@ -19,6 +19,7 @@ function App() {
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/home" element={<HomePage />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="/test" element={<TestPage />} />
 				</Routes>
 			</AnimatePresence>

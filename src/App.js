@@ -9,6 +9,8 @@ import NavbarComponent from './components/navbar/navbar.jsx';
 import LandingPage from './pages/landing/landing.jsx';
 import HomePage from './pages/home/home.jsx';
 import TestPage from './pages/test/test.jsx';
+import Login from './pages/login/login.jsx';
+import Signup from './pages/signup/signup.jsx';
 
 function App() {
 	const location = useLocation();
@@ -20,6 +22,8 @@ function App() {
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/test" element={<TestPage />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
 				</Routes>
 			</AnimatePresence>
 		</>

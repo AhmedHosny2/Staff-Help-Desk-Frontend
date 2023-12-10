@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Login from './pages/login/login';
 // Imported Components
 
 // Imported Pages

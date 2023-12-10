@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // Imported Components
+import LandingNavbar from '../../components/landingNavbar/landingNavbar';
 import LandingParallax from './components/landingParallax/landingParallax';
 import Hero from './components/hero/hero';
 import LogoCloud from './components/logoCloud/logoCloud';
@@ -27,6 +28,7 @@ const containerVariants = {
 export default function LandingPage() {
 	return (
 		<>
+			<LandingNavbar />
 			<motion.div
 				className="bg-primary"
 				variants={containerVariants}

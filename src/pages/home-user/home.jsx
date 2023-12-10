@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+// Imported Components
+import Navbar from '../../components/navbar/navbar';
+
 const containerVariants = {
 	hidden: {
 		x: '100vw',
@@ -18,6 +21,7 @@ const containerVariants = {
 export default function HomePage() {
 	return (
 		<>
+			<Navbar />
 			<motion.div
 				className="bg-accent h-screen"
 				variants={containerVariants}

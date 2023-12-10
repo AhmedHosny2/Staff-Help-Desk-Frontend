@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+import SubLinks from './components/subLinks';
+
 const navigationVariants = {
 	hidden: {
 		y: -250,
@@ -52,29 +54,13 @@ export default function NavbarComponent() {
 								tabIndex={0}
 								className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
 							>
-								<li>
-									<a>Item 1</a>
-								</li>
-								<li>
-									<a>Item 1</a>
-								</li>
-								<li>
-									<a>Item 3</a>
-								</li>
+								<SubLinks />
 							</ul>
 						</div>
 						<a className="btn btn-ghost text-xl">DeskMate</a>
 						<div className="navbar-center hidden lg:flex">
 							<ul className="menu menu-horizontal px-1">
-								<li>
-									<a>Item 1</a>
-								</li>
-								<li>
-									<a>Item 2</a>
-								</li>
-								<li>
-									<a>Item 3</a>
-								</li>
+								<SubLinks />
 							</ul>
 						</div>
 					</div>
@@ -156,7 +142,7 @@ export default function NavbarComponent() {
 									<a className="justify-between">Profile</a>
 								</li>
 								<li>
-									<a>Login</a>
+									<a>Logout</a>
 								</li>
 							</ul>
 						</div>

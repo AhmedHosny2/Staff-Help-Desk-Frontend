@@ -48,14 +48,14 @@ export default function ProfileInfo({ profileObject }) {
 	return (
 		<>
 			<div className="flex items-center justify-between mb-4">
-				<h1 className="text-xl font-bold">Profile Info</h1>
+				<h1 className="text-xl font-bold text-neutral-content">Profile Info</h1>
 				<div>
 					{isEditing ? (
 						<button onClick={handleSaveClick} className="btn btn-primary">
 							Save
 						</button>
 					) : (
-						<button onClick={handleEditClick} className="btn btn-outline">
+						<button onClick={handleEditClick} className="btn btn-outline btn-primary">
 							Edit
 						</button>
 					)}
@@ -65,7 +65,7 @@ export default function ProfileInfo({ profileObject }) {
 			<div className="grid lg:grid-cols-2 gap-4">
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">First Name</span>
+						<span className="label-text text-neutral-content">First Name</span>
 					</label>
 					{isEditing ? (
 						<input
@@ -86,7 +86,7 @@ export default function ProfileInfo({ profileObject }) {
 
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">Last Name</span>
+						<span className="label-text text-neutral-content">Last Name</span>
 					</label>
 					{isEditing ? (
 						<input
@@ -107,7 +107,7 @@ export default function ProfileInfo({ profileObject }) {
 
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">Email</span>
+						<span className="label-text text-neutral-content">Email</span>
 					</label>
 					{isEditing ? (
 						<input
@@ -128,7 +128,7 @@ export default function ProfileInfo({ profileObject }) {
 
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">Password</span>
+						<span className="label-text text-neutral-content">Password</span>
 					</label>
 					{isEditing ? (
 						<input
@@ -138,13 +138,7 @@ export default function ProfileInfo({ profileObject }) {
 							className="input input-bordered w-full max-w-xs"
 						/>
 					) : (
-						// <input
-						// 	type="text"
-						// 	placeholder={editedPassword}
-						// 	className="input input-bordered w-full max-w-xs"
-						// 	disabled
-						// />
-						<div className="diff h-[3rem] w-[20rem]">
+						<div className="diff h-[3rem] w-[20rem] rounded-[1rem]">
 							<div className="diff-item-1">
 								<div className="bg-primary text-primary-content text-md grid place-content-center">
 									{editedPassword}
@@ -162,7 +156,7 @@ export default function ProfileInfo({ profileObject }) {
 
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">Phone Number</span>
+						<span className="label-text text-neutral-content">Phone Number</span>
 					</label>
 					{isEditing ? (
 						<input
@@ -183,7 +177,7 @@ export default function ProfileInfo({ profileObject }) {
 
 				<div className="form-control">
 					<label className="label">
-						<span className="label-text">Address</span>
+						<span className="label-text text-neutral-content">Address</span>
 					</label>
 					{isEditing ? (
 						<input

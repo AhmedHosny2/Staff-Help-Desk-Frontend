@@ -1,7 +1,16 @@
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+
+// Restrict access to pages
+import PublicRoute from './utils/PublicRoute.js';
+
+// Restrict access to pages
+import PrivateRoute from './utils/PrivateRoute.js';
+
 // Imported Components
+import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
@@ -13,14 +22,16 @@ import Profile from './pages/profile/profile.jsx';
 
 function App() {
 	const location = useLocation();
+	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
 	return (
 		<>
+			<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} />
 			<AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/home/user" element={<HomePage />} />
 					<Route path="/test" element={<TestPage />} />
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/profile" element={<Profile />} />
 				</Routes>
@@ -30,3 +41,52 @@ function App() {
 }
 
 export default App;
+
+{
+	/* <>
+	<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} />
+	<AnimatePresence>
+		<Routes location={location} key={location.key}>
+			<Route
+				path="/"
+				element={
+					<PublicRoute
+						element={<LandingPage />}
+						isLoggedin={loggedin}
+						fallbackPath="/profile"
+					/>
+				}
+			/>
+			<Route
+				path="/home/user"
+				element={
+					<PrivateRoute element={<HomePage />} isLoggedin={loggedin} fallbackPath="/login" />
+				}
+			/>
+			<Route
+				path="/login"
+				element={
+					<PublicRoute
+						element={<Login setLoggedin={setLoggedin} />}
+						isLoggedin={loggedin}
+						fallbackPath="/profile"
+					/>
+				}
+			/>
+
+			<Route
+				path="/signup"
+				element={
+					<PublicRoute element={<Signup />} isLoggedin={loggedin} fallbackPath="/profile" />
+				}
+			/>
+			<Route
+				path="/profile"
+				element={
+					<PrivateRoute element={<Profile />} isLoggedin={loggedin} fallbackPath="/login" />
+				}
+			/>
+		</Routes>
+	</AnimatePresence>
+</>; */
+}

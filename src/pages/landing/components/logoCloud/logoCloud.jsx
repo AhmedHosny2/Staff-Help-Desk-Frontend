@@ -64,7 +64,7 @@ export default function LogoCloud() {
 
 	return (
 		<>
-			<h2 className="text-center mb-16 text-3xl font-bold text-neutral-content">
+			<h2 className="text-center mb-16 text-3xl font-bold">
 				Trusted by <u className="">2,000,000+</u> users
 			</h2>
 			<section>

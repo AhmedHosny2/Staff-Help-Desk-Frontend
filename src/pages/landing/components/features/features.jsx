@@ -45,8 +45,8 @@ export default function Features() {
 
 	return (
 		<>
-			<h2 className="text-center my-16 text-3xl font-bold text-neutral-content">Features</h2>
-			<div className="max-w-5xl mx-auto flex items-center justify-center sm:w-90 md:w-70">
+			<h2 className="text-center my-16 text-3xl font-bold">Features</h2>
+			<div className="flex flex-align-center max-w-5xl mx-auto sm:w-90 md:w-70 mx-4">
 				<ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
 					<li>
 						<div className="timeline-middle">

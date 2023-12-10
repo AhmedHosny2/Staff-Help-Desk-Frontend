@@ -80,13 +80,11 @@
 //   );
 // =======
 import LoginComponent from './components/login';
-import LandingNavbar from './../../components/landingNavbar/landingNavbar';
 
-export default function Login() {
+export default function Login({ setLoggedin }) {
 	return (
 		<>
-			<LandingNavbar />
-			<LoginComponent />
+			<LoginComponent setLoggedin={setLoggedin} />
 		</>
 	);
 }

@@ -1,6 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import GoogleButton from './googleButton';
 
-export default function LoginComponent() {
+export default function LoginComponent({ setLoggedin }) {
+	const navigate = useNavigate();
+	const handleLoginClick = () => {
+		setLoggedin(true);
+		localStorage.setItem('loggedin', 'true');
+		setTimeout(() => {
+			navigate('/profile');
+		}, 2500);
+	};
+
 	return (
 		<>
 			<div className="hero min-h-screen">
@@ -39,7 +49,9 @@ export default function LoginComponent() {
 								</label>
 							</div>
 							<div className="form-control mt-6">
-								<button className="btn btn-primary">Login</button>
+								<button className="btn btn-primary" onClick={handleLoginClick}>
+									Login
+								</button>
 								<label className="">
 									<a href="#" className="label-text-alt link link-hover">
 										New here? Sign up now

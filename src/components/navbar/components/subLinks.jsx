@@ -8,13 +8,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">User Item 1</a>
+							<a href="#">Home</a>
 						</li>
 						<li>
 							<a href="#">User Item 2</a>
 						</li>
 						<li>
-							<a href="#">User Item 3</a>
+							<a href="#">Knowledge Base</a>
 						</li>
 					</>
 				);

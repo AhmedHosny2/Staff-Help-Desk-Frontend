@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.notifDrop {
+	position: relative;
+	z-index: 9999;
+}
+
+.bringBack {
+	position: relative;
+	z-index: -9999;
+}
+
+/* .card1 {
+	position: relative;
+	z-index: 99999;
+} */

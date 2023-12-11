@@ -6,7 +6,8 @@ export function formatDate(inputDate, mood = 0) {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        hour12: true,
+        second: 'numeric',
+        hour12: false,
     };
 
     const date = new Date(inputDate);

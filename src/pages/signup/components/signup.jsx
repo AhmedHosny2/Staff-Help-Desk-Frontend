@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { customFetch } from '../../../utils/Fetch';
-import { getToastStyle } from '../../../utils/toastStyle';
+import { getToastStyle, removeToast } from '../../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function SignupComponent() {
@@ -14,6 +14,7 @@ export default function SignupComponent() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [role, setRole] = useState('User');
+	const [signingup, setSigningup] = useState(false);
 
 	const [isPending, setIsPending] = useState(false);
 	const [error, setError] = useState(null);
@@ -22,8 +23,9 @@ export default function SignupComponent() {
 	const [statusText, setStatusText] = useState('');
 	const [message, setMessage] = useState('');
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleSignupClick = async () => {
+		setSigningup(true);
+
 		const body = {
 			firstName,
 			lastName,
@@ -33,11 +35,13 @@ export default function SignupComponent() {
 			email,
 			password,
 		};
+
 		const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
 			process.env.REACT_APP_USERS_URL + 'signup',
 			'POST',
 			body
 		);
+
 		setError(err);
 		setIsPending(isPen);
 		setData(newData);
@@ -46,13 +50,19 @@ export default function SignupComponent() {
 		setMessage(newMessage);
 
 		if (newStatusText === 'success') {
-			toast.success('Successfully Signed Up', getToastStyle());
+			// Step 1: Save toast id using var
+			var toastId = toast.success('Successfully Signed Up', getToastStyle());
 			setTimeout(() => {
 				navigate('/login');
+				setSigningup(false);
 			}, 4000);
 		} else {
-			toast.error(newMessage, getToastStyle());
+			// Step 2: This is the other toast (for error)
+			toastId = toast.error(newMessage, getToastStyle());
+			setSigningup(false);
 		}
+		// Step 3: always call this function
+		removeToast(toast, toastId);
 	};
 
 	return (
@@ -169,10 +179,17 @@ export default function SignupComponent() {
 							<div className="form-control mt-6">
 								<button
 									className="btn btn-primary"
-									onClick={handleSubmit}
-									disabled={isPending}
+									onClick={handleSignupClick}
+									disabled={signingup}
 								>
-									{isPending ? 'Signing up...' : 'Signup'}
+									{signingup ? (
+										<>
+											Signing Up
+											<span className="loading loading-spinner loading-xs"></span>
+										</>
+									) : (
+										'Signup'
+									)}
 								</button>
 								<label className="">
 									<a href="#" className="label-text-alt link link-hover">
@@ -184,6 +201,7 @@ export default function SignupComponent() {
 					</div>
 				</div>
 			</div>
+			{/* Step 4: Add Toaster Tag */}
 			<Toaster />
 		</>
 	);

@@ -28,7 +28,8 @@ const navigationVariants = {
 export default function NavbarComponent({ setLoggedin }) {
 	const navigate = useNavigate();
 
-	const handleLogoutClick = () => {
+	const handleLogoutClick = (e) => {
+		e.preventDefault();
 		setLoggedin(false);
 		localStorage.setItem('loggedin', 'false');
 		setTimeout(() => {

@@ -7,7 +7,7 @@ const textColor = getTailwindColorHex('text-neutral');
 
 export const getToastStyle = () => {
 	return {
-		duration: 3000,
+		duration: 2000,
 		style: {
 			padding: '16px',
 			color: textColor,
@@ -18,4 +18,10 @@ export const getToastStyle = () => {
 			secondary: secondaryColor,
 		},
 	};
+};
+
+export const removeToast = (toast, toastId) => {
+	setTimeout(() => {
+		toast.remove(toastId);
+	}, 2300);
 };

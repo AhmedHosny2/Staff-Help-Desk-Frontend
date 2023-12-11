@@ -1,4 +1,3 @@
-// <<<<<<< HEAD
 // import { Link } from "react-router-dom";
 // import { motion } from "framer-motion";
 // import { customFetch } from "../../utils/Fetch";
@@ -78,7 +77,6 @@
 //       </motion.div>
 //     </>
 //   );
-// =======
 import LoginComponent from './components/login';
 
 export default function Login({ setLoggedin }) {

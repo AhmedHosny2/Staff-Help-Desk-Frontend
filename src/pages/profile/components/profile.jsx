@@ -138,19 +138,47 @@ export default function ProfileComponent() {
 									>
 										Resume
 									</a>
+									<div className="collapse">
+										<input type="checkbox" />
+										<div className="collapse-title text-xl font-medium text-neutral-content">
+											Customize your entire profile here!
+										</div>
+										<div className="collapse-content">
+											<p className="text-neutral-content">Add a profile picture</p>
+											<p className="text-neutral-content">Update profile info</p>
+											<p className="text-neutral-content">Change your password</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div className="flex flex-col">
-								<span className="text-neutral-content uppercase font-bold tracking-wider mb-2">
-									Skills
-								</span>
-								<ul>
-									<li className="text-neutral-content mb-2">JavaScript</li>
-									<li className="text-neutral-content mb-2">React</li>
-									<li className="text-neutral-content mb-2">Node.js</li>
-									<li className="text-neutral-content mb-2">HTML/CSS</li>
-									<li className="text-neutral-content mb-2">Tailwind Css</li>
-								</ul>
+							<div className="flex justify-center items-center">
+								<label className="swap swap-flip text-9xl">
+									{/* this hidden checkbox controls the state */}
+									<input type="checkbox" />
+
+									<div className="swap-on stats shadow bg-secondary">
+										<div className="stat">
+											<div className="stat-title text-lg text-neutral-content">
+												Tickets opened
+											</div>
+											<div className="stat-value text-neutral-content">89,400</div>
+											<div className="stat-desc text-neutral-content">
+												Jan 1st - Feb 1st
+											</div>
+										</div>
+									</div>
+									<div className="swap-off stats shadow bg-secondary">
+										<div className="stat">
+											<div className="stat-title text-lg text-neutral-content">
+												Total Page Views
+											</div>
+											<div className="stat-value text-neutral-content">2,500</div>
+											<div className="stat-desc text-neutral-content">
+												21% more than last month
+											</div>
+										</div>
+									</div>
+								</label>
 							</div>
 						</div>
 					</div>

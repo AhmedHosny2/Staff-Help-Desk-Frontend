@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { customFetch } from '../../../utils/Fetch';
-import { getToastStyle, removeToast } from '../../../utils/toastStyle';
-import toast, { Toaster } from 'react-hot-toast';
 import ProfileInfo from './profileInfo';
 
-const profileObject = {
+const defaultProfile = {
 	id: '123456789',
 	firstname: 'John',
 	lastname: 'Doe',
@@ -14,13 +12,58 @@ const profileObject = {
 	phonenumber: '12345678901',
 	address: 'Giu Street 56 Aprt.7',
 	role: 'user',
-	bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuererisus non velit egestas suscipit. Nunc finibus vel ante id euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam erat volutpat. Nulla vulputate pharetra tellus, in luctus risus rhoncus id.`,
+	bio: '',
+	links: {
+		linkedIn: '',
+		youtube: '',
+		facebook: '',
+		instagram: '',
+		twitter: '',
+	},
 };
 
 export default function ProfileComponent() {
-	const [profileData, setProfileData] = useState(profileObject);
+	const [profileData, setProfileData] = useState(defaultProfile);
 	const [isEditing, setIsEditing] = useState(false);
-	const [editedBio, setEditedBio] = useState(profileObject.bio);
+	const [editedBio, setEditedBio] = useState(null);
+	const [linkName, setLinkName] = useState('');
+	const [linkUrl, setLinkUrl] = useState('');
+
+	const handleLinkClick = (e, linkName, linkUrl) => {
+		e.preventDefault();
+
+		if (!isEditing) {
+			const finalLink = (profileData.links && profileData.links[linkName.toLowerCase()]) || '';
+
+			if (finalLink.trim() !== '') {
+				if (!finalLink.startsWith('https://')) {
+					window.open('https://' + finalLink, '_blank');
+				} else {
+					window.open(finalLink, '_blank');
+				}
+			}
+		} else {
+			setLinkName(linkName);
+
+			const finalLink = (profileData.links && profileData.links[linkName.toLowerCase()]) || '';
+			setLinkUrl(finalLink || profileData.links[linkName.toLowerCase()] || '');
+
+			// Show the modal
+			const modal = document.getElementById('my_modal_2');
+			modal.showModal();
+		}
+	};
+
+	const updateLinksObject = (linkName, linkUrl) => {
+		// Make a copy of the profileData to avoid mutating the state directly
+		const updatedProfileData = { ...profileData };
+
+		// Update the link in the copied profileData with lowercase linkName
+		updatedProfileData.links[linkName.toLowerCase()] = linkUrl;
+
+		// Update the state with the modified profileData
+		setProfileData(updatedProfileData);
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -30,12 +73,8 @@ export default function ProfileComponent() {
 					'GET'
 				);
 
-				if (newStatusText === 'success') {
-					var toastId = toast.success('Successfully Signed Up', getToastStyle());
-				} else {
-					toastId = toast.error(err, getToastStyle());
-				}
-				removeToast(toast, toastId);
+				setProfileData(newData);
+				setEditedBio(newData.bio);
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
@@ -76,14 +115,14 @@ export default function ProfileComponent() {
 									</g>
 								</svg>
 								<h1 className="text-xl font-bold text-neutral-content">
-									{profileObject.firstname} {profileObject.lastname}
+									{profileData.firstName} {profileData.lastName}
 								</h1>
 								<div classNameName="badge badge-xs my-2">
-									<span className="text-neutral-content">{profileObject.id}</span>
+									<span className="text-xs text-neutral-content">{profileData._id}</span>
 								</div>
 								<p className="">
 									<div classNameName="badge badge-accent pt-1 pb-2">
-										<span className="text-neutral-content">{profileObject.role}</span>
+										<span className="text-neutral-content">{profileData.role}</span>
 									</div>
 								</p>
 								<div className="mt-6 flex flex-wrap gap-4 justify-center">
@@ -154,6 +193,7 @@ export default function ProfileComponent() {
 									aria-label="Visit TrendyMinds LinkedIn"
 									href=""
 									target="_blank"
+									onClick={(e) => handleLinkClick(e, 'LinkedIn', linkUrl)}
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -171,6 +211,7 @@ export default function ProfileComponent() {
 									aria-label="Visit TrendyMinds YouTube"
 									href=""
 									target="_blank"
+									onClick={(e) => handleLinkClick(e, 'Youtube', linkUrl)}
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +229,7 @@ export default function ProfileComponent() {
 									aria-label="Visit TrendyMinds Facebook"
 									href=""
 									target="_blank"
+									onClick={(e) => handleLinkClick(e, 'Facebook', linkUrl)}
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -205,6 +247,7 @@ export default function ProfileComponent() {
 									aria-label="Visit TrendyMinds Instagram"
 									href=""
 									target="_blank"
+									onClick={(e) => handleLinkClick(e, 'Instagram', linkUrl)}
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -222,6 +265,7 @@ export default function ProfileComponent() {
 									aria-label="Visit TrendyMinds Twitter"
 									href=""
 									target="_blank"
+									onClick={(e) => handleLinkClick(e, 'Twitter', linkUrl)}
 								>
 									<svg
 										className="h-6"
@@ -236,8 +280,36 @@ export default function ProfileComponent() {
 								</Link>
 							</div>
 
+							<dialog id="my_modal_2" className="modal">
+								<div className="modal-box">
+									<h3 className="font-bold text-lg">
+										Update {linkName}
+										{"'s "} link?
+									</h3>
+									<div className="flex items-center justify-center mt-4">
+										<input
+											type="text"
+											placeholder="Type here"
+											className="input input-bordered input-xs w-full max-w-xs"
+											value={linkUrl}
+											onChange={(e) => setLinkUrl(e.target.value)}
+										/>
+									</div>
+								</div>
+								<form method="dialog" className="modal-backdrop">
+									<button
+										onClick={() => {
+											document.getElementById('my_modal_2').close();
+											updateLinksObject(linkName, linkUrl);
+										}}
+									>
+										close
+									</button>
+								</form>
+							</dialog>
+
 							<ProfileInfo
-								profileObject={profileObject}
+								profileData={profileData}
 								isEditing={isEditing}
 								setIsEditing={setIsEditing}
 								editedBio={editedBio}
@@ -246,7 +318,6 @@ export default function ProfileComponent() {
 					</div>
 				</div>
 			</div>
-			<Toaster />
 		</>
 	);
 }

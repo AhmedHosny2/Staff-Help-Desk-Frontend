@@ -1,47 +1,74 @@
 import React, { useState, useEffect } from 'react';
+import { customFetch } from '../../../utils/Fetch';
+import { getToastStyle, removeToast } from '../../../utils/toastStyle';
+import toast, { Toaster } from 'react-hot-toast';
 
-export default function ProfileInfo({ profileObject, isEditing, setIsEditing, editedBio }) {
-	const [editedFirstName, setEditedFirstName] = useState(profileObject.firstname);
-	const [editedLastName, setEditedLastName] = useState(profileObject.lastname);
-	const [editedEmail, setEditedEmail] = useState(profileObject.email);
-	const [editedPassword, setEditedPassword] = useState(profileObject.password);
-	const [editedPhoneNumber, setEditedPhoneNumber] = useState(profileObject.phonenumber);
-	const [editedAddress, setEditedAddress] = useState(profileObject.address);
+export default function ProfileInfo({ profileData, isEditing, setIsEditing, editedBio }) {
+	const [editedFirstName, setEditedFirstName] = useState(profileData.firstName);
+	const [editedLastName, setEditedLastName] = useState(profileData.lastName);
+	const [editedEmail, setEditedEmail] = useState(profileData.email);
+	const [editedPassword, setEditedPassword] = useState('');
+	const [editedPhoneNumber, setEditedPhoneNumber] = useState(profileData.phonenumber);
+	const [editedAddress, setEditedAddress] = useState(profileData.address);
+
+	const [isPending, setIsPending] = useState(false);
+	const [error, setError] = useState(null);
+	const [data, setData] = useState(null);
+	const [status, setStatus] = useState(null);
+	const [statusText, setStatusText] = useState('');
+	const [message, setMessage] = useState('');
+
+	useEffect(() => {
+		// Update state values when profileData changes
+		setEditedFirstName(profileData.firstName);
+		setEditedLastName(profileData.lastName);
+		setEditedEmail(profileData.email);
+		setEditedPassword('');
+		setEditedPhoneNumber(profileData.phoneNumber);
+		setEditedAddress(profileData.address);
+	}, [profileData]);
 
 	const generateStars = () => {
-		return '*'.repeat(editedPassword.length);
+		return '*'.repeat(6);
 	};
 
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const handleSaveClick = () => {
-		// You would typically make a fetch request to the backend here
-		// with the edited data. For now, let's just log the edited data.
-		// console.log({
-		// 	id,
-		// 	firstName: editedFirstName,
-		// 	lastName: editedLastName,
-		// 	email: editedEmail,
-		// 	password: editedPassword,
-		// 	phoneNumber: editedPhoneNumber,
-		// 	address: editedAddress,
-		// });
-
-		// Exit edit mode after saving
+	const handleSaveClick = async () => {
 		setIsEditing(false);
 
-		// You can also call a callback function to update the data in the parent component
-		// onSave({
-		// 	id,
-		// 	firstName: editedFirstName,
-		// 	lastName: editedLastName,
-		// 	email: editedEmail,
-		// 	password: editedPassword,
-		// 	phoneNumber: editedPhoneNumber,
-		// 	address: editedAddress,
-		// });
+		const body = {
+			firstName: editedFirstName,
+			lastName: editedLastName,
+			email: editedEmail,
+			password: editedPassword,
+			phoneNumber: editedPhoneNumber,
+			address: editedAddress,
+			bio: editedBio,
+			links: profileData.links,
+		};
+
+		const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+			process.env.REACT_APP_USERS_URL + 'profile',
+			'PUT',
+			body
+		);
+
+		setError(err);
+		setIsPending(isPen);
+		setData(newData);
+		setStatus(newStatus);
+		setStatusText(newStatusText);
+		setMessage(newMessage);
+
+		if (newStatusText === 'success') {
+			var toastId = toast.success('Your Profile is up to Date!', getToastStyle());
+		} else {
+			toastId = toast.error(newMessage, getToastStyle());
+		}
+		removeToast(toast, toastId);
 	};
 
 	return (
@@ -140,7 +167,7 @@ export default function ProfileInfo({ profileObject, isEditing, setIsEditing, ed
 						<div className="diff h-[3rem] w-[20rem] rounded-[1rem]">
 							<div className="diff-item-1">
 								<div className="bg-primary text-primary-content text-md grid place-content-center">
-									{editedPassword}
+									hidden
 								</div>
 							</div>
 							<div className="diff-item-2">
@@ -195,6 +222,7 @@ export default function ProfileInfo({ profileObject, isEditing, setIsEditing, ed
 					)}
 				</div>
 			</div>
+			<Toaster />
 		</>
 	);
 }

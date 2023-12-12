@@ -126,18 +126,19 @@ export default function ProfileComponent() {
 									</div>
 								</p>
 								<div className="mt-6 flex flex-wrap gap-4 justify-center">
+									<input type="file" />
 									<Link
 										href="#"
 										className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
 									>
-										Contact
+										Upload
 									</Link>
-									<a
+									<Link
 										href="#"
 										className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
 									>
 										Resume
-									</a>
+									</Link>
 									<div className="collapse">
 										<input type="checkbox" />
 										<div className="collapse-title text-xl font-medium text-neutral-content">

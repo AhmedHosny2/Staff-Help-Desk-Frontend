@@ -1,4 +1,4 @@
-import itSupport from '../../../../assets/itsupport.jpg';
+import itSupport from '../../../../assets/itsupport3.jpg';
 
 export default function Hero() {
 	return (

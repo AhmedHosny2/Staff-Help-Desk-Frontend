@@ -8,8 +8,8 @@ import GoogleButton from './googleButton';
 export default function LoginComponent({ setLoggedin }) {
 	const navigate = useNavigate();
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState('test@example.com');
+	const [password, setPassword] = useState('pass1');
 	const [loggingin, setLoggingin] = useState(false);
 
 	const [isPending, setIsPending] = useState(false);

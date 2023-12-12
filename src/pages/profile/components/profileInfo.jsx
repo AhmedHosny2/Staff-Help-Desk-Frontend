@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function ProfileInfo({ profileObject }) {
-	const [isEditing, setIsEditing] = useState(false);
+export default function ProfileInfo({ profileObject, isEditing, setIsEditing, editedBio }) {
 	const [editedFirstName, setEditedFirstName] = useState(profileObject.firstname);
 	const [editedLastName, setEditedLastName] = useState(profileObject.lastname);
 	const [editedEmail, setEditedEmail] = useState(profileObject.email);

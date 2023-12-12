@@ -1,4 +1,8 @@
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { customFetch } from '../../../utils/Fetch';
+import { getToastStyle, removeToast } from '../../../utils/toastStyle';
+import toast, { Toaster } from 'react-hot-toast';
 import ProfileInfo from './profileInfo';
 
 const profileObject = {
@@ -6,13 +10,40 @@ const profileObject = {
 	firstname: 'John',
 	lastname: 'Doe',
 	email: 'john@example.com',
-	password: 'Stecki10',
-	phonenumber: '01008419319',
-	address: 'Street 200; Building 7A; 3rd floor, aprmt 7',
+	password: 'John123',
+	phonenumber: '12345678901',
+	address: 'Giu Street 56 Aprt.7',
 	role: 'user',
+	bio: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuererisus non velit egestas suscipit. Nunc finibus vel ante id euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam erat volutpat. Nulla vulputate pharetra tellus, in luctus risus rhoncus id.`,
 };
 
 export default function ProfileComponent() {
+	const [profileData, setProfileData] = useState(profileObject);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedBio, setEditedBio] = useState(profileObject.bio);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+					process.env.REACT_APP_USERS_URL + 'profile',
+					'GET'
+				);
+
+				if (newStatusText === 'success') {
+					var toastId = toast.success('Successfully Signed Up', getToastStyle());
+				} else {
+					toastId = toast.error(err, getToastStyle());
+				}
+				removeToast(toast, toastId);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+
+		fetchData();
+	}, []);
+
 	return (
 		<>
 			<div className="container mx-auto py-8">
@@ -87,14 +118,32 @@ export default function ProfileComponent() {
 					<div className="col-span-4 sm:col-span-9">
 						<div className="bg-neutral shadow rounded-lg p-6">
 							<h2 className="text-xl font-bold mb-4 text-neutral-content">About Me</h2>
-							<p className="text-neutral-content">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus est
-								vitae tortor ullamcorper, ut vestibulum velit convallis. Aenean posuere
-								risus non velit egestas suscipit. Nunc finibus vel ante id euismod.
-								Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-								cubilia Curae; Aliquam erat volutpat. Nulla vulputate pharetra tellus, in
-								luctus risus rhoncus id.
-							</p>
+							{isEditing ? (
+								<textarea
+									className="textarea textarea-ghost textarea-lg w-full text-sm"
+									style={{
+										height: '7rem',
+										minHeight: '7rem',
+										maxHeight: '10rem',
+									}}
+									placeholder="Bio"
+									value={editedBio}
+									onChange={(e) => setEditedBio(e.target.value)}
+								></textarea>
+							) : (
+								<textarea
+									className="textarea textarea-ghost textarea-lg w-full text-sm"
+									style={{
+										height: '7rem',
+										minHeight: '7rem',
+										maxHeight: '10rem',
+									}}
+									placeholder="Bio"
+									value={editedBio}
+									onChange={(e) => setEditedBio(e.target.value)}
+									disabled
+								></textarea>
+							)}
 
 							<h3 className="font-semibold text-center mt-3 -mb-2 text-neutral-content">
 								Find me on
@@ -187,11 +236,17 @@ export default function ProfileComponent() {
 								</Link>
 							</div>
 
-							<ProfileInfo profileObject={profileObject} />
+							<ProfileInfo
+								profileObject={profileObject}
+								isEditing={isEditing}
+								setIsEditing={setIsEditing}
+								editedBio={editedBio}
+							/>
 						</div>
 					</div>
 				</div>
 			</div>
+			<Toaster />
 		</>
 	);
 }

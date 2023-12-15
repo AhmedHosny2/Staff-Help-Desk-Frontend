@@ -33,7 +33,8 @@ export default function Info({ data }) {
 								<th>{agent._id}</th>
 								<td>{`${agent.firstName} ${agent.lastName}`}</td>
 								<td>{agent.role}</td>
-								<td>{agent.priorityMode}</td>
+								{/* <td>{agent.priorityMode}</td> */}
+								<td>medium</td>
 							</tr>
 						))}
 					</tbody>

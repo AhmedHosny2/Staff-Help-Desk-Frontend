@@ -44,7 +44,8 @@ const addTable = (pdf, yPosition, tableData) => {
 			agent._id,
 			`${agent.firstName} ${agent.lastName}`,
 			agent.role,
-			agent.priorityMode,
+			// agent.priorityMode,
+			'medium',
 		]),
 	});
 };

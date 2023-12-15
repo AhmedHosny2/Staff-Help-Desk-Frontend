@@ -1,9 +1,9 @@
 import ProfileComponent from './components/profile';
 
-export default function Profile() {
+export default function Profile({ setProfilePic }) {
 	return (
 		<>
-			<ProfileComponent />
+			<ProfileComponent setProfilePic={setProfilePic} />
 		</>
 	);
 }

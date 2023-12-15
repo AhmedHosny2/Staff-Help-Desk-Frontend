@@ -21,15 +21,17 @@ const addSection = (pdf, yPosition, title, content) => {
 };
 
 const addSection2 = (pdf, yPosition, title, countTitle, agent) => {
+	console.log('START OF AGENT');
+	console.log(agent);
 	pdf.setFontSize(14);
 	pdf.setFont(undefined, 'bold');
 	pdf.text(0.5, yPosition, title);
 	pdf.setFont(undefined, 'normal');
-	const { id, name, role, count } = agent;
-	pdf.text(0.8, yPosition + 0.3, 'Agent ID: ' + id.toString());
-	pdf.text(0.8, yPosition + 0.6, 'Agent Name: ' + name.toString());
+	const { agentId, agentName, role, openedTickets } = agent;
+	pdf.text(0.8, yPosition + 0.3, 'Agent ID: ' + agentId.toString());
+	pdf.text(0.8, yPosition + 0.6, 'Agent Name: ' + agentName.toString());
 	pdf.text(0.8, yPosition + 0.9, 'Agent Role: ' + role.toString());
-	pdf.text(0.8, yPosition + 1.2, countTitle + count.toString());
+	pdf.text(0.8, yPosition + 1.2, countTitle + openedTickets.toString());
 };
 
 const addTable = (pdf, yPosition, tableData) => {
@@ -38,7 +40,12 @@ const addTable = (pdf, yPosition, tableData) => {
 		theme: 'plain',
 		startY: yPosition,
 		head: [['ID', 'Name', 'Role', 'Priority']],
-		body: tableData.map((agent) => [agent.id, agent.name, agent.role, agent.priorityMode]),
+		body: tableData.map((agent) => [
+			agent._id,
+			`${agent.firstName} ${agent.lastName}`,
+			agent.role,
+			agent.priorityMode,
+		]),
 	});
 };
 
@@ -57,13 +64,14 @@ const generatePDF = (chartIds, chartTitles, data, tableData) => {
 
 	addSection(pdf, 4, 'Number of Tickets:', data.numberOfTickets);
 	addSection(pdf, 4.5, 'Average Rating:', data.averageRating + ' stars');
-	addSection(pdf, 5, 'Most Frequent Issue Type:', data.mostFrequentIssueType + ' issues');
+	// addSection(pdf, 5, 'Most Frequent Issue Type:', data.mostFrequentIssueType + ' issues');
+	addSection(pdf, 5, 'Most Frequent Issue Type:', 'Software', ' issues');
 	addSection2(
 		pdf,
 		5.5,
 		'Agent With Most Open Tickets:-',
 		'Number of open tickets: ',
-		data.agentWithMostOpenTickets
+		data.agentWithMostOpenedTickets
 	);
 	addSection2(
 		pdf,
@@ -130,15 +138,11 @@ const Charts1 = ({ data }) => {
 		const myChart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
-				labels: data.averageRatingPerAgent.map((agent) => agent.name),
+				labels: data.agentsStats.map((agent) => agent.agentName),
 				datasets: [
 					{
 						label: 'Number of Solved Tickets',
-						data: [
-							data.numberOfSolvedTicketsAgent1,
-							data.numberOfSolvedTicketsAgent2,
-							data.numberOfSolvedTicketsAgent3,
-						],
+						data: data.agentsStats.map((agent) => agent.solvedTickets),
 						borderColor: neutralContentColor,
 						backgroundColor: [primaryColor, secondaryColor, accentColor],
 						hoverOffset: 4,
@@ -159,6 +163,7 @@ const Charts1 = ({ data }) => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, [
+		data.agentsStats,
 		data.averageRatingPerAgent,
 		data.numberOfSolvedTicketsAgent1,
 		data.numberOfSolvedTicketsAgent2,
@@ -177,11 +182,11 @@ const Charts2 = ({ data }) => {
 		const myChart = new Chart(ctx, {
 			type: 'bar', // Change the chart type to 'bar' for the bar chart
 			data: {
-				labels: data.averageRatingPerAgent.map((agent) => agent.name),
+				labels: data.agentsStats.map((agent) => agent.agentName),
 				datasets: [
 					{
 						label: 'Average Rating Per Agent',
-						data: data.averageRatingPerAgent.map((agent) => agent.averageRating),
+						data: data.agentsStats.map((agent) => agent.avgRating),
 						borderColor: neutralContentColor,
 						backgroundColor: [primaryColor, secondaryColor, accentColor],
 						borderWidth: 1,
@@ -202,7 +207,7 @@ const Charts2 = ({ data }) => {
 			myChart.destroy();
 			window.removeEventListener('resize', handleResize);
 		};
-	}, [data.averageRatingPerAgent]);
+	}, [data.agentsStats, data.averageRatingPerAgent]);
 
 	return <canvas id="myChart2" ref={chartRef}></canvas>;
 };

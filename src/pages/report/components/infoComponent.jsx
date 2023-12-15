@@ -1,13 +1,11 @@
 export default function Info({ data }) {
-	const agents = data.agents;
+	const agents = data.agents.data;
 
 	const rating = data.averageRating;
 	const tickets = data.numberOfTickets;
 	const issue = data.mostFrequentIssueType;
-	const openTickets = data.agentWithMostOpenTickets;
+	const openTickets = data.agentWithMostOpenedTickets;
 	const closedTickets = data.agentWithMostSolvedTickets;
-
-	console.log(openTickets);
 
 	return (
 		<>
@@ -31,9 +29,9 @@ export default function Info({ data }) {
 					</thead>
 					<tbody>
 						{agents.map((agent) => (
-							<tr key={agent.id} className="hover">
-								<th>{agent.id}</th>
-								<td>{agent.name}</td>
+							<tr key={agent._id} className="hover">
+								<th>{agent._id}</th>
+								<td>{`${agent.firstName} ${agent.lastName}`}</td>
 								<td>{agent.role}</td>
 								<td>{agent.priorityMode}</td>
 							</tr>
@@ -63,19 +61,19 @@ export default function Info({ data }) {
 				<h2 className="text-md font-bold mt-6">
 					Agent With Most Open Tickets:
 					<ul className="text-md font-normal ml-10">
-						<li>Agent ID: {openTickets.id}</li>
-						<li>Agent Name: {openTickets.name}</li>
+						<li>Agent ID: {openTickets.agentId}</li>
+						<li>Agent Name: {openTickets.agentName}</li>
 						<li>Agent Role: {openTickets.role}</li>
-						<li>Number of Open Tickets: {openTickets.count}</li>
+						<li>Number of Open Tickets: {openTickets.openedTickets}</li>
 					</ul>
 				</h2>
 				<h2 className="text-md font-bold mt-6">
 					Agent With Most Solved Tickets:
 					<ul className="text-md font-normal ml-10">
-						<li>Agent ID: {closedTickets.id}</li>
-						<li>Agent Name: {closedTickets.name}</li>
+						<li>Agent ID: {closedTickets.agentId}</li>
+						<li>Agent Name: {closedTickets.agentName}</li>
 						<li>Agent Role: {closedTickets.role}</li>
-						<li>Number of Solved Tickets: {closedTickets.count}</li>
+						<li>Number of Solved Tickets: {closedTickets.solvedTickets}</li>
 					</ul>
 				</h2>
 			</div>

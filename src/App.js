@@ -24,9 +24,10 @@ import Report from './pages/report/report.jsx';
 function App() {
 	const location = useLocation();
 	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
+	const [profilePic, setProfilePic] = useState(null);
 	return (
 		<>
-			<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} />
+			<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} profilePic={profilePic} />
 			<AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
@@ -34,7 +35,7 @@ function App() {
 					<Route path="/test" element={<TestPage />} />
 					<Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
 					<Route path="/signup" element={<Signup />} />
-					<Route path="/profile" element={<Profile />} />
+					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
 				</Routes>
 			</AnimatePresence>

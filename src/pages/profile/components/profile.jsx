@@ -163,7 +163,7 @@ export default function ProfileComponent({ setProfilePic }) {
 		};
 
 		fetchData();
-	}, [added]);
+	}, [added, setProfilePic]);
 
 	return (
 		<>

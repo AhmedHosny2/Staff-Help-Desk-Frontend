@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+import { customFetch } from '../../utils/Fetch';
 import SubLinks from './components/subLinks';
 
 const navigationVariants = {
@@ -25,7 +27,7 @@ const navigationVariants = {
 	},
 };
 
-export default function NavbarComponent({ setLoggedin, profilePic }) {
+export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic }) {
 	const navigate = useNavigate();
 
 	const handleLogoutClick = (e) => {
@@ -36,6 +38,23 @@ export default function NavbarComponent({ setLoggedin, profilePic }) {
 			navigate('/');
 		}, 2500);
 	};
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+					process.env.REACT_APP_USERS_URL + 'profile',
+					'GET'
+				);
+
+				setProfilePic(newData.profilePic);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+
+		fetchData();
+	}, [setProfilePic]);
 
 	return (
 		<>

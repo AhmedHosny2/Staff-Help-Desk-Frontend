@@ -27,7 +27,12 @@ function App() {
 	const [profilePic, setProfilePic] = useState(null);
 	return (
 		<>
-			<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} profilePic={profilePic} />
+			<NavbarParent
+				loggedin={loggedin}
+				setLoggedin={setLoggedin}
+				profilePic={profilePic}
+				setProfilePic={setProfilePic}
+			/>
 			<AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />

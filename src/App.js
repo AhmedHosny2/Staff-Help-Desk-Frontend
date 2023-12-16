@@ -23,7 +23,7 @@ import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
-
+import Ticket from "./pages/Tickets/tickets.jsx"
 function App() {
 	const location = useLocation();
 	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
@@ -48,6 +48,7 @@ function App() {
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
+					<Route path="/ticket" element={<Ticket setLoggedin={setLoggedin}/>}/>
 				</Routes>
 			</AnimatePresence>
 		</>

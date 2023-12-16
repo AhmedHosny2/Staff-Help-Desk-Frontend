@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import Card from '../card1/card1';
 import homePets from '../../../../assets/herobg2.jpg';
-import getSVGs from './heroSVGs';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
 const heroVariant = {
 	hidden: {
@@ -61,7 +64,6 @@ const childCardVariant4 = {
 };
 
 export default function Hero() {
-	const { ticketsvg, chatsvg, notificationsvg, infosvg } = getSVGs();
 	return (
 		<>
 			<motion.div
@@ -96,16 +98,16 @@ export default function Hero() {
 
 						<div className="flex flex-wrap gap-6 justify-center">
 							<motion.div variants={childCardVariant1}>
-								<Card first={ticketsvg} second={'TICKETS'} />
+								<Card first={<ConfirmationNumberOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'TICKETS'} />
 							</motion.div>
 							<motion.div variants={childCardVariant2}>
-								<Card first={chatsvg} second={'CHATS'} />
+								<Card first={<ChatOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'CHATS'} />
 							</motion.div>
 							<motion.div variants={childCardVariant3}>
-								<Card first={notificationsvg} second={'REMINDERS'} />
+								<Card first={<NotificationsNoneIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REMINDERS'} />
 							</motion.div>
 							<motion.div variants={childCardVariant4}>
-								<Card first={infosvg} second={`KNOWLEDGE\nBASE`} />
+								<Card first={<ErrorOutlineIcon sx={{ color: "Black", fontSize: 100, transform: "rotate(180deg)", }} />} second={`KNOWLEDGE\nBASE`} />
 							</motion.div>
 						</div>
 					</div>

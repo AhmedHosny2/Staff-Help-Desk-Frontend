@@ -6,8 +6,9 @@ import LandingParallax from './components/landingParallax/landingParallax';
 import Hero from './components/hero/hero';
 import LogoCloud from './components/logoCloud/logoCloud';
 import LogoCloud2 from './components/logoCloud2/logoCloud2';
-import App from './components/app/app';
 import Features from './components/features/features';
+import Colors from './components/colors/colors';
+import App from './components/app/app';
 import Footer from '../../components/footer/footer';
 
 const containerVariants = {
@@ -45,6 +46,7 @@ export default function LandingPage() {
 				<LogoCloud />
 				<LogoCloud2 />
 				<Features />
+				<Colors />
 				<App />
 				<Footer />
 			</motion.div>

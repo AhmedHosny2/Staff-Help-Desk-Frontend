@@ -19,6 +19,9 @@ import TestPage from './pages/test/test.jsx';
 import Login from './pages/login/login.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Profile from './pages/profile/profile.jsx';
+import Logs from './pages/Logs/Logs.jsx';
+import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
+import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
 
 function App() {
@@ -40,6 +43,9 @@ function App() {
 					<Route path="/test" element={<TestPage />} />
 					<Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
 					<Route path="/signup" element={<Signup />} />
+					<Route path="/logs" element={<Logs />} />
+					<Route path="/manageUsers" element={<ManageUsers />} />
+					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
 				</Routes>

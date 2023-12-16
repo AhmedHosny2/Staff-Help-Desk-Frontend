@@ -173,7 +173,7 @@ export default function App() {
 															d="M4.5 12.75l6 6 9-13.5"
 														/>
 													</svg>
-													Multifunctionality
+													Multifunction
 												</p>
 											</div>
 											<div class="mb-6">
@@ -192,7 +192,7 @@ export default function App() {
 															d="M4.5 12.75l6 6 9-13.5"
 														/>
 													</svg>
-													Offline Capability
+													Offline Access
 												</p>
 											</div>
 											<div className="flex items-center flex-wrap">

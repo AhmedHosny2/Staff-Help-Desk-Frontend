@@ -3,7 +3,7 @@
 	width: 350px;
 	border-radius: 1em;
 	overflow: hidden;
-	box-shadow: 0 10px 20px #dbdbdb;
+	box-shadow: 0 10px 20px transparent;
 	font-family: sans-serif;
 }
 
@@ -59,19 +59,20 @@
 	opacity: 1;
 }
 
-#stats {
+.stats {
 	height: 14%;
 	width: 100%;
-	background: white;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 1.5em;
 	box-sizing: border-box;
 	color: #bebebe;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
-#stats svg {
+.stats svg {
 	fill: #bebebe;
 	transform: scale(1.2);
 }

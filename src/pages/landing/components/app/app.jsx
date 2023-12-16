@@ -1,3 +1,4 @@
+import Countdown from './components/countdown';
 import phoneMockup from '../../../../assets/phoneMockup4.jpg';
 import ios from '../../../../assets/AppBadge__ios.png';
 import android from '../../../../assets/AppBadge__android.png';
@@ -199,6 +200,7 @@ export default function App() {
 												<img src={ios} alt="iOS Badge" className="h-12 mr-2 mb-2" />
 												<img src={android} alt="Android Badge" className="h-12" />
 											</div>
+											<Countdown />
 										</div>
 									</div>
 								</div>

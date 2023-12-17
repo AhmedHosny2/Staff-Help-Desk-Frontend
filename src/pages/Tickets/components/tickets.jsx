@@ -38,6 +38,9 @@ export default function TicketComponent({ setLoggedin }) {
   const handleEmailClick = (e) => {
     window.location.href = `mailto:${e.target.value}`;
   };
+  const handleIDClick = (e) => {
+    navigate(`/ticket/${e.target.value}`);
+  };
   return (
     <>
       {/* <div className="badge bg-base-300">Pending</div>
@@ -46,7 +49,7 @@ export default function TicketComponent({ setLoggedin }) {
       <Toaster /> */}
       {/*
       
-      tickets for agent ========================
+      tickets for admin he can see all the tickets  ========================
 
         REQUESTER : PIC , NAME , EMAIL 
         SUBJECT : TITLE 
@@ -60,15 +63,10 @@ export default function TicketComponent({ setLoggedin }) {
         <table className="table">
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <th>REQUESTER</th>
               <th>SUBJECT</th>
-              <th>AGENT</th>
               <th>STATUS</th>
+              <th>ID</th>
 
               <th></th>
             </tr>
@@ -79,17 +77,12 @@ export default function TicketComponent({ setLoggedin }) {
             {data &&
               data.map((ticketData) => (
                 <tr key={ticketData.userData._id}>
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src="/tailwind-css-component-profile-2@56w.png"
+                            src={ticketData.userData.profilePic}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
@@ -101,7 +94,7 @@ export default function TicketComponent({ setLoggedin }) {
                             ticketData.userData.lastName}
                         </div>
                         <div
-                          className="text-blue-500 hover:underline"
+                          className="text-black-400 hover:underline"
                           onClick={handleEmailClick}
                         >
                           {" "}
@@ -111,67 +104,49 @@ export default function TicketComponent({ setLoggedin }) {
                     </div>
                   </td>
                   <td>
-                  {ticketData.ticket.title}
+                    {ticketData.ticket.title}
                     <br />
                     <span className="badge badge-ghost badge-sm">
-                    {ticketData.ticket.issue_type}
-
+                      {ticketData.ticket.issue_type}
                     </span>
                   </td>
-                  <td>Purple</td>
+                  <td>
+                    {ticketData.ticket.ticketPriority === "low" && (
+                      <div className="badge bg-success">Low</div>
+                    )}
+                    {ticketData.ticket.ticketPriority === "medium" && (
+                      <div className="badge badge-warning">Medium</div>
+                    )}
+                    {ticketData.ticket.ticketPriority === "high" && (
+                      <div className="badge bg-error">High</div>
+                    )}
+                  </td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button
+                      className="btn btn-ghost btn-xs "
+                      value={ticketData.ticket._id}
+                      onClick={handleIDClick}
+                    >
+                      {ticketData.ticket._id}
+                    </button>
                   </th>
                 </tr>
               ))}
-
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-5@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Yancy Tear</div>
-                    <div className="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Community Outreach Specialist
-                </span>
-              </td>
-              <td>Indigo</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
           </tbody>
           {/* foot */}
           <tfoot>
             <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>REQUESTER</th>
+              <th>SUBJECT</th>
+              <th>STATUS</th>
+              <th>ID</th>
+
               <th></th>
             </tr>
           </tfoot>
         </table>
-      </div>
+      </div>{" "}
+      <Toaster />
     </>
   );
 }

@@ -1,0 +1,78 @@
+.ColorCard-container {
+	height: 200px;
+	width: 350px;
+	border-radius: 1em;
+	overflow: hidden;
+	box-shadow: 0 10px 20px transparent;
+	font-family: sans-serif;
+}
+
+.ColorCard-palette {
+	display: flex;
+	height: 86%;
+	width: 100%;
+}
+
+.ColorCard-color {
+	height: 100%;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-weight: 600;
+	letter-spacing: 1px;
+	transition: flex 0.1s linear;
+}
+
+.ColorCard-color span {
+	opacity: 0;
+	transition: opacity 0.1s linear;
+}
+
+.ColorCard-color:nth-child(1) {
+	background: #264653;
+}
+
+.ColorCard-color:nth-child(2) {
+	background: #2a9d8f;
+}
+
+.ColorCard-color:nth-child(3) {
+	background: #e9c46a;
+}
+
+.ColorCard-color:nth-child(4) {
+	background: #f4a261;
+}
+
+.ColorCard-color:nth-child(5) {
+	background: #e76f51;
+}
+
+.ColorCard-color:hover {
+	flex: 2;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.ColorCard-color:hover span {
+	opacity: 1;
+}
+
+.stats {
+	height: 14%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1.5em;
+	box-sizing: border-box;
+	color: #bebebe;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.stats svg {
+	fill: #bebebe;
+	transform: scale(1.2);
+}

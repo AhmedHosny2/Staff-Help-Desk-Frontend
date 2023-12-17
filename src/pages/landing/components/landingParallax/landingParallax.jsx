@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import imageFull from '../../../../assets/desk.jpg';
 import imageBottom from '../../../../assets/desk-parallax.png';
+import AnimatedHeading from '../heading/heading';
 
 export default function LandingParallax() {
 	const ref = useRef(null);
@@ -22,7 +23,8 @@ export default function LandingParallax() {
 					style={{ y: textY }}
 					className="font-bold text-white text-7xl sm:text-9xl relative z-10"
 				>
-					DESKMATE
+					{/* DESKMATE */}
+					<AnimatedHeading />
 				</motion.h1>
 
 				<motion.div

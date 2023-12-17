@@ -36,6 +36,8 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 		localStorage.setItem('loggedin', 'false');
 		setTimeout(() => {
 			navigate('/');
+			document.cookie =
+				"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
 		}, 2500);
 	};
 

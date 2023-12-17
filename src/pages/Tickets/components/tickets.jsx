@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import { getToastStyle, removeToast } from "../../../utils/toastStyle";
 import toast, { Toaster } from "react-hot-toast";
-
+import TicketEntity from "../../TicketEntity/ticketEntity"; 
 export default function TicketComponent({ setLoggedin }) {
   const navigate = useNavigate();
 
@@ -65,7 +65,7 @@ export default function TicketComponent({ setLoggedin }) {
             <tr>
               <th>REQUESTER</th>
               <th>SUBJECT</th>
-              <th>STATUS</th>
+              <th>PRIORITY</th>
               <th>ID</th>
 
               <th></th>
@@ -138,7 +138,7 @@ export default function TicketComponent({ setLoggedin }) {
             <tr>
               <th>REQUESTER</th>
               <th>SUBJECT</th>
-              <th>STATUS</th>
+              <th>PRIORITY</th>
               <th>ID</th>
 
               <th></th>

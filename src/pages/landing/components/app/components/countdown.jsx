@@ -39,35 +39,33 @@ export default function Countdown() {
 
 	return (
 		<>
-			<div className="card w-96">
-				<div className="card-body">
-					<h2 className="card-title">Time remaining untill launch...</h2>
-					<div>
-						<div className="grid grid-flow-col gap-5 text-center auto-cols-max">
-							<div className="flex flex-col">
-								<span className="countdown font-mono text-3xl">
-									<span style={{ '--value': days }}></span>
-								</span>
-								days
-							</div>
-							<div className="flex flex-col">
-								<span className="countdown font-mono text-3xl">
-									<span style={{ '--value': hours }}></span>
-								</span>
-								hours
-							</div>
-							<div className="flex flex-col">
-								<span className="countdown font-mono text-3xl">
-									<span style={{ '--value': minutes }}></span>
-								</span>
-								min
-							</div>
-							<div className="flex flex-col">
-								<span className="countdown font-mono text-3xl">
-									<span style={{ '--value': seconds }}></span>
-								</span>
-								sec
-							</div>
+			<div className="card-body">
+				<h2 className="card-title">Time remaining untill launch...</h2>
+				<div>
+					<div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+						<div className="flex flex-col">
+							<span className="countdown font-mono text-3xl">
+								<span style={{ '--value': days }}></span>
+							</span>
+							days
+						</div>
+						<div className="flex flex-col">
+							<span className="countdown font-mono text-3xl">
+								<span style={{ '--value': hours }}></span>
+							</span>
+							hours
+						</div>
+						<div className="flex flex-col">
+							<span className="countdown font-mono text-3xl">
+								<span style={{ '--value': minutes }}></span>
+							</span>
+							min
+						</div>
+						<div className="flex flex-col">
+							<span className="countdown font-mono text-3xl">
+								<span style={{ '--value': seconds }}></span>
+							</span>
+							sec
 						</div>
 					</div>
 				</div>

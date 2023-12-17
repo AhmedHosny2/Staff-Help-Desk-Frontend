@@ -39,7 +39,7 @@ export default function TicketComponent({ setLoggedin }) {
     window.location.href = `mailto:${e.target.value}`;
   };
   const handleIDClick = (e) => {
-    navigate(`/ticket/${e.target.value}`);
+    navigate(`/ticketEntity/${e.target.value}`);
   };
   return (
     <>

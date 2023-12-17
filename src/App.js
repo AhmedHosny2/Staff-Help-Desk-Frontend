@@ -24,7 +24,8 @@ import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
 import Ticket from "./pages/Tickets/tickets.jsx"
-import TicketEntity  from './pages/TicketEntity/ticketEntity.jsx'; 
+import TicketEntity  from './pages/TicketEntity/ticketEntity.jsx';
+import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx" 
 function App() {
 	const location = useLocation();
 	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
@@ -51,6 +52,7 @@ function App() {
 					<Route path="/report" element={<Report />} />
 					<Route path="/ticket" element={<Ticket setLoggedin={setLoggedin}/>}/>
 					<Route path="/ticketEntity/:id" element={<TicketEntity />}/>
+					<Route path="/createTicket" element={<CreatTicketComponent />}/>
 				</Routes>
 			</AnimatePresence>
 		</>

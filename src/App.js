@@ -14,7 +14,10 @@ import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
-import HomePage from './pages/home-user/home.jsx';
+import UserHomePage from './pages/home-user/home.jsx';
+import AdminHomePage from './pages/home-admin/home.jsx';
+import AgentHomePage from './pages/home-agent/home.jsx';
+import ManagerHomePage from './pages/home-manager/home.jsx';
 import TestPage from './pages/test/test.jsx';
 import Login from './pages/login/login.jsx';
 import Signup from './pages/signup/signup.jsx';
@@ -39,7 +42,10 @@ function App() {
 			<AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/home/user" element={<HomePage />} />
+					<Route path="/home/user" element={<UserHomePage />} />
+					<Route path="/home/admin" element={<AdminHomePage />} />
+					<Route path="/home/agent" element={<AgentHomePage />} />
+					<Route path="/home/manager" element={<ManagerHomePage />} />
 					<Route path="/test" element={<TestPage />} />
 					<Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
 					<Route path="/signup" element={<Signup />} />

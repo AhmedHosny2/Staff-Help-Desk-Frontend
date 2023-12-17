@@ -19,7 +19,7 @@ import Footer from '../../components/footer/footer';
 // 	},
 // };
 
-export default function HomePage() {
+export default function UserHomePage() {
 	return (
 		<>
 			{/* <div className="bringBack"> */}

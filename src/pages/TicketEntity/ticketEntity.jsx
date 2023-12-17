@@ -2,7 +2,8 @@ import QRCode from "react-qr-code";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { customFetch } from "../../utils/Fetch";
-
+import { Trash } from "react-bootstrap-icons";
+import { PencilSquare } from "react-bootstrap-icons";
 export default function TicketEntity() {
   const navigate = useNavigate();
   const id = window.location.pathname.split("/")[2];
@@ -30,12 +31,25 @@ export default function TicketEntity() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  //   useEffect(() => {
+  //     if(data === )navigate("/tickets");
+  //   }, [data]);
 
-  const handleIDClick = (e) => {
-    navigate(`/ticket/${e.target.value}`);
+  const handleButtonClick = (e) => {
+    const fetchData = async () => {
+      try {
+        const { err, isPen, newData, newStatus, newStatusText, newMessage } =
+          await customFetch(
+            process.env.REACT_APP_TICKETS_URL + "/" + id,
+            "DELETE"
+          );
+        setData(newData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+    navigate("/ticket");
   };
 
   return (
@@ -43,21 +57,27 @@ export default function TicketEntity() {
       {/* <p>Status: {data.status}</p>
             <p>Time Created: {data.timeCreated}</p> */}
       {data && (
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure>
-            <QRCode value={window.location.href} />
-          </figure>
-          <div className="card-body">
-            <h2 className="cardh2le">{data.title}</h2>
-            <span className="badge badge-ghost badge-lg">
-              {data.issue_type}
-            </span>
-            <span className="badge badge-ghost badge-sm">
-              {data.sub_category}
-            </span>
-            <p>{data.description}</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
+        <div className="flex justify-center items-center">
+          <div className="card w-96 bg-base-100 shadow-xl flex items-center p-10">
+            <figure>
+              <QRCode value={window.location.href} />
+            </figure>
+            <div className="card-body">
+              <h2 className="cardh2le">{data.title}</h2>
+              <span className="badge badge-ghost badge-lg">
+                {data.issue_type}
+              </span>
+              <span className="badge badge-ghost badge-sm">
+                {data.sub_category}
+              </span>
+              <i class="bi bi-trash"></i>
+              <p>{data.description}</p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-error" onClick={handleButtonClick}>
+                  <Trash size={35} style={{ marginRight: "5px" }} />
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>

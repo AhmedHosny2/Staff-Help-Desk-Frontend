@@ -5,7 +5,7 @@ import { customFetch } from "../../utils/Fetch";
 
 export default function TicketEntity() {
   const navigate = useNavigate();
-    const id = window.location.pathname.split("/")[2];
+  const id = window.location.pathname.split("/")[2];
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -19,11 +19,10 @@ export default function TicketEntity() {
       try {
         const { err, isPen, newData, newStatus, newStatusText, newMessage } =
           await customFetch(
-            process.env.REACT_APP_TICKETS_URL +"/"+ id,
+            process.env.REACT_APP_TICKETS_URL + "/" + id,
             "GET"
           );
-         setData(newData);
-   
+        setData(newData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -32,31 +31,37 @@ export default function TicketEntity() {
   }, []);
 
   useEffect(() => {
-   console.log(data);
+    console.log(data);
   }, [data]);
 
   const handleIDClick = (e) => {
     navigate(`/ticket/${e.target.value}`);
   };
 
-    return (
-        <div>
-        <h1>Ticket Details</h1>
-        <div>
-          <p>Title: {data.title}</p>
-          <p>Description: {data.description}</p>
-          <p>Issue Type: {data.issue_type}</p>
-          <p>Sub Category: {data.sub_category}</p>
-          <p>Status: {data.status}</p>
-          <p>Priority: {data.ticketPriority}</p>
-          {/* Add more details as needed */}
-          <p>Time Created: {data.timeCreated}</p>
+  return (
+    <>
+      {/* <p>Status: {data.status}</p>
+            <p>Time Created: {data.timeCreated}</p> */}
+      {data && (
+        <div className="card w-96 bg-base-100 shadow-xl">
+          <figure>
+            <QRCode value={window.location.href} />
+          </figure>
+          <div className="card-body">
+            <h2 className="cardh2le">{data.title}</h2>
+            <span className="badge badge-ghost badge-lg">
+              {data.issue_type}
+            </span>
+            <span className="badge badge-ghost badge-sm">
+              {data.sub_category}
+            </span>
+            <p>{data.description}</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
         </div>
-        <div>
-          <h2>QR Code</h2>
-        <QRCode value={window.location.href} />
-      </div>
-      </div>
-      
-    );
+      )}
+    </>
+  );
 }

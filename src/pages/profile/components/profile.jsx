@@ -257,7 +257,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								<h1 className="text-xl font-bold text-neutral-content">
 									{profileData.firstName} {profileData.lastName}
 								</h1>
-								<div className="badge badge-xs badge-outline text-neutral-content my-2">
+								<div className="badge badge-xs badge-outline text-neutral-content my-2 py-2">
 									{profileData._id}
 								</div>
 								<div className="badge badge-xs badge-outline text-neutral-content py-2">
@@ -277,33 +277,6 @@ export default function ProfileComponent({ setProfilePic }) {
 										</div>
 									</div>
 								</div>
-							</div>
-							<div className="flex justify-center items-center">
-								<label className="swap swap-flip text-9xl">
-									{/* this hidden checkbox controls the state */}
-									<input type="checkbox" />
-
-									<div className="swap-on stats shadow bg-secondary">
-										<div className="stat">
-											<div className="stat-title text-lg text-neutral-content">
-												Tickets opened
-											</div>
-											<div className="stat-value text-neutral-content">89,400</div>
-											<div className="stat-desc text-neutral-content">
-												Jan 1st - Feb 1st
-											</div>
-										</div>
-									</div>
-									<div className="swap-off stats shadow bg-secondary">
-										<div className="stat">
-											<div className="stat-title text-lg text-neutral-content">
-												Total Page Views
-											</div>
-											<div className="stat-value text-neutral-content">2,500</div>
-											<div className="stat-desc text-neutral-content">21% more</div>
-										</div>
-									</div>
-								</label>
 							</div>
 						</div>
 					</div>

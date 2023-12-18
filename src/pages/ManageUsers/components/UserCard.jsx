@@ -1,17 +1,20 @@
 import React from 'react';
+import defaultProfile from '../../../assets/defaultProfile.jpg';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
-function UserCard({ userType, userName, email, userID }) {
+function UserCard({ userType, userName, email, userID, profilePicture }) {
   let iconComponent;
 
   switch (userType) {
     case 'user':
       iconComponent = <PersonIcon />;
       break;
-    case 'agent1' || 'agent2' || 'agent3':
+    case 'agent1':
+    case 'agent2':
+    case 'agent3':
       iconComponent = <SupportAgentIcon />;
       break;
     case 'manager':
@@ -24,6 +27,14 @@ function UserCard({ userType, userName, email, userID }) {
       iconComponent = <PersonIcon />;
   }
 
+  const renderImage = () => {
+    if (profilePicture) {
+      return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={profilePicture} alt={`${userName} image`} />;
+    } else {
+      return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={defaultProfile} alt="Default image" />;
+    }
+  };
+
   return (
     <div className="w-full max-w-sm bg-base-100 border border-base-200 rounded-lg shadow">
       <div className="flex justify-end px-4 pt-4">
@@ -33,6 +44,7 @@ function UserCard({ userType, userName, email, userID }) {
         </span>
       </div>
       <div className="flex flex-col items-center pb-10">
+        {renderImage()}
         <h5 className="mb-1 text-xl font-medium text-gray-900">{userName}</h5>
         <span className="text-sm text-primary-content">{email}</span>
         <span className="text-sm text-primary-content">User ID: {userID}</span>

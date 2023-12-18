@@ -192,7 +192,7 @@ export default function SignupComponent() {
 									)}
 								</button>
 								<label className="">
-									<a href="#" className="label-text-alt link link-hover">
+									<a href="/login" className="label-text-alt link link-hover">
 										Already have an account? Login
 									</a>
 								</label>

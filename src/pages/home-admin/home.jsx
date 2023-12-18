@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Hero from './components/hero/hero';
-import Faq from '../../components/faq/faq';
+import LogsTable from './components/shortLogs/logs';
 import Footer from '../../components/footer/footer';
 
 export default function AdminHomePage() {
@@ -8,8 +8,8 @@ export default function AdminHomePage() {
 		<>
 			{/* <div className="bringBack"> */}
 			<Hero />
+			<LogsTable />
 			{/* </div> */}
-			<Faq />
 			<Footer />
 		</>
 	);

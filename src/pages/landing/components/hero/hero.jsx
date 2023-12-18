@@ -1,6 +1,10 @@
 import itSupport from '../../../../assets/itsupport3.jpg';
+import { customFetch } from '../../../../utils/Fetch';
 
 export default function Hero() {
+
+
+
 	return (
 		<>
 			<div className="hero min-h-screen">

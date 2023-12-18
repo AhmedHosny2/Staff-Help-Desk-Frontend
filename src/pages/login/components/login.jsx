@@ -118,7 +118,7 @@ export default function LoginComponent({ setLoggedin }) {
 									)}
 								</button>
 								<label className="">
-									<Link href="#" className="label-text-alt link link-hover">
+									<Link to="/signup" className="label-text-alt link link-hover">
 										New here? Sign up now
 									</Link>
 								</label>

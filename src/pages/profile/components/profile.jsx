@@ -168,7 +168,7 @@ export default function ProfileComponent({ setProfilePic }) {
 	return (
 		<>
 			<div className="container mx-auto py-8 z-[-10]">
-				<div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
+				<div className="grid grid-cols-4 lg:grid-cols-12 gap-6 px-4">
 					<div className="col-span-4 sm:col-span-3">
 						<div className="bg-neutral shadow rounded-lg p-6">
 							<div className="flex flex-col items-center">
@@ -270,10 +270,30 @@ export default function ProfileComponent({ setProfilePic }) {
 										<div className="collapse-title text-xl font-medium text-neutral-content">
 											Customize your entire profile here!
 										</div>
+
 										<div className="collapse-content">
-											<p className="text-neutral-content">Add a profile picture</p>
-											<p className="text-neutral-content">Update profile info</p>
-											<p className="text-neutral-content">Change your password</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Add a profile picture</div>
+											</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Update profile info</div>
+											</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Change your password</div>
+											</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Link your social media</div>
+											</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Add a profile picture</div>
+											</p>
+											<p className="text-neutral-content">
+												<div className="badge badge-ghost">Add a profile picture</div>
+											</p>
+											<p className="text-neutral-content mt-2">
+												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
+												me field to write a new line
+											</p>
 										</div>
 									</div>
 								</div>

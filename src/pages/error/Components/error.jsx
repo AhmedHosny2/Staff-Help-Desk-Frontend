@@ -4,8 +4,15 @@ import { ReactComponent as ErrorSvg1 } from "../../../assets/error1.svg";
 import { ReactComponent as ErrorSvg2 } from "../../../assets/error2.svg";
 import { ReactComponent as ErrorSvg3 } from "../../../assets/error3.svg";
 import { ReactComponent as ErrorSvg4 } from "../../../assets/error4.svg";
+import { ReactComponent as ErrorSvg5 } from "../../../assets/error5.svg";
+import { ReactComponent as ErrorSvg6 } from "../../../assets/error6.svg";
+import { ReactComponent as ErrorSvg7 } from "../../../assets/error7.svg";
+import { ReactComponent as ErrorSvg8 } from "../../../assets/error8.svg";
+import { ReactComponent as ErrorSvg9 } from "../../../assets/error9.svg";
+import { ReactComponent as ErrorSvg10 } from "../../../assets/error10.svg";
 
-const errorSvgs = [ErrorSvg1, ErrorSvg2, ErrorSvg3, ErrorSvg4];
+
+const errorSvgs = [ErrorSvg1, ErrorSvg2, ErrorSvg3, ErrorSvg4, ErrorSvg5, ErrorSvg6, ErrorSvg7, ErrorSvg8, ErrorSvg9, ErrorSvg10];
 
 const getRandomErrorSvg = () => {
   const randomIndex = Math.floor(Math.random() * errorSvgs.length);

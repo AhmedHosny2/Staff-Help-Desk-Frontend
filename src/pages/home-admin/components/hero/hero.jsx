@@ -4,6 +4,7 @@ import homePets from '../../../../assets/herobg2.jpg';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import TocIcon from '@mui/icons-material/Toc';
+import { Link } from 'react-router-dom';
 
 const heroVariant = {
 	hidden: {
@@ -85,15 +86,22 @@ export default function Hero() {
 						</div>
 
 						<div className="flex flex-wrap gap-6 justify-center">
-							<motion.div variants={childCardVariant1}>
-								<Card first={<PeopleOutlineIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Manage Users'} />
-							</motion.div>
-							<motion.div variants={childCardVariant2}>
-								<Card first={<PersonAddAltIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Add User'} />
-							</motion.div>
-							<motion.div variants={childCardVariant3}>
-								<Card first={<TocIcon sx={{ color: "Black", fontSize: 100 }} />} second={'View Logs'} />
-							</motion.div>
+							<Link to="/manageUsers">
+								<motion.div variants={childCardVariant1}>
+									<Card first={<PeopleOutlineIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Manage Users'} />
+								</motion.div>
+							</Link>
+							<Link to="/addUser">
+								<motion.div variants={childCardVariant2}>
+									<Card first={<PersonAddAltIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Add User'} />
+								</motion.div>
+							</Link>
+							<Link to="/logs">
+								<motion.div variants={childCardVariant3}>
+									<Card first={<TocIcon sx={{ color: "Black", fontSize: 100 }} />} second={'View Logs'} />
+								</motion.div>
+							</Link>
+
 						</div>
 					</div>
 				</div>

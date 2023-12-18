@@ -39,14 +39,12 @@ export default function LoginComponent({ setLoggedin }) {
 		setStatus(newStatus);
 		setStatusText(newStatusText);
 		setMessage(newMessage);
-
 		if (newStatusText === 'success') {
 			if (newData.role.startsWith('agent')) {
 				var role = newData.role.slice(0, -1);
 			} else {
 				role = newData.role;
 			}
-
 			var toastId = toast.success('Successfully Logged In', getToastStyle());
 			localStorage.setItem('loggedin', 'true');
 			setLoggedin(true);
@@ -54,7 +52,14 @@ export default function LoginComponent({ setLoggedin }) {
 				navigate('/home/' + role);
 				setLoggingin(false);
 			}, 2500);
-		} else {
+		} else if (newStatusText === 'MFA required') {
+			toastId = toast.error("MFA check", getToastStyle());
+			setTimeout(() => {
+				navigate('/mfa/validate' );
+				setLoggingin(false);
+			}, 2500);
+
+		}  else {
 			toastId = toast.error(newMessage, getToastStyle());
 			setLoggingin(false);
 		}

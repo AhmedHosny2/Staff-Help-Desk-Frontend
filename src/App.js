@@ -26,6 +26,10 @@ import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
+import MFAValidationComponent  from './pages/MFA/MFAValidationComponent.jsx';
+import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
+import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
+import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
 
 function App() {
 	const location = useLocation();
@@ -54,6 +58,10 @@ function App() {
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
+					<Route path="/mfa/validate" element={<MFAValidationComponent />} />
+					<Route path="/mfa/enable-mfa" element={<EnableMFAComponent />} />
+					<Route path="/resetPassword" element={<ResetPasswordRequestComponent/>} />
+					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent/>} />
 				</Routes>
 			</AnimatePresence>
 		</>

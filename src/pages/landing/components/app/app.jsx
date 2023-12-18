@@ -1,6 +1,8 @@
+import Countdown from './components/countdown';
 import phoneMockup from '../../../../assets/phoneMockup4.jpg';
 import ios from '../../../../assets/AppBadge__ios.png';
 import android from '../../../../assets/AppBadge__android.png';
+import PhoneMockup from './components/phoneMockup';
 
 export default function App() {
 	return (
@@ -16,7 +18,7 @@ export default function App() {
 											Experience Deskmate Anywhere, Anytime
 										</h2>
 										<h2 class="mb-6 text-2xl font-bold text-info">
-											Deskmate App - Coming Soon
+											Deskmate App - FREE - Coming Soon
 										</h2>
 										<p class="mb-8 text-neutral-content dark:text-neutral-content">
 											Take your help desk with you on the go. Deskmate is designed for
@@ -173,7 +175,7 @@ export default function App() {
 															d="M4.5 12.75l6 6 9-13.5"
 														/>
 													</svg>
-													Multifunctionality
+													Multifunction
 												</p>
 											</div>
 											<div class="mb-6">
@@ -192,7 +194,7 @@ export default function App() {
 															d="M4.5 12.75l6 6 9-13.5"
 														/>
 													</svg>
-													Offline Capability
+													Offline Access
 												</p>
 											</div>
 											<div className="flex items-center flex-wrap">
@@ -200,10 +202,11 @@ export default function App() {
 												<img src={android} alt="Android Badge" className="h-12" />
 											</div>
 										</div>
+										<Countdown />
 									</div>
 								</div>
 								<div className="md:mb-12 lg:mb-0 sm:ml-14">
-									<div className="mockup-phone">
+									{/* <div className="mockup-phone">
 										<div className="camera"></div>
 										<div className="display">
 											<div className="artboard artboard-demo phone-1">
@@ -214,7 +217,8 @@ export default function App() {
 												/>
 											</div>
 										</div>
-									</div>
+									</div> */}
+
 									{/* <div
 										className="relative flex justify-center h-[520px] w-[250px] border border-4 border-black rounded-2xl"
 										style={{ boxShadow: '10px 10px 5px 12px rgb(209, 218, 218)' }}
@@ -230,6 +234,8 @@ export default function App() {
 										<span className="absolute -right-2 top-20 border border-4 border-black h-10 rounded-md"></span>
 										<span className="absolute -right-2 top-44 border border-4 border-black h-24 rounded-md"></span>
 									</div> */}
+
+									<PhoneMockup />
 								</div>
 							</div>
 						</div>

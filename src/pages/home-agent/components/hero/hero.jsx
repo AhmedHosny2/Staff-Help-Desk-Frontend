@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import Card from '../card1/card1';
 import homePets from '../../../../assets/herobg2.jpg';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 
@@ -51,17 +50,6 @@ const childCardVariant3 = {
 		transition: { delay: 0.7, duration: 0.5, ease: 'easeOut' },
 	},
 };
-const childCardVariant4 = {
-	hidden: {
-		y: 100,
-		opacity: 0,
-	},
-	visible: {
-		y: 0,
-		opacity: 1,
-		transition: { delay: 1, duration: 0.5, ease: 'easeOut' },
-	},
-};
 
 export default function Hero() {
 	return (
@@ -84,7 +72,7 @@ export default function Hero() {
 								Welcome Back to DeskMate
 							</h1>
 							<p className="mb-5">
-								As a <span className="text-secondary text-xl font-bold">USER</span>,
+								As a <span className="text-secondary text-xl font-bold">Agent</span>,
 								discover a seamless ticketing experience and stay connected with DeskMate.
 								Your go-to platform for managing and resolving <br />
 								<span className="text-secondary text-xl font-bold">Software</span>
@@ -104,10 +92,7 @@ export default function Hero() {
 								<Card first={<ChatOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'CHATS'} />
 							</motion.div>
 							<motion.div variants={childCardVariant3}>
-								<Card first={<NotificationsNoneIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REMINDERS'} />
-							</motion.div>
-							<motion.div variants={childCardVariant4}>
-								<Card first={<ErrorOutlineIcon sx={{ color: "Black", fontSize: 100, transform: "rotate(180deg)", }} />} second={`KNOWLEDGE\nBASE`} />
+								<Card first={<FormatListBulletedOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'WORK FlOW'} />
 							</motion.div>
 						</div>
 					</div>

@@ -49,8 +49,10 @@ export default function LoginComponent() {
 				role = newData.role;
 			}
 			var toastId = toast.success('Successfully Logged In', getToastStyle());
-			navigate('/home/' + role);
-			setLoggingin(false);
+			setTimeout(() => {
+				navigate('/home/' + role);
+				setLoggingin(false);
+			}, 2500);
 		} else if (newStatusText === 'MFA required') {
 			toastId = toast.error('MFA check', getToastStyle());
 			setTimeout(() => {

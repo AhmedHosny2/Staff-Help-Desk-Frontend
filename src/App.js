@@ -36,16 +36,10 @@ import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
 import Error from './pages/error/error.jsx';
 function App() {
 	const location = useLocation();
-	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
 	const [profilePic, setProfilePic] = useState(null);
 	return (
 		<>
-			<NavbarParent
-				loggedin={loggedin}
-				setLoggedin={setLoggedin}
-				profilePic={profilePic}
-				setProfilePic={setProfilePic}
-			/>
+			<NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
 			<AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
@@ -54,7 +48,7 @@ function App() {
 					<Route path="/home/agent" element={<AgentHomePage />} />
 					<Route path="/home/manager" element={<ManagerHomePage />} />
 					<Route path="/test" element={<TestPage />} />
-					<Route path="/login" element={<Login setLoggedin={setLoggedin} />} />
+					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/logs" element={<Logs />} />
 					<Route path="/manageUsers" element={<ManageUsers />} />
@@ -65,7 +59,7 @@ function App() {
 					<Route path="/mfa/enable-mfa" element={<EnableMFAComponent />} />
 					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
 					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
-					<Route path="/ticket" element={<Ticket setLoggedin={setLoggedin} />} />
+					<Route path="/ticket" element={<Ticket />} />
 					<Route path="/ticketEntity/:id" element={<TicketEntity />} />
 					<Route path="/createTicket" element={<CreatTicketComponent />} />
 					<Route path="*" element={<Error />} />

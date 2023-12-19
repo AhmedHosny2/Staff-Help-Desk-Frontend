@@ -27,7 +27,7 @@ const navigationVariants = {
 	},
 };
 
-export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic }) {
+export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const navigate = useNavigate();
 
 	const getRole = () => {
@@ -38,18 +38,14 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 		return role;
 	};
 	const role = getRole();
-	console.log(role);
 
 	const handleLogoutClick = (e) => {
-		e.preventDefault();
-		setLoggedin(false);
-		localStorage.setItem('loggedin', 'false');
-		localStorage.removeItem('role');
-		setTimeout(() => {
-			navigate('/');
-			document.cookie =
-				"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
-		}, 2500);
+		// e.preventDefault();
+		localStorage.removeItem('loggedin');
+		// localStorage.removeItem('role');
+		navigate('/');
+		// document.cookie =
+		// 	"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
 	};
 
 	useEffect(() => {

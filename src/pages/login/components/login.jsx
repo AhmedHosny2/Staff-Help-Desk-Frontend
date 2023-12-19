@@ -5,7 +5,7 @@ import { getToastStyle, removeToast } from '../../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
 import GoogleButton from './googleButton';
 
-export default function LoginComponent({ setLoggedin }) {
+export default function LoginComponent() {
 	const navigate = useNavigate();
 
 	const [email, setEmail] = useState('');
@@ -41,6 +41,7 @@ export default function LoginComponent({ setLoggedin }) {
 		setMessage(newMessage);
 		if (newStatusText === 'success') {
 			localStorage.setItem('role', newData.role);
+			localStorage.setItem('loggedin', true);
 			console.log(newData.role);
 			if (newData.role.startsWith('agent')) {
 				var role = newData.role.slice(0, -1);
@@ -48,13 +49,8 @@ export default function LoginComponent({ setLoggedin }) {
 				role = newData.role;
 			}
 			var toastId = toast.success('Successfully Logged In', getToastStyle());
-			localStorage.setItem('loggedin', 'true');
-
-			setLoggedin(true);
-			setTimeout(() => {
-				navigate('/home/' + role);
-				setLoggingin(false);
-			}, 2500);
+			navigate('/home/' + role);
+			setLoggingin(false);
 		} else if (newStatusText === 'MFA required') {
 			toastId = toast.error('MFA check', getToastStyle());
 			setTimeout(() => {

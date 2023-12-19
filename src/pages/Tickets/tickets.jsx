@@ -1,9 +1,9 @@
 import TicketComponent from './components/tickets';
 
-export default function Ticket({ setLoggedin }) {
+export default function Ticket() {
 	return (
 		<>
-			<TicketComponent setLoggedin={setLoggedin} />
+			<TicketComponent />
 		</>
 	);
 }

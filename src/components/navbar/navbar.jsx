@@ -40,7 +40,7 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const role = getRole();
 
 	const handleLogoutClick = (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		localStorage.removeItem('loggedin');
 		// localStorage.removeItem('role');
 		navigate('/');

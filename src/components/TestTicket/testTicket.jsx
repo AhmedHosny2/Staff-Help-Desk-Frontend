@@ -14,7 +14,9 @@ const data = {
 export default function TestestTicket() {
 	return (
 		<>
-			<TestTicketComponent data={data} />
+			<div className="bringBack">
+				<TestTicketComponent data={data} />
+			</div>
 		</>
 	);
 }

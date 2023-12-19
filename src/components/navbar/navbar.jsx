@@ -127,11 +127,11 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 									<span className="badge badge-sm indicator-item">4</span>
 								</div>
 							</div>
-							<div className="notifDrop">
-								<div
-									tabIndex={0}
-									className="mt-3 z-[4] card card-compact dropdown-content w-52 bg-base-100 shadow"
-								>
+							<div
+								tabIndex={0}
+								className="mt-3 z-[4] card card-compact dropdown-content w-52 bg-base-100 shadow"
+							>
+								<div className="notifDrop">
 									<div className="card-body">
 										<span className="font-bold text-lg">4 Items</span>
 										<span className="text-info">Notification 1</span>
@@ -139,7 +139,10 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 										<span className="text-info">Notification 3</span>
 										<span className="text-info">Notification 4</span>
 										<div className="card-actions">
-											<button className="btn btn-primary btn-block">
+											<button
+												className="btn btn-primary btn-block"
+												onClick={() => alert('clicked')}
+											>
 												Clear Notifications
 											</button>
 										</div>

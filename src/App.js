@@ -1,16 +1,16 @@
-import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import './App.css';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 // Restrict access to pages
-import PublicRoute from "./utils/PublicRoute.js";
+import PublicRoute from './utils/PublicRoute.js';
 
 // Restrict access to pages
-import PrivateRoute from "./utils/PrivateRoute.js";
+import PrivateRoute from './utils/PrivateRoute.js';
 
 // Imported Components
-import NavbarParent from "./components/navbarParent/navbarParent.jsx";
+import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
@@ -26,21 +26,13 @@ import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
-import MFAValidationComponent  from './pages/MFA/MFAValidationComponent.jsx';
+import MFAValidationComponent from './pages/MFA/MFAValidationComponent.jsx';
 import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
 import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
 import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
-import MFAValidationComponent  from './pages/MFA/MFAValidationComponent.jsx';
-import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
-import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
-import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
-import Ticket from "./pages/Tickets/tickets.jsx"
-import TicketEntity  from './pages/TicketEntity/ticketEntity.jsx';
-import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx" 
-import Error from './pages/error/error.jsx';
-import Ticket from "./pages/Tickets/tickets.jsx"
-import TicketEntity  from './pages/TicketEntity/ticketEntity.jsx';
-import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx" 
+import Ticket from './pages/Tickets/tickets.jsx';
+import TicketEntity from './pages/TicketEntity/ticketEntity.jsx';
+import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
 import Error from './pages/error/error.jsx';
 function App() {
 	const location = useLocation();
@@ -71,11 +63,11 @@ function App() {
 					<Route path="/report" element={<Report />} />
 					<Route path="/mfa/validate" element={<MFAValidationComponent />} />
 					<Route path="/mfa/enable-mfa" element={<EnableMFAComponent />} />
-					<Route path="/resetPassword" element={<ResetPasswordRequestComponent/>} />
-					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent/>} />
-					<Route path="/ticket" element={<Ticket setLoggedin={setLoggedin}/>}/>
-					<Route path="/ticketEntity/:id" element={<TicketEntity />}/>
-					<Route path="/createTicket" element={<CreatTicketComponent />}/>
+					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
+					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
+					<Route path="/ticket" element={<Ticket setLoggedin={setLoggedin} />} />
+					<Route path="/ticketEntity/:id" element={<TicketEntity />} />
+					<Route path="/createTicket" element={<CreatTicketComponent />} />
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</AnimatePresence>
@@ -86,7 +78,7 @@ function App() {
 export default App;
 
 {
-  /* <>
+	/* <>
 	<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} />
 	<AnimatePresence>
 		<Routes location={location} key={location.key}>

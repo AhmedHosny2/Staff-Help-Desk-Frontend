@@ -40,6 +40,7 @@ export default function LoginComponent({ setLoggedin }) {
 		setStatusText(newStatusText);
 		setMessage(newMessage);
 		if (newStatusText === 'success') {
+			localStorage.setItem('role', newData.role);
 			if (newData.role.startsWith('agent')) {
 				var role = newData.role.slice(0, -1);
 			} else {
@@ -47,6 +48,7 @@ export default function LoginComponent({ setLoggedin }) {
 			}
 			var toastId = toast.success('Successfully Logged In', getToastStyle());
 			localStorage.setItem('loggedin', 'true');
+
 			setLoggedin(true);
 			setTimeout(() => {
 				navigate('/home/' + role);

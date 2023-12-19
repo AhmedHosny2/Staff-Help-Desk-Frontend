@@ -1,6 +1,6 @@
 export default function SubLinks() {
 	// user, agent1, agent2, ageng3, manager, admin
-	const role = 'user';
+	const role = localStorage.getItem('role');
 
 	const renderLinksBasedOnRole = () => {
 		switch (role) {
@@ -8,13 +8,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">Home</a>
+							<a href="#">User Item 1</a>
 						</li>
 						<li>
 							<a href="#">User Item 2</a>
 						</li>
 						<li>
-							<a href="#">Knowledge Base</a>
+							<a href="#">User Item 3</a>
 						</li>
 					</>
 				);
@@ -24,52 +24,45 @@ export default function SubLinks() {
 			case 'agent3':
 				return (
 					<>
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Agent Item 1</a>
-							</li>
-							<li>
-								<a href="#">Agent Item 2</a>
-							</li>
-							<li>
-								<a href="#">Agent Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<a href="#">Agent Item 1</a>
+						</li>
+						<li>
+							<a href="#">Agent Item 2</a>
+						</li>
+						<li>
+							<a href="#">Agent Item 3</a>
+						</li>
 					</>
 				);
 
 			case 'manager':
 				return (
 					<>
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Manager Item 1</a>
-							</li>
-							<li>
-								<a href="#">Manager Item 2</a>
-							</li>
-							<li>
-								<a href="#">Manager Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<a href="#">Manager Item 1</a>
+						</li>
+						<li>
+							<a href="#">Manager Item 2</a>
+						</li>
+						<li>
+							<a href="#">Manager Item 3</a>
+						</li>
 					</>
 				);
 
 			case 'admin':
 				return (
 					<>
-						{' '}
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Admin Item 1</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 2</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<a href="#">Admin Item 1</a>
+						</li>
+						<li>
+							<a href="#">Admin Item 2</a>
+						</li>
+						<li>
+							<a href="#">Admin Item 3</a>
+						</li>
 					</>
 				);
 

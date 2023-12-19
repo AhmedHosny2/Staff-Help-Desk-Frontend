@@ -30,6 +30,7 @@ import Ticket from "./pages/Tickets/tickets.jsx";
 import TicketEntity from "./pages/TicketEntity/ticketEntity.jsx";
 import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx";
 import Error from "./pages/error/error.jsx";
+import Bot from "./pages/bot/bot.jsx";
 function App() {
   const location = useLocation();
   const [loggedin, setLoggedin] = useState(
@@ -57,6 +58,7 @@ function App() {
           <Route path="/logs" element={<Logs />} />
           <Route path="/manageUsers" element={<ManageUsers />} />
           <Route path="/AddUser" element={<AddUser />} />
+          <Route path="/bot" element={<Bot />} />
           <Route
             path="/profile"
             element={<Profile setProfilePic={setProfilePic} />}

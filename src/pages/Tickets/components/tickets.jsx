@@ -95,32 +95,36 @@ export default function TicketComponent({ setLoggedin }) {
             {data &&
               data.map((ticketData) => (
                 <tr key={ticketData.userData._id}>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={ticketData.userData.profilePic}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">
-                          {ticketData.userData.firstName +
-                            " " +
-                            ticketData.userData.lastName}
-                        </div>
-                        <div
-                          className="text-black-400 hover:underline"
-                          onClick={handleEmailClick}
-                        >
-                          {" "}
-                          {ticketData.userData.email}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
+                  {/* user / resquester  for ( admin / manager / agent ) */}
+                  {(userType === "manager" || userType === "admin" || userType === "agent") && (
+  <React.Fragment>
+    <td>
+      <div className="flex items-center gap-3">
+        <div className="avatar">
+          <div className="mask mask-squircle w-12 h-12">
+            <img
+              src={ticketData.userData.profilePic}
+              alt="Avatar Tailwind CSS Component"
+            />
+          </div>
+        </div>
+        <div>
+          <div className="font-bold">
+            {ticketData.userData.firstName + " " + ticketData.userData.lastName}
+          </div>
+          <div
+            className="text-black-400 hover:underline"
+            onClick={handleEmailClick}
+          >
+            {ticketData.userData.email}
+          </div>
+        </div>
+      </div>
+    </td>
+  </React.Fragment>
+)}
+
+
                   <td>
                     {ticketData.ticket.title}
                     <br />

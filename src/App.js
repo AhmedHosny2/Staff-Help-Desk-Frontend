@@ -1,16 +1,16 @@
-import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import "./App.css";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 // Restrict access to pages
 import PublicRoute from './utils/PublicRoute.js';
 
 // Restrict access to pages
-import PrivateRoute from './utils/PrivateRoute.js';
+import PrivateRoute from "./utils/PrivateRoute.js";
 
 // Imported Components
-import NavbarParent from './components/navbarParent/navbarParent.jsx';
+import NavbarParent from "./components/navbarParent/navbarParent.jsx";
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
@@ -86,7 +86,7 @@ function App() {
 export default App;
 
 {
-	/* <>
+  /* <>
 	<NavbarParent loggedin={loggedin} setLoggedin={setLoggedin} />
 	<AnimatePresence>
 		<Routes location={location} key={location.key}>

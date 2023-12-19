@@ -41,6 +41,7 @@ export default function LoginComponent({ setLoggedin }) {
 		setMessage(newMessage);
 		if (newStatusText === 'success') {
 			localStorage.setItem('role', newData.role);
+			console.log(newData.role);
 			if (newData.role.startsWith('agent')) {
 				var role = newData.role.slice(0, -1);
 			} else {

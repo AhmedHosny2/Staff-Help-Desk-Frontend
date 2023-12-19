@@ -30,10 +30,21 @@ const navigationVariants = {
 export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic }) {
 	const navigate = useNavigate();
 
+	const getRole = () => {
+		var role = localStorage.getItem('role');
+		if (role.startsWith('agent')) {
+			return (role = role.slice(0, -1));
+		}
+		return role;
+	};
+	const role = getRole();
+	console.log(role);
+
 	const handleLogoutClick = (e) => {
 		e.preventDefault();
 		setLoggedin(false);
 		localStorage.setItem('loggedin', 'false');
+		localStorage.removeItem('role');
 		setTimeout(() => {
 			navigate('/');
 			document.cookie =
@@ -87,7 +98,7 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 								<SubLinks />
 							</ul>
 						</div>
-						<Link to="/home/user" className="btn btn-ghost text-xl">
+						<Link to={'/home/' + role} className="btn btn-ghost text-xl">
 							DeskMate
 						</Link>
 						<div className="navbar-center hidden lg:flex">

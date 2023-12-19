@@ -19,22 +19,35 @@ const Faq = () => {
 	const [FAQs, setFAQs] = useState([]);
 	const [isPending, setIsPending] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
 
-				const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
-				setFAQs(newData);
-				setIsPending(false);
+		useEffect(() => {
+				const fetchData = async () => {
+					try {
+						const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
+						console.log('Fetched data:', newData);  // Log the fetched data
 
-			} catch (error) {
-				console.error('Error fetching FAQs:', error);
-				setIsPending(false);
-			}
-		};
+						
+						const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
+						console.log('Popular FAQs:', popularFAQs);  // Log the popular FAQs
 
-		fetchData();
-	}, []);
+						const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
+						console.log('Sorted FAQs:', sortedFAQs);  // Log the sorted FAQs
+
+						const topFAQs = sortedFAQs.slice(0, 4);
+						console.log('Top FAQs:', topFAQs);  // 
+
+						setFAQs(topFAQs);
+						setIsPending(false);
+					} catch (error) {
+						console.error('Error fetching FAQs:', error);
+						setIsPending(false);
+					}
+				};
+
+				fetchData();
+			}, []);
+	
+	
 
 	return (
 		<>
@@ -58,7 +71,7 @@ const Faq = () => {
 						<div className="join join-vertical w-[90vw]">
 							{FAQs.map((FAQ) => (
 								<div key={FAQ.id} className="collapse collapse-arrow join-item border border-base-300">
-									<input type="radio" name={`my-accordion-${FAQ.id || 'default'}`} />
+									<input type="checkbox" name={`my-accordion-${FAQ.id || 'default'}`} />
 									<div className="collapse-title text-xl font-medium">{FAQ.question}</div>
 									<div className="collapse-content">
 										<p>{FAQ.answer}</p>

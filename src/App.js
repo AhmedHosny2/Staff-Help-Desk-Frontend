@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 // Restrict access to pages
-import PublicRoute from './utils/PublicRoute.js';
+import PublicRoute from "./utils/PublicRoute.js";
 
 // Restrict access to pages
 import PrivateRoute from "./utils/PrivateRoute.js";

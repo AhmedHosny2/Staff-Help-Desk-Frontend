@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import { getToastStyle, removeToast } from "../../../utils/toastStyle";
 import toast, { Toaster } from "react-hot-toast";
-import TicketEntity from "../../TicketEntity/ticketEntity"; 
+import TicketEntity from "../../TicketEntity/ticketEntity";
+import { set } from "animejs";
+import React from "react";
 export default function TicketComponent({ setLoggedin }) {
   const navigate = useNavigate();
 
@@ -17,9 +19,10 @@ export default function TicketComponent({ setLoggedin }) {
   const [status, setStatus] = useState(null);
   const [statusText, setStatusText] = useState("");
   const [message, setMessage] = useState("");
-
+  const [userType, setUserType] = useState("");
   // put this in use effect
   useEffect(() => {
+    setUserType(localStorage.getItem("role"));
     const fetchData = async () => {
       try {
         const { err, isPen, newData, newStatus, newStatusText, newMessage } =
@@ -63,10 +66,25 @@ export default function TicketComponent({ setLoggedin }) {
         <table className="table">
           <thead>
             <tr>
-              <th>REQUESTER</th>
-              <th>SUBJECT</th>
-              <th>PRIORITY</th>
-              <th>ID</th>
+              {userType === "agent" && (
+                <React.Fragment>
+                  <th>REQUESTER</th>
+                  <th>SUBJECT</th>
+                  <th>PRIORITY</th>
+                  <th>ID</th>
+                </React.Fragment>
+              )}
+
+              {(userType === "manger" || userType === "admin") && (
+                <React.Fragment>
+                  <th>User</th>
+                  <th>AGENT</th>
+                  <th>PRIORITY</th>
+                  <th>STATUS</th>
+                  <th>CREATION</th>
+                  <th>ID</th>
+                </React.Fragment>
+              )}
 
               <th></th>
             </tr>

@@ -11,6 +11,7 @@ import PrivateRoute from './utils/PrivateRoute.js';
 
 // Imported Components
 import NavbarParent from './components/navbarParent/navbarParent.jsx';
+import TestTicket from './components/TestTicket/testTicket.jsx';
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
@@ -62,6 +63,8 @@ function App() {
 					<Route path="/ticket" element={<Ticket />} />
 					<Route path="/ticketEntity/:id" element={<TicketEntity />} />
 					<Route path="/createTicket" element={<CreatTicketComponent />} />
+					<Route path="/testTicket" element={<TestTicket />} />
+
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</AnimatePresence>

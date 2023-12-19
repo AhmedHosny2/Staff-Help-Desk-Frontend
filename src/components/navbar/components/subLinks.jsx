@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function SubLinks() {
 	// user, agent1, agent2, ageng3, manager, admin
 	const role = localStorage.getItem('role');
@@ -8,13 +10,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">User Item 1</a>
+							<Link>+ Ticket</Link>
 						</li>
 						<li>
-							<a href="#">User Item 2</a>
+							<Link>Knowledge Base</Link>
 						</li>
 						<li>
-							<a href="#">User Item 3</a>
+							<Link>Chat</Link>
 						</li>
 					</>
 				);
@@ -25,13 +27,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">Agent Item 1</a>
+							<Link>Agent Item 1</Link>
 						</li>
 						<li>
-							<a href="#">Agent Item 2</a>
+							<Link>Agent Item 2</Link>
 						</li>
 						<li>
-							<a href="#">Agent Item 3</a>
+							<Link>Agent Item 3</Link>
 						</li>
 					</>
 				);
@@ -40,13 +42,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">Manager Item 1</a>
+							<Link to="/report">Generate Report</Link>
 						</li>
 						<li>
-							<a href="#">Manager Item 2</a>
+							<Link>Manager Item 2</Link>
 						</li>
 						<li>
-							<a href="#">Manager Item 3</a>
+							<Link>Manager Item 3</Link>
 						</li>
 					</>
 				);
@@ -55,13 +57,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">Admin Item 1</a>
+							<Link>Knowledge Base</Link>
 						</li>
 						<li>
-							<a href="#">Admin Item 2</a>
+							<Link>Admin Item 1</Link>
 						</li>
 						<li>
-							<a href="#">Admin Item 3</a>
+							<Link>Admin Item 2</Link>
 						</li>
 					</>
 				);

@@ -42,7 +42,6 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const handleLogoutClick = (e) => {
 		e.preventDefault();
 		localStorage.removeItem('loggedin');
-		// localStorage.removeItem('role');
 		navigate('/');
 		// document.cookie =
 		// 	"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";

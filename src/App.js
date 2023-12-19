@@ -26,6 +26,7 @@ import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
+import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
 
 function App() {
 	const location = useLocation();
@@ -54,6 +55,7 @@ function App() {
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
+					<Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
 				</Routes>
 			</AnimatePresence>
 		</>

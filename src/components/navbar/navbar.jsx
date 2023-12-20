@@ -12,9 +12,10 @@ const navigationVariants = {
 	visible: {
 		y: '0vh',
 		transition: {
+			duration: 3000,
 			delay: 0,
 			type: 'spring',
-			stiffness: 200,
+			stiffness: 300,
 		},
 	},
 	exit: {
@@ -22,7 +23,7 @@ const navigationVariants = {
 		transition: {
 			delay: 0,
 			type: 'spring',
-			stiffness: 200,
+			stiffness: 400,
 		},
 	},
 };
@@ -42,7 +43,9 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const handleLogoutClick = (e) => {
 		e.preventDefault();
 		localStorage.removeItem('loggedin');
-		navigate('/');
+		setTimeout(() => {
+			navigate('/');
+		}, 2500);
 		// document.cookie =
 		// 	"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
 	};

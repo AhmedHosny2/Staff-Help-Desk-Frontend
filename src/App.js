@@ -1,7 +1,7 @@
-import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import "./App.css";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 // Restrict access to pages
 import PublicRoute from './utils/PublicRoute.js';
@@ -10,6 +10,7 @@ import PublicRoute from './utils/PublicRoute.js';
 import PrivateRoute from './utils/PrivateRoute.js';
 
 // Imported Components
+
 import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
@@ -27,6 +28,7 @@ import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
 import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
+import ChangeBrandPage from "./pages/ChangeBrand/ChangeBrand.jsx";
 
 function App() {
 	const location = useLocation();
@@ -56,10 +58,16 @@ function App() {
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
 					<Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
+					<Route path="/changeBrand" element={<ChangeBrandPage />} />
 				</Routes>
 			</AnimatePresence>
 		</>
 	);
+
+
+
+          
+
 }
 
 export default App;

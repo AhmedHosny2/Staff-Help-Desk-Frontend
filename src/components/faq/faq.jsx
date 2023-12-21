@@ -20,34 +20,34 @@ const Faq = () => {
 	const [isPending, setIsPending] = useState(true);
 
 
-		useEffect(() => {
-				const fetchData = async () => {
-					try {
-						const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
-						console.log('Fetched data:', newData);  // Log the fetched data
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
+				// console.log('Fetched data:', newData);
 
-						
-						const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
-						console.log('Popular FAQs:', popularFAQs);  // Log the popular FAQs
 
-						const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
-						console.log('Sorted FAQs:', sortedFAQs);  // Log the sorted FAQs
+				const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
+				// console.log('Popular FAQs:', popularFAQs);
 
-						const topFAQs = sortedFAQs.slice(0, 4);
-						console.log('Top FAQs:', topFAQs);  // 
+				const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
+				// console.log('Sorted FAQs:', sortedFAQs);
 
-						setFAQs(topFAQs);
-						setIsPending(false);
-					} catch (error) {
-						console.error('Error fetching FAQs:', error);
-						setIsPending(false);
-					}
-				};
+				const topFAQs = sortedFAQs.slice(0, 4);
+				// console.log('Top FAQs:', topFAQs); 
 
-				fetchData();
-			}, []);
-	
-	
+				setFAQs(topFAQs);
+				setIsPending(false);
+			} catch (error) {
+				console.error('Error fetching FAQs:', error);
+				setIsPending(false);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+
 
 	return (
 		<>

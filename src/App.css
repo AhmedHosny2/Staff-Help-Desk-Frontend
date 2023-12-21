@@ -42,19 +42,19 @@ p {
 
 .notifDrop {
 	position: relative;
-	z-index: 99999999;
+	z-index: 9999;
 }
 
 .bringBack {
 	position: relative;
 	z-index: -9999;
 }
-@media (max-width: 1700px) {
+/* @media (max-width: 1700px) {
 	.heroBringBack {
 		position: relative;
 		z-index: -9999;
 	}
-}
+} */
 
 /* .card1 {
 	position: relative;

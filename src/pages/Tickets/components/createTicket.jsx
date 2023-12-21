@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import SaveIcon from "@mui/icons-material/Save";
 import { getToastStyle, removeToast } from "../../../utils/toastStyle";
@@ -12,6 +12,7 @@ export default function CreatTicketComponent() {
   });
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [automaticWorkflow, setAutomaticWorkflow] = useState("");
 
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ export default function CreatTicketComponent() {
   const [status, setStatus] = useState(null);
   const [statusText, setStatusText] = useState("");
   const [message, setMessage] = useState("");
+
   const handleButtonClick = (e) => {
     const body = {
       title: title,
@@ -67,7 +69,18 @@ export default function CreatTicketComponent() {
       ...formData,
       sub_category: selectedSubCategory,
     });
-  };
+    getAutomaticWorkflow(formData.issue_type, selectedSubCategory)
+  }
+
+  const getAutomaticWorkflow = async (issue_type, sub_category,) => {
+    const { err, isPen, newData, newStatus, newStatusText, newMessage } =
+      await customFetch(
+        process.env.REACT_APP_TICKETS_URL + `/getAutomaticWorkflow?issue_type=${issue_type}&sub_category=${sub_category}`,
+        "GET",
+      );
+    setAutomaticWorkflow(newData);
+  }
+
   return (
     <>
       <div className="hero min-h-screen">
@@ -141,14 +154,32 @@ export default function CreatTicketComponent() {
                       </>
                     )}
                   </select>
-
+                  {formData.sub_category && automaticWorkflow.fixes.length > 0 && (
+                    <>
+                      <div className="indicator mt-8 pt-4">
+                        <span className="indicator-item badge badge-secondary">SOLUTIONS</span>
+                        <h3 className="text-center text-lg sm:text-l md:text-2xl lg:text-3xl xl:text-4xl font-bold">
+                          Try one of these solutions:
+                        </h3>
+                      </div>
+                      <div className="textarea flex w-full my-5">
+                        <ul className="list-disc pl-5">
+                          {automaticWorkflow.fixes.map((fix, index) => (
+                            <li key={index}>{fix}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  )}
                   {formData.sub_category && (
-                    <textarea
-                      className="textarea textarea-success flex w-full my-5"
-                      placeholder="Describe the problem..."
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
+                    <>
+                      <textarea
+                        className="textarea textarea-success flex w-full my-5"
+                        placeholder="Describe the problem..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      ></textarea>
+                    </>
                   )}
                 </div>
               )}

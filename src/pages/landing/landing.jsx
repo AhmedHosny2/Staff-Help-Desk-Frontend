@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // Imported Components
@@ -11,20 +10,6 @@ import Colors from './components/colors/colors';
 import App from './components/app/app';
 import Footer from '../../components/footer/footer';
 
-const containerVariants = {
-	hidden: {
-		x: '100vw',
-	},
-	visible: {
-		x: '0vw',
-		transition: { delay: 0.5, duration: 0.4 },
-	},
-	exit: {
-		x: '-100vw',
-		transition: { ease: 'easeInOut' },
-	},
-};
-
 const pageVarient = {
 	hidden: {
 		opacity: 0,
@@ -32,7 +17,7 @@ const pageVarient = {
 	},
 	visible: {
 		opacity: 1,
-		y: 0,
+		y: -70,
 		transition: { delay: 1, duration: 1, ease: 'easeInOut', when: 'beforeChildren' },
 	},
 };

@@ -40,14 +40,22 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 	};
 	const role = getRole();
 
-	const handleLogoutClick = (e) => {
+	const handleLogoutClick = async (e) => {
 		e.preventDefault();
-		localStorage.removeItem('loggedin');
-		setTimeout(() => {
-			navigate('/');
-		}, 2500);
-		// document.cookie =
-		// 	"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
+
+		try {
+			const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+				process.env.REACT_APP_USERS_URL + 'logout',
+				'GET'
+			);
+
+			localStorage.removeItem('loggedin');
+			setTimeout(() => {
+				navigate('/');
+			}, 2500);
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
 	};
 
 	useEffect(() => {

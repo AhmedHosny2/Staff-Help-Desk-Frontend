@@ -132,7 +132,10 @@ export default function CreatTicketComponent() {
                     {formData.issue_type === "Hardware" && (
                       <>
                         <option value="desktops">Desktops</option>
+                        <option value="printers">Printers</option>
                         <option value="laptops">Laptops</option>
+                        <option value="servers">Servers</option>
+                        <option value="networking equipment">Networking Equipment</option>
                       </>
                     )}
                     {formData.issue_type === "Software" && (
@@ -143,6 +146,12 @@ export default function CreatTicketComponent() {
                         <option value="application software">
                           Application Software
                         </option>
+                        <option value="custom software">
+                        Custom Software
+                        </option>
+                        <option value="integration issues">
+                        Integration Issues
+                        </option>
                       </>
                     )}
                     {formData.issue_type === "Network" && (
@@ -151,6 +160,8 @@ export default function CreatTicketComponent() {
                         <option value="internet connection problems">
                           Internet Connection Problems
                         </option>
+                        <option value="website errors">Website Errors</option>
+
                       </>
                     )}
                   </select>

@@ -11,21 +11,22 @@ export default function TicketComponent() {
   useEffect(() => {
     const userRole = localStorage.getItem("role");
     setUserType(userRole.match("agent") ? userRole.slice(0, -1) : userRole);
-    const fetchData = async () => {
+    const fetchData = async (url) => {
       try {
         const { newData } = await customFetch(
-          process.env.REACT_APP_TICKETS_URL + "/getAgentTickets",
+          process.env.REACT_APP_TICKETS_URL + url,
           "GET"
         );
         setData(newData);
 
         console.log("new " + newData[0]);
-        console.log("new " + newData[0].ticket._id);
+        console.log("new " + newData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData();
+    if (userRole !== "user") fetchData("/getAgentTickets");
+    else fetchData("/getUserTickets");
   }, []);
   const handleEmailClick = (e) => {
     window.location.href = `mailto:${e.target.value}`;

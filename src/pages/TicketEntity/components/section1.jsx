@@ -55,22 +55,23 @@ export default function Section1({ data }) {
 						<div className="tooltip tooltip-bottom" data-tip="Category">
 							<h2 className="card-title">
 								<div className="badge badge-outline h-12 lg:h-5">{data.sub_category}</div>
-								{data.userType === 'user' && (
-									<div className="card-actions justify-end">
-										<button
-											className="btn btn-error absolute bottom-0 right-0"
-											onClick={handleDeleteButtonClick}
-										>
-											<Trash size={35} />
-											Delete
-										</button>
-									</div>
-								)}
 							</h2>
 						</div>
+
+						{data.userType === 'user' && (
+							<div className="card-actions">
+								<button
+									className="btn btn-error btn-outline"
+									onClick={handleDeleteButtonClick}
+								>
+									<Trash size={35} />
+									Delete
+								</button>
+							</div>
+						)}
 					</div>
 
-					<figure className="m-6">
+					<figure className="m-2">
 						<QRCode value={window.location.href} />
 					</figure>
 					<div className="flex justify-center items-center">

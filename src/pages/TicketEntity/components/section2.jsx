@@ -38,6 +38,7 @@ export default function Section2({ data }) {
 		<>
 			<div className="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
 				<div className="flex flex-wrap">
+					<h2 className="text-center mb-3 text-xl font-bold">Title: {data.title}</h2>
 					<div className="stats stats-vertical lg:stats-horizontal shadow mb-3">
 						<div className="stat">
 							<div className="stat-value">Date</div>

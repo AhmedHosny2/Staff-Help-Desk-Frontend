@@ -9,6 +9,8 @@ export default function Section2({ data }) {
 	const navigate = useNavigate();
 	const [content, setContent] = useState('');
 	const [status, setStatus] = useState(null);
+	const [loading, setLoading] = useState(false);
+
 	const editor = useRef(null);
 
 	const formattedDate = new Date(data.timeCreated).toLocaleDateString('en-US', {
@@ -18,6 +20,7 @@ export default function Section2({ data }) {
 	});
 
 	const handleButtonClick = async (e) => {
+		setLoading(true);
 		console.log(e.target.value);
 		const body = {
 			ticketId: window.location.pathname.split('/')[2],
@@ -30,8 +33,13 @@ export default function Section2({ data }) {
 			body
 		);
 		setStatus(newStatus);
-		if (newStatus === 200) navigate('/ticket');
-		else alert('Error');
+		if (newStatus === 200) {
+			setLoading(false);
+			navigate('/ticket');
+		} else {
+			setLoading(false);
+			alert('Error');
+		}
 	};
 
 	return (
@@ -73,20 +81,31 @@ export default function Section2({ data }) {
 								<JoditEditor ref={editor} value={content} />
 
 								<div className="flex">
-									<button
-										className=" btn  btn-outline  btn-success m-auto"
-										value="closed"
-										onClick={handleButtonClick}
-									>
-										Save & Close Ticket
-									</button>
-									<button
-										className=" btn  btn-outline  btn-primary m-auto"
-										value="updated"
-										onClick={handleButtonClick}
-									>
-										Update
-									</button>
+									{!loading ? (
+										<>
+											<button
+												className="btn btn-outline btn-success m-auto"
+												value="closed"
+												onClick={handleButtonClick}
+											>
+												Save & Close Ticket
+											</button>
+											<button
+												className="btn btn-outline btn-primary m-auto"
+												value="updated"
+												onClick={handleButtonClick}
+											>
+												Update
+											</button>
+										</>
+									) : (
+										<>
+											<button className="btn btn-outline btn-success m-auto" disabled>
+												Saving Changes
+												<span className="loading loading-spinner loading-sm ml-4"></span>
+											</button>
+										</>
+									)}
 								</div>
 							</div>
 						</div>

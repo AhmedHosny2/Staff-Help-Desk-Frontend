@@ -201,7 +201,7 @@ export default function CreatTicketComponent() {
 										Create
 									</button>
 								) : (
-									<button className="btn btn-success disabled">
+									<button className="btn btn-success" disabled={true}>
 										<SaveIcon />
 										Creating Ticket
 										<span className="loading loading-spinner loading-xs m;-4"></span>

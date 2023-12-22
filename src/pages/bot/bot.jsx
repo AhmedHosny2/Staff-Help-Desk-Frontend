@@ -11,7 +11,7 @@ export default function Bot() {
     { user: "Obi-Wan Kenobi", text: "You were the Chosen One!" },
     { user: "Anakin", text: "I hate you!" },
     { user: "Anakin", text: "I hate you!" },
-    { user: "Anakin", text: "I hate you!" },
+    { user: "Obi-Wan Kenobi", text: "I hate you!" },
     { user: "Anakin", text: "I hate you!" },
     { user: "Anakin", text: "I hate you!" },
   ]);

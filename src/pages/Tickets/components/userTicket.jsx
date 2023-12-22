@@ -5,17 +5,20 @@ export default function UserTicket({ data }) {
   const navigate = useNavigate();
 
   const handleButtonClick = (e) => {
-    navigate(`/ticketEntity/${e.currentTarget.dataset.ticketId}`);  };
+    navigate(`/ticketEntity/${e.currentTarget.dataset.ticketId}`);
+  };
   return (
     <>
       {data &&
         data.map((ticketData) => (
-            <div
+          <div
             key={ticketData._id}
             className="card w-96 bg-base-100 shadow-xl"
             onClick={handleButtonClick}
             data-ticket-id={ticketData._id}
-          >            <figure>
+          >
+            {" "}
+            <figure>
               <QRCode value={window.location.href} />
             </figure>
             <div className="card-body">
@@ -28,7 +31,6 @@ export default function UserTicket({ data }) {
                 <div className="badge badge-outline">
                   {ticketData.issue_type}
                 </div>
-                <div className="badge badge-outline">Products</div>
               </div>
             </div>
           </div>

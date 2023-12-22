@@ -73,49 +73,50 @@ export default function Section1({ data }) {
 					<figure className="m-6">
 						<QRCode value={window.location.href} />
 					</figure>
-				</div>
-
-				{data.userType === 'user' && (
-					<div className="rating rating-lg">
-						<input type="radio" name="rating-9" className="rating-hidden" />
-						<input
-							type="radio"
-							name="rating-9"
-							className="mask mask-star-2"
-							value={1}
-							onClick={handleRatingChange}
-						/>
-						<input
-							type="radio"
-							name="rating-9"
-							className="mask mask-star-2"
-							checked
-							value={2}
-							onClick={handleRatingChange}
-						/>
-						<input
-							type="radio"
-							name="rating-9"
-							className="mask mask-star-2"
-							value={3}
-							onClick={handleRatingChange}
-						/>
-						<input
-							type="radio"
-							name="rating-9"
-							className="mask mask-star-2"
-							value={4}
-							onClick={handleRatingChange}
-						/>
-						<input
-							type="radio"
-							name="rating-9"
-							className="mask mask-star-2"
-							value={5}
-							onClick={handleRatingChange}
-						/>
+					<div className="flex justify-center items-center">
+						{data.userType === 'user' && (
+							<div className="rating rating-lg mb-6">
+								<input type="radio" name="rating-9" className="rating-hidden" />
+								<input
+									type="radio"
+									name="rating-9"
+									className="mask mask-star-2"
+									value={1}
+									onClick={handleRatingChange}
+								/>
+								<input
+									type="radio"
+									name="rating-9"
+									className="mask mask-star-2"
+									checked
+									value={2}
+									onClick={handleRatingChange}
+								/>
+								<input
+									type="radio"
+									name="rating-9"
+									className="mask mask-star-2"
+									value={3}
+									onClick={handleRatingChange}
+								/>
+								<input
+									type="radio"
+									name="rating-9"
+									className="mask mask-star-2"
+									value={4}
+									onClick={handleRatingChange}
+								/>
+								<input
+									type="radio"
+									name="rating-9"
+									className="mask mask-star-2"
+									value={5}
+									onClick={handleRatingChange}
+								/>
+							</div>
+						)}
 					</div>
-				)}
+				</div>
 			</div>
 		</>
 	);

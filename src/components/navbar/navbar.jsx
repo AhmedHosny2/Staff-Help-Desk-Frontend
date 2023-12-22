@@ -44,10 +44,12 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 		e.preventDefault();
 
 		try {
-			const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-				process.env.REACT_APP_USERS_URL + 'logout',
-				'GET'
-			);
+			// const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+			// 	process.env.REACT_APP_USERS_URL + 'logout',
+			// 	'GET'
+			// );
+			document.cookie = `authcookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+			document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
 
 			localStorage.removeItem('loggedin');
 			setTimeout(() => {

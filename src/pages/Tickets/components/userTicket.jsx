@@ -9,7 +9,7 @@ export default function UserTicket({ data }) {
   const handleButtonClick = (ticketId) => {
     navigate(`/ticketEntity/${ticketId}`);
   };
-
+  if(!data) return null;
   const filteredData = data.filter((ticketData) =>
     ticketData.issue_type.toLowerCase().includes(searchQuery.toLowerCase())
   );

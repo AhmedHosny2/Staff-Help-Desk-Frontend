@@ -1,11 +1,30 @@
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import { Trash } from "react-bootstrap-icons";
 
 export default function Section1({ data }) {
   const navigate = useNavigate();
+  const [selectedRating, setSelectedRating] = useState(3); // Default to the third star
+  const handleRatingChange = async (e) => {
+    const rating = e.target.value;
+    setSelectedRating(rating);
+    console.log("Selected Rating:", rating);
+    const id = window.location.pathname.split("/")[2];
+    const body = {
+      rating: rating,
+      ticketId: id,
+    };
+    const { newData } = await customFetch(
+      process.env.REACT_APP_TICKETS_URL + "/rateTicket",
+      "PUT",
+      body
+    );
+    console.log("newData", newData);
+    // You can perform additional actions here based on the selected rating
+  };
+
   const id = window.location.pathname.split("/")[2];
   const [userType, setUserType] = useState("");
   const handleDeleteButtonClick = (e) => {
@@ -52,6 +71,47 @@ export default function Section1({ data }) {
               <Trash size={35} />
               Delete
             </button>
+            <div className="rating rating-lg">
+              <div className="rating rating-lg">
+                <input type="radio" name="rating-9" className="rating-hidden" />
+                <input
+                  type="radio"
+                  name="rating-9"
+                  className="mask mask-star-2"
+                  value={1}
+                  onClick={handleRatingChange}
+                />
+                <input
+                  type="radio"
+                  name="rating-9"
+                  className="mask mask-star-2"
+                  checked
+                  value={2}
+                  onClick={handleRatingChange}
+                />
+                <input
+                  type="radio"
+                  name="rating-9"
+                  className="mask mask-star-2"
+                  value={3}
+                  onClick={handleRatingChange}
+                />
+                <input
+                  type="radio"
+                  name="rating-9"
+                  className="mask mask-star-2"
+                  value={4}
+                  onClick={handleRatingChange}
+                />
+                <input
+                  type="radio"
+                  name="rating-9"
+                  className="mask mask-star-2"
+                  value={5}
+                  onClick={handleRatingChange}
+                />
+              </div>
+            </div>
           </div>
         )}
       </div>

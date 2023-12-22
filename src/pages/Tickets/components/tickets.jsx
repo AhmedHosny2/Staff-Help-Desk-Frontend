@@ -1,56 +1,55 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { customFetch } from "../../../utils/Fetch";
-import { getToastStyle, removeToast } from "../../../utils/toastStyle";
-import toast, { Toaster } from "react-hot-toast";
-import TicketEntity from "../../TicketEntity/ticketEntity";
-import { set } from "animejs";
-import React from "react";
-export default function TicketComponent({ setLoggedin }) {
-  const navigate = useNavigate();
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { customFetch } from '../../../utils/Fetch';
+import { getToastStyle, removeToast } from '../../../utils/toastStyle';
+import toast, { Toaster } from 'react-hot-toast';
+import TicketEntity from '../../TicketEntity/ticketEntity';
+import { set } from 'animejs';
+import React from 'react';
+export default function TicketComponent() {
+	const navigate = useNavigate();
 
-  const [email, setEmail] = useState("youfielwy@gmail.com");
-  const [password, setPassword] = useState("Stecki10");
-  const [loggingin, setLoggingin] = useState(false);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [loggingin, setLoggingin] = useState(false);
 
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [statusText, setStatusText] = useState("");
-  const [message, setMessage] = useState("");
-  const [userType, setUserType] = useState("");
-  // put this in use effect
-  useEffect(() => {
-    setUserType(localStorage.getItem("role"));
-    const fetchData = async () => {
-      try {
-        const { err, isPen, newData, newStatus, newStatusText, newMessage } =
-          await customFetch(
-            process.env.REACT_APP_TICKETS_URL + "/getAgentTickets",
-            "GET"
-          );
-        await setData(newData);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-  const handleEmailClick = (e) => {
-    window.location.href = `mailto:${e.target.value}`;
-  };
-  const handleIDClick = (e) => {
-    navigate(`/ticketEntity/${e.target.value}`);
-  };
-  return (
-    <>
-      {/* <div className="badge bg-base-300">Pending</div>
+	const [isPending, setIsPending] = useState(false);
+	const [error, setError] = useState(null);
+	const [data, setData] = useState(null);
+	const [status, setStatus] = useState(null);
+	const [statusText, setStatusText] = useState('');
+	const [message, setMessage] = useState('');
+	const [userType, setUserType] = useState('');
+	// put this in use effect
+	useEffect(() => {
+		setUserType(localStorage.getItem('role'));
+		const fetchData = async () => {
+			try {
+				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+					process.env.REACT_APP_TICKETS_URL + '/getAgentTickets',
+					'GET'
+				);
+				await setData(newData);
+				console.log(data);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+		fetchData();
+	}, []);
+	const handleEmailClick = (e) => {
+		window.location.href = `mailto:${e.target.value}`;
+	};
+	const handleIDClick = (e) => {
+		navigate(`/ticketEntity/${e.target.value}`);
+	};
+	return (
+		<>
+			{/* <div className="badge bg-base-300">Pending</div>
       <div className="badge badge-accent ">Open</div>
       <div className="badge bg-neutral text-base-300">Closed</div>
       <Toaster /> */}
-      {/*
+			{/*
       
       tickets for admin he can see all the tickets  ========================
 
@@ -62,29 +61,29 @@ export default function TicketComponent({ setLoggedin }) {
 
 
 */}
-      <div className="overflow-x-auto">
-        <table className="table">
-          <thead>
-            <tr>
-              {userType === "agent" && (
-                <React.Fragment>
-                  <th>REQUESTER</th>
-                  <th>SUBJECT</th>
-                  <th>PRIORITY</th>
-                  <th>ID</th>
-                </React.Fragment>
-              )}
+			<div className="overflow-x-auto">
+				<table className="table">
+					<thead>
+						<tr>
+							{userType === 'agent' && (
+								<React.Fragment>
+									<th>REQUESTER</th>
+									<th>SUBJECT</th>
+									<th>PRIORITY</th>
+									<th>ID</th>
+								</React.Fragment>
+							)}
 
-              {(userType === "manger" || userType === "admin") && (
-                <React.Fragment>
-                  <th>User</th>
-                  <th>AGENT</th>
-                  <th>PRIORITY</th>
-                  <th>STATUS</th>
-                  <th>CREATION</th>
-                  <th>ID</th>
-                </React.Fragment>
-              )}
+							{(userType === 'manger' || userType === 'admin') && (
+								<React.Fragment>
+									<th>User</th>
+									<th>AGENT</th>
+									<th>PRIORITY</th>
+									<th>STATUS</th>
+									<th>CREATION</th>
+									<th>ID</th>
+								</React.Fragment>
+							)}
 
               <th></th>
             </tr>
@@ -163,12 +162,12 @@ export default function TicketComponent({ setLoggedin }) {
               <th>PRIORITY</th>
               <th>ID</th>
 
-              <th></th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>{" "}
-      <Toaster />
-    </>
-  );
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>{' '}
+			<Toaster />
+		</>
+	);
 }

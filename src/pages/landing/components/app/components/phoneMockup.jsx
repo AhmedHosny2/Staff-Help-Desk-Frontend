@@ -12,7 +12,7 @@ export default function PhoneMockup() {
 					<div className="phoneMockup-btn4"></div>
 					<div className="phoneMockup-card-int">
 						<div className="phoneMockup-hello">
-							DESKMATE
+							<span className="text-sm sm:text-3xl">DESKMATE</span>
 							<span className="phoneMockup-hidden">
 								<div className="card shadow-xl image-full mx-2 mt-6 rounded-3xl">
 									<figure>

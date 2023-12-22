@@ -80,10 +80,10 @@
 // }
 import LoginComponent from './components/login';
 
-export default function Login({ setLoggedin }) {
+export default function Login() {
 	return (
 		<>
-			<LoginComponent setLoggedin={setLoggedin} />
+			<LoginComponent />
 		</>
 	);
 }

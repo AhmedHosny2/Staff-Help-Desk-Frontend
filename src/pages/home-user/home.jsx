@@ -22,9 +22,9 @@ import Footer from '../../components/footer/footer';
 export default function UserHomePage() {
 	return (
 		<>
-			{/* <div className="bringBack"> */}
-			<Hero />
-			{/* </div> */}
+			<div className="heroBringBack">
+				<Hero />
+			</div>
 			<Faq />
 			<Footer />
 		</>

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { customFetch } from '../../utils/Fetch';
 
 const heroVariant = {
 	hidden: {
@@ -13,7 +15,40 @@ const heroVariant = {
 	},
 };
 
-export default function Faq() {
+const Faq = () => {
+	const [FAQs, setFAQs] = useState([]);
+	const [isPending, setIsPending] = useState(true);
+
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
+				// console.log('Fetched data:', newData);
+
+
+				const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
+				// console.log('Popular FAQs:', popularFAQs);
+
+				const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
+				// console.log('Sorted FAQs:', sortedFAQs);
+
+				const topFAQs = sortedFAQs.slice(0, 4);
+				// console.log('Top FAQs:', topFAQs); 
+
+				setFAQs(topFAQs);
+				setIsPending(false);
+			} catch (error) {
+				console.error('Error fetching FAQs:', error);
+				setIsPending(false);
+			}
+		};
+
+		fetchData();
+	}, []);
+
+
+
 	return (
 		<>
 			<motion.div variants={heroVariant} initial="hidden" animate="visible">
@@ -28,47 +63,27 @@ export default function Faq() {
 						Go to knowledgebase instead?
 					</Link>
 				</div>
+
 				<div className="flex items-center justify-center mb-16">
-					<div className="join join-vertical w-[90vw]">
-						<div className="collapse collapse-arrow join-item border border-base-300">
-							<input type="radio" name="my-accordion-4" />
-							<div className="collapse-title text-xl font-medium">Question 1</div>
-							<div className="collapse-content">
-								<p>
-									Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-									suscipit ipsum eaque quisquam minima iste quibusdam. Perspiciatis unde
-									quisquam illum ut eius sit! Ratione recusandae quidem, laborum earum
-									dicta officia.
-								</p>
-							</div>
+					{isPending ? (
+						<p>Loading FAQs...</p>
+					) : (
+						<div className="join join-vertical w-[90vw]">
+							{FAQs.map((FAQ) => (
+								<div key={FAQ.id} className="collapse collapse-arrow join-item border border-base-300">
+									<input type="checkbox" name={`my-accordion-${FAQ.id || 'default'}`} />
+									<div className="collapse-title text-xl font-medium">{FAQ.question}</div>
+									<div className="collapse-content">
+										<p>{FAQ.answer}</p>
+									</div>
+								</div>
+							))}
 						</div>
-						<div className="collapse collapse-arrow join-item border border-base-300">
-							<input type="radio" name="my-accordion-4" />
-							<div className="collapse-title text-xl font-medium">Question 2</div>
-							<div className="collapse-content">
-								<p>
-									Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-									suscipit ipsum eaque quisquam minima iste quibusdam. Perspiciatis unde
-									quisquam illum ut eius sit! Ratione recusandae quidem, laborum earum
-									dicta officia.
-								</p>
-							</div>
-						</div>
-						<div className="collapse collapse-arrow join-item border border-base-300">
-							<input type="radio" name="my-accordion-4" />
-							<div className="collapse-title text-xl font-medium">Question 3</div>
-							<div className="collapse-content">
-								<p>
-									Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat
-									suscipit ipsum eaque quisquam minima iste quibusdam. Perspiciatis unde
-									quisquam illum ut eius sit! Ratione recusandae quidem, laborum earum
-									dicta officia.
-								</p>
-							</div>
-						</div>
-					</div>
+					)}
 				</div>
 			</motion.div>
 		</>
 	);
-}
+};
+
+export default Faq;

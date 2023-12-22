@@ -83,8 +83,7 @@ const   handleButtonClick = ()=>
 
               {userType.match("agent") && (
                 <div className="flex">
-                  <button className="btn btn-info mr-2" onClick={handleButtonClick}>Update</button>
-                  <button className="btn btn-success" onClick={handleButtonClick} >Solve</button>
+                  <button className="btn btn-info mr-2" onClick={handleButtonClick}>Update Ticket</button>
                 </div>
               )}
               {userType === "user" && (

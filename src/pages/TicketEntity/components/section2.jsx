@@ -6,13 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import { Parser } from 'html-to-react';
 
 export default function Section2({ data }) {
-	console.log(data);
 	const navigate = useNavigate();
-	console.log(data.userType);
 	const [content, setContent] = useState('');
 	const [status, setStatus] = useState(null);
-
 	const editor = useRef(null);
+
+	const formattedDate = new Date(data.timeCreated).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+
 	const handleButtonClick = async (e) => {
 		console.log(e.target.value);
 		const body = {
@@ -29,10 +33,29 @@ export default function Section2({ data }) {
 		if (newStatus === 200) navigate('/ticket');
 		else alert('Error');
 	};
+
 	return (
 		<>
 			<div className="w-full shrink-0 grow-0 basis-auto lg:w-7/12">
 				<div className="flex flex-wrap">
+					<div className="stats stats-vertical lg:stats-horizontal shadow mb-3">
+						<div className="stat">
+							<div className="stat-value">Date</div>
+							<div className="stat-title">Ticket opened on</div>
+							<div className="stat-desc">{formattedDate}</div>
+						</div>
+
+						<div className="stat">
+							<div className="stat-value">Priority</div>
+							<div className="stat-desc">{data.ticketPriority}</div>
+						</div>
+
+						<div className="stat">
+							<div className="stat-value">Status</div>
+							<div className="stat-desc">{data.status}</div>
+						</div>
+					</div>
+
 					<div className="collapse collapse-plus bg-base-200 mb-6">
 						<input type="checkbox" />
 						<div className="collapse-title text-xl font-medium">Description</div>
@@ -70,7 +93,28 @@ export default function Section2({ data }) {
 
 					{data.userType === 'user' && (
 						<>
-							<div className="badge badge-primary badge-outline text-xl item-center mx-auto">
+							<div className="collapse collapse-plus bg-base-200 mb-6">
+								<input type="checkbox" />
+								<div className="collapse-title text-xl font-medium">Solutions</div>
+								<div className="collapse-content">
+									{data.ticketSolution.length > 0 ? (
+										// add spcae here
+										<div>
+											{data.ticketSolution.map((sol, index) => (
+												<div key={index} dangerouslySetInnerHTML={{ __html: sol }} />
+											))}
+										</div>
+									) : (
+										<p>
+											Our agents are working on it
+											<span className="loading loading-dots loading-md ml-6"></span>
+										</p>
+									)}
+								</div>
+							</div>
+
+							{/* AHMED YEHIAS CODE. DIDNT WANA DELETE IT YET */}
+							{/* <div className="badge badge-primary badge-outline text-xl item-center mx-auto">
 								Solution
 							</div>
 
@@ -87,7 +131,7 @@ export default function Section2({ data }) {
 								</div>
 							) : (
 								<p>Our agents are working on it</p>
-							)}
+							)} */}
 						</>
 					)}
 				</div>

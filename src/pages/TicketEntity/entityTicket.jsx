@@ -10,9 +10,13 @@ export default function TicketEntity() {
 	const [isPending, setIsPending] = useState(false);
 	const [error, setError] = useState(null);
 	const [data, setData] = useState(null);
+	const [userData, setUserData] = useState(null);
 	const [editorRunning, setEditorRunning] = useState(false);
 	const [userType, setUserType] = useState('');
+
 	useEffect(() => {
+		let userId = null;
+
 		const fetchData = async () => {
 			try {
 				if (!localStorage.getItem('role')) navigate('/');
@@ -21,20 +25,33 @@ export default function TicketEntity() {
 					process.env.REACT_APP_TICKETS_URL + '/' + id,
 					'GET'
 				);
+
 				//remove last char
 				const userRole = localStorage.getItem('role');
 				newData.userType = userRole.match('agent') ? userRole.slice(0, -1) : userRole;
 				if (!newData.profilePic) newData.profilePic = img;
+				userId = newData.createdUser;
 				setData(newData);
-				console.log(newData);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+
+			// NOW FETCH THE USER DATA
+			try {
+				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+					process.env.REACT_APP_USERS_URL + '/profile/' + userId,
+					'GET'
+				);
+				setUserData(newData);
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
 		};
+
 		fetchData();
 	}, []);
 
-	return <>{data && <EntityTicketComponent data={data} />}</>;
+	return <>{data && <EntityTicketComponent data={data} userData={userData} />}</>;
 }
 
 // const data = {

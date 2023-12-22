@@ -80,7 +80,7 @@ export default function Section2({ data }) {
 							<div className="collapse-content">
 								<JoditEditor ref={editor} value={content} />
 
-								<div className="flex">
+								<div className="flex mt-3">
 									{!loading ? (
 										<>
 											<button

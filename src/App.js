@@ -16,6 +16,7 @@ import TestPage from './pages/test/test.jsx';
 import Login from './pages/login/login.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Profile from './pages/profile/profile.jsx';
+import ProfileGeneral from './pages/profileGeneral/profile.jsx';
 import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
@@ -46,6 +47,7 @@ const privateRoutes = [
 	`/ticketEntity`,
 	`/createTicket`,
 	`/knowledgeBase`,
+	`/profileGeneral`,
 	'*',
 ];
 
@@ -53,6 +55,7 @@ const roleHierarchy = {
 	user: [
 		'/home/user',
 		'/profile',
+		`/profileGeneral`,
 		'/mfa/validate',
 		'/mfa/enable-mfa',
 		'/ticket',
@@ -63,6 +66,7 @@ const roleHierarchy = {
 	agent: [
 		'/home/agent',
 		'/profile',
+		`/profileGeneral`,
 		'/mfa/validate',
 		'/mfa/enable-mfa',
 		'/ticket',
@@ -74,6 +78,7 @@ const roleHierarchy = {
 		'/logs',
 		'/manageUsers',
 		'/profile',
+		`/profileGeneral`,
 		'/report',
 		'/mfa/validate',
 		'/mfa/enable-mfa',
@@ -87,6 +92,7 @@ const roleHierarchy = {
 		'/manageUsers',
 		'/AddUser',
 		'/profile',
+		`/profileGeneral`,
 		'/report',
 		'/mfa/validate',
 		'/mfa/enable-mfa',
@@ -172,6 +178,7 @@ function App() {
 					<Route path="/manageUsers" element={<ManageUsers />} />
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
+					<Route path="/profile/:id" element={<ProfileGeneral />} />
 					<Route path="/report" element={<Report />} />
 
 					<Route path="/mfa/validate" element={<MFAValidationComponent />} />

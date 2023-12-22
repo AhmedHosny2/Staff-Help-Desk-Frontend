@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Parser } from 'html-to-react';
 
 export default function Section2({ data }) {
+	console.log(data);
 	const navigate = useNavigate();
 	console.log(data.userType);
 	const [content, setContent] = useState('');
@@ -70,7 +71,7 @@ export default function Section2({ data }) {
 					{data.userType === 'user' && (
 						<>
 							<div className="badge badge-primary badge-outline text-xl item-center mx-auto">
-								Solutions
+								Solution
 							</div>
 
 							{data.ticketSolution.length > 0 ? (

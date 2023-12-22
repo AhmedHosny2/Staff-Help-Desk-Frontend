@@ -10,10 +10,20 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<Link>+ Ticket</Link>
+							<details>
+								<summary>Tickets</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/createTicket">+ Ticket</Link>
+									</li>
+									<li>
+										<Link to="/ticket">My Tickets</Link>
+									</li>
+								</ul>
+							</details>
 						</li>
 						<li>
-							<Link>Knowledge Base</Link>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
 							<Link>Chat</Link>
@@ -27,13 +37,13 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<Link>Agent Item 1</Link>
+							<Link to="/ticket">All Tickets</Link>
 						</li>
 						<li>
-							<Link>Agent Item 2</Link>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Agent Item 3</Link>
+							<Link>Chat</Link>
 						</li>
 					</>
 				);
@@ -45,7 +55,7 @@ export default function SubLinks() {
 							<Link to="/report">Generate Report</Link>
 						</li>
 						<li>
-							<Link>Manager Item 2</Link>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
 							<Link>Manager Item 3</Link>
@@ -57,13 +67,26 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<Link>Knowledge Base</Link>
+							<details>
+								<summary>Tickets</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/createTicket">+ Ticket</Link>
+									</li>
+									<li>
+										<Link to="/ticket">My Tickets</Link>
+									</li>
+								</ul>
+							</details>
 						</li>
 						<li>
-							<Link>Admin Item 1</Link>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Admin Item 2</Link>
+							<Link to="/report">Generate Report</Link>
+						</li>
+						<li>
+							<Link>Chat</Link>
 						</li>
 					</>
 				);

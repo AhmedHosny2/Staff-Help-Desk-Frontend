@@ -30,6 +30,7 @@ const navigationVariants = {
 
 export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const navigate = useNavigate();
+	const [loggingout, setLoggingout] = useState(false);
 
 	const getRole = () => {
 		var role = localStorage.getItem('role');
@@ -42,16 +43,20 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 
 	const handleLogoutClick = async (e) => {
 		e.preventDefault();
+		setLoggingout(true);
 
 		try {
-			const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-				process.env.REACT_APP_USERS_URL + 'logout',
-				'GET'
-			);
+			// const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+			// 	process.env.REACT_APP_USERS_URL + 'logout',
+			// 	'GET'
+			// );
+			document.cookie = `authcookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+			document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
 
 			localStorage.removeItem('loggedin');
 			setTimeout(() => {
 				navigate('/');
+				setLoggingout(false);
 			}, 2500);
 		} catch (error) {
 			console.error('Error fetching data:', error);
@@ -208,7 +213,14 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 									</Link>
 								</li>
 								<li>
-									<Link onClick={handleLogoutClick}>Logout</Link>
+									{!loggingout ? (
+										<Link onClick={handleLogoutClick}>Logout</Link>
+									) : (
+										<Link disabled>
+											Logging Out
+											<span className="loading loading-spinner loading-xs ml-4"></span>
+										</Link>
+									)}
 								</li>
 							</ul>
 						</div>

@@ -1,11 +1,11 @@
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import { Trash } from "react-bootstrap-icons";
+import React, { useEffect } from "react";
 
 export default function Section1({ data }) {
-  const navigate = useNavigate();
   const [selectedRating, setSelectedRating] = useState(3); // Default to the third star
   const handleRatingChange = async (e) => {
     const rating = e.target.value;
@@ -25,8 +25,10 @@ export default function Section1({ data }) {
     // You can perform additional actions here based on the selected rating
   };
 
+  const navigate = useNavigate();
   const id = window.location.pathname.split("/")[2];
   const [userType, setUserType] = useState("");
+
   const handleDeleteButtonClick = (e) => {
     const fetchData = async () => {
       try {
@@ -57,7 +59,7 @@ export default function Section1({ data }) {
               </h2>
             </div>
           </div>
-          <figure>
+          <figure className="m-6">
             <QRCode value={window.location.href} />
           </figure>
         </div>
@@ -67,51 +69,50 @@ export default function Section1({ data }) {
               className="btn btn-error absolute bottom-0 left-0"
               onClick={handleDeleteButtonClick}
             >
-              {" "}
               <Trash size={35} />
               Delete
             </button>
-            <div className="rating rating-lg">
-              <div className="rating rating-lg">
-                <input type="radio" name="rating-9" className="rating-hidden" />
-                <input
-                  type="radio"
-                  name="rating-9"
-                  className="mask mask-star-2"
-                  value={1}
-                  onClick={handleRatingChange}
-                />
-                <input
-                  type="radio"
-                  name="rating-9"
-                  className="mask mask-star-2"
-                  checked
-                  value={2}
-                  onClick={handleRatingChange}
-                />
-                <input
-                  type="radio"
-                  name="rating-9"
-                  className="mask mask-star-2"
-                  value={3}
-                  onClick={handleRatingChange}
-                />
-                <input
-                  type="radio"
-                  name="rating-9"
-                  className="mask mask-star-2"
-                  value={4}
-                  onClick={handleRatingChange}
-                />
-                <input
-                  type="radio"
-                  name="rating-9"
-                  className="mask mask-star-2"
-                  value={5}
-                  onClick={handleRatingChange}
-                />
-              </div>
-            </div>
+          </div>
+        )}
+        {data.userType === "user" && (
+          <div className="rating rating-lg">
+            <input type="radio" name="rating-9" className="rating-hidden" />
+            <input
+              type="radio"
+              name="rating-9"
+              className="mask mask-star-2"
+              value={1}
+              onClick={handleRatingChange}
+            />
+            <input
+              type="radio"
+              name="rating-9"
+              className="mask mask-star-2"
+              checked
+              value={2}
+              onClick={handleRatingChange}
+            />
+            <input
+              type="radio"
+              name="rating-9"
+              className="mask mask-star-2"
+              value={3}
+              onClick={handleRatingChange}
+            />
+            <input
+              type="radio"
+              name="rating-9"
+              className="mask mask-star-2"
+              value={4}
+              onClick={handleRatingChange}
+            />
+            <input
+              type="radio"
+              name="rating-9"
+              className="mask mask-star-2"
+              value={5}
+              onClick={handleRatingChange}
+            />
           </div>
         )}
       </div>

@@ -205,7 +205,7 @@ export default function ProfileComponent({ setProfilePic }) {
 										) : (
 											<img
 												className="custom-file-upload border-4 border-secondary rounded"
-												src={profileData.profilePic || addImage.myFile}
+												src={addImage.myFile || profileData.profilePic}
 												alt=""
 											></img>
 										)}
@@ -223,7 +223,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								<>
 									{added && (
 										<button
-											className="btn btn-xs btn-secondary btn-outline my-6"
+											className="btn btn-xs btn-outline btn-primary btn-outline my-6"
 											onClick={handleAddProfilePic}
 										>
 											Upload
@@ -294,6 +294,7 @@ export default function ProfileComponent({ setProfilePic }) {
 												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
 												me field to write a new line
 											</p>
+											<button className="btn btn-wide btn-outline">Enable MFA</button>
 										</div>
 									</div>
 								</div>

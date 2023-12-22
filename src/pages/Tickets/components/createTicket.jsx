@@ -154,12 +154,12 @@ export default function CreatTicketComponent() {
                       </>
                     )}
                   </select>
-                  {formData.sub_category && automaticWorkflow.fixes.length > 0 && (
+                  {formData.sub_category && automaticWorkflow && automaticWorkflow.fixes.length > 0 && (
                     <>
                       <div className="indicator mt-8 pt-4">
                         <span className="indicator-item badge badge-secondary">SOLUTIONS</span>
                         <h3 className="text-center text-lg sm:text-l md:text-2xl lg:text-3xl xl:text-4xl font-bold">
-                          Try one of these solutions:
+                          Try one of these fixes first:
                         </h3>
                       </div>
                       <div className="textarea flex w-full my-5">
@@ -171,7 +171,7 @@ export default function CreatTicketComponent() {
                       </div>
                     </>
                   )}
-                  {formData.sub_category && (
+                  {formData.sub_category && automaticWorkflow !== null && (
                     <>
                       <textarea
                         className="textarea textarea-success flex w-full my-5"

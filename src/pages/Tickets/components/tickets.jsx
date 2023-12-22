@@ -3,20 +3,23 @@ import { useEffect, useState } from "react";
 import { customFetch } from "../../../utils/Fetch";
 import { Toaster } from "react-hot-toast";
 import React from "react";
+import img from "../../../assets/account-avatar-profile.svg";
 export default function TicketComponent() {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [userType, setUserType] = useState("");
   useEffect(() => {
-    setUserType(localStorage.getItem("role"));
+    const userRole = localStorage.getItem("role");
+    setUserType(userRole.match("agent") ? userRole.slice(0, -1) : userRole);
     const fetchData = async () => {
       try {
         const { newData } = await customFetch(
           process.env.REACT_APP_TICKETS_URL + "/getAgentTickets",
           "GET"
         );
-        await setData(newData);
-        console.log(data);
+        setData(newData);
+
+        console.log(newData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -51,25 +54,11 @@ export default function TicketComponent() {
         <table className="table">
           <thead>
             <tr>
-              {userType === "agent" && (
-                <React.Fragment>
-                  <th>REQUESTER</th>
-                  <th>SUBJECT</th>
-                  <th>PRIORITY</th>
-                  <th>ID</th>
-                </React.Fragment>
-              )}
-
-              {(userType === "manger" || userType === "admin") && (
-                <React.Fragment>
-                  <th>User</th>
-                  <th>AGENT</th>
-                  <th>PRIORITY</th>
-                  <th>STATUS</th>
-                  <th>CREATION</th>
-                  <th>ID</th>
-                </React.Fragment>
-              )}
+              <th>REQUESTER</th>
+              <th>SUBJECT</th>
+              <th>PRIORITY</th>
+              <th>STATUS</th>
+              <th>ID</th>
 
               <th></th>
             </tr>
@@ -79,18 +68,22 @@ export default function TicketComponent() {
             {/* we should iterate over the data here  */}
             {data &&
               data.map((ticketData) => (
-                <tr key={ticketData.userData._id}>
+                <tr key={ticketData.ticket._id}>
                   {/* user / resquester  for ( admin / manager / agent ) */}
                   {(userType === "manager" ||
                     userType === "admin" ||
                     userType === "agent") && (
-                    <React.Fragment>
+                    <>
                       <td>
                         <div className="flex items-center gap-3">
                           <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
                               <img
-                                src={ticketData.userData.profilePic}
+                                src={
+                                  ticketData.userData.profilePic
+                                    ? ticketData.userData.profilePic
+                                    : img
+                                }
                                 alt="Avatar Tailwind CSS Component"
                               />
                             </div>
@@ -110,27 +103,39 @@ export default function TicketComponent() {
                           </div>
                         </div>
                       </td>
-                    </React.Fragment>
+
+                      <td>
+                        {ticketData.ticket.title}
+                        <br />
+                        <span className="badge badge-ghost badge-sm">
+                          {ticketData.ticket.issue_type}
+                        </span>
+                      </td>
+                      <td>
+                        {ticketData.ticket.ticketPriority === "low" && (
+                          <div className="badge bg-success">Low</div>
+                        )}
+                        {ticketData.ticket.ticketPriority === "medium" && (
+                          <div className="badge badge-warning">Medium</div>
+                        )}
+                        {ticketData.ticket.ticketPriority === "high" && (
+                          <div className="badge bg-error">High</div>
+                        )}
+                      </td>
+                      <td>
+                        {ticketData.ticket.status === "open" && (
+                          <div className="badge bg-primary">open</div>
+                        )}
+                        {ticketData.ticket.status === "pending" && (
+                          <div className="badge badge-ghost">pending</div>
+                        )}
+                        {ticketData.ticket.status === "updated" && (
+                          <div className="badge bg-accent">updated</div>
+                        )}
+                      </td>
+                    </>
                   )}
 
-                  <td>
-                    {ticketData.ticket.title}
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      {ticketData.ticket.issue_type}
-                    </span>
-                  </td>
-                  <td>
-                    {ticketData.ticket.ticketPriority === "low" && (
-                      <div className="badge bg-success">Low</div>
-                    )}
-                    {ticketData.ticket.ticketPriority === "medium" && (
-                      <div className="badge badge-warning">Medium</div>
-                    )}
-                    {ticketData.ticket.ticketPriority === "high" && (
-                      <div className="badge bg-error">High</div>
-                    )}
-                  </td>
                   <th>
                     <button
                       className="btn btn-ghost btn-xs "
@@ -149,6 +154,7 @@ export default function TicketComponent() {
               <th>REQUESTER</th>
               <th>SUBJECT</th>
               <th>PRIORITY</th>
+              <th>STATUS</th>
               <th>ID</th>
 
               <th></th>

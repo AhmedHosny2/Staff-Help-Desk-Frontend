@@ -2,7 +2,7 @@ import ProfileSection from './profileSection';
 import Section1 from './section1';
 import Section2 from './section2';
 
-export default function TestTicketComponent({ data }) {
+export default function EntityTicketComponent({ data }) {
 
 	return (
 		<>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import TestTicketComponent from "./components/testTicket";
+import EntityTicketComponent from "./components/entityTicket";
 import { Link, useNavigate } from "react-router-dom";
 import { customFetch } from "../../utils/Fetch";
 import img from "../../assets/account-avatar-profile.svg";
 
-export default function TestestTicket() {
+export default function TicketEntity() {
   const navigate = useNavigate();
   const id = window.location.pathname.split("/")[2];
   const [isPending, setIsPending] = useState(false);
@@ -35,7 +35,7 @@ export default function TestestTicket() {
     fetchData();
   }, []);
 
-  return <>{data && <TestTicketComponent data={data} />}</>;
+  return <>{data && <EntityTicketComponent data={data} />}</>;
 }
 
 // const data = {

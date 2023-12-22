@@ -19,7 +19,8 @@ export default function TicketComponent() {
         );
         setData(newData);
 
-        console.log(newData);
+        console.log("new " + newData[0]);
+        console.log("new " + newData[0].ticket._id);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -72,69 +73,70 @@ export default function TicketComponent() {
                   {/* user / resquester  for ( admin / manager / agent ) */}
                   {(userType === "manager" ||
                     userType === "admin" ||
-                    userType === "agent") && (
-                    <>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img
-                                src={
-                                  ticketData.userData.profilePic
-                                    ? ticketData.userData.profilePic
-                                    : img
-                                }
-                                alt="Avatar Tailwind CSS Component"
-                              />
+                    userType === "agent") &&
+                    ticketData.userData && (
+                      <>
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <div className="avatar">
+                              <div className="mask mask-squircle w-12 h-12">
+                                <img
+                                  src={
+                                    ticketData.userData.profilePic
+                                      ? ticketData.userData.profilePic
+                                      : img
+                                  }
+                                  alt="Avatar Tailwind CSS Component"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="font-bold">
+                                {ticketData.userData.firstName +
+                                  " " +
+                                  ticketData.userData.lastName}
+                              </div>
+                              <div
+                                className="text-black-400 hover:underline"
+                                onClick={handleEmailClick}
+                              >
+                                {ticketData.userData.email}
+                              </div>
                             </div>
                           </div>
-                          <div>
-                            <div className="font-bold">
-                              {ticketData.userData.firstName +
-                                " " +
-                                ticketData.userData.lastName}
-                            </div>
-                            <div
-                              className="text-black-400 hover:underline"
-                              onClick={handleEmailClick}
-                            >
-                              {ticketData.userData.email}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
+                        </td>
 
-                      <td>
-                        {ticketData.ticket.title}
-                        <br />
-                        <span className="badge badge-ghost badge-sm">
-                          {ticketData.ticket.issue_type}
-                        </span>
-                      </td>
-                      <td>
-                        {ticketData.ticket.ticketPriority === "low" && (
-                          <div className="badge bg-success">Low</div>
-                        )}
-                        {ticketData.ticket.ticketPriority === "medium" && (
-                          <div className="badge badge-warning">Medium</div>
-                        )}
-                        {ticketData.ticket.ticketPriority === "high" && (
-                          <div className="badge bg-error">High</div>
-                        )}
-                      </td>
-                      <td>
-                        {ticketData.ticket.status === "open" && (
-                          <div className="badge bg-primary">open</div>
-                        )}
-                        {ticketData.ticket.status === "pending" && (
-                          <div className="badge badge-ghost">pending</div>
-                        )}
-                        {ticketData.ticket.status === "updated" && (
-                          <div className="badge bg-accent">updated</div>
-                        )}
-                      </td>
-                    </>
-                  )}
+                        <td>
+                          {ticketData.ticket.title}
+                          <br />
+                          <span className="badge badge-ghost badge-sm">
+                            {ticketData.ticket.issue_type}
+                          </span>
+                        </td>
+                        <td>
+                          {ticketData.ticket.ticketPriority === "low" && (
+                            <div className="badge bg-success">Low</div>
+                          )}
+                          {ticketData.ticket.ticketPriority === "medium" && (
+                            <div className="badge badge-warning">Medium</div>
+                          )}
+                          {ticketData.ticket.ticketPriority === "high" && (
+                            <div className="badge bg-error">High</div>
+                          )}
+                        </td>
+                        <td>
+                          {ticketData.ticket.status === "open" && (
+                            <div className="badge bg-primary">open</div>
+                          )}
+                          {ticketData.ticket.status === "pending" && (
+                            <div className="badge badge-ghost">pending</div>
+                          )}
+                          {ticketData.ticket.status === "updated" && (
+                            <div className="badge bg-accent">updated</div>
+                          )}
+                        </td>
+                      </>
+                    )}
 
                   <th>
                     <button

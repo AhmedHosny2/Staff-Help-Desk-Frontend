@@ -1,41 +1,40 @@
-import { useEffect, useState } from "react";
-import EntityTicketComponent from "./components/entityTicket";
-import { Link, useNavigate } from "react-router-dom";
-import { customFetch } from "../../utils/Fetch";
-import img from "../../assets/account-avatar-profile.svg";
+import { useEffect, useState } from 'react';
+import EntityTicketComponent from './components/entityTicket';
+import { Link, useNavigate } from 'react-router-dom';
+import { customFetch } from '../../utils/Fetch';
+import img from '../../assets/account-avatar-profile.svg';
 
 export default function TicketEntity() {
-  const navigate = useNavigate();
-  const id = window.location.pathname.split("/")[2];
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-  const [editorRunning, setEditorRunning] = useState(false);
-  const [userType, setUserType] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (!localStorage.getItem("role")) navigate("/");
-        setUserType(localStorage.getItem("role"));
-        const { err, isPen, newData, newStatus, newStatusText, newMessage } =
-          await customFetch(
-            process.env.REACT_APP_TICKETS_URL + "/" + id,
-            "GET"
-          );
-		  //remove last char 
-      const userRole = localStorage.getItem("role")
-				newData.userType =userRole.match("agent")? userRole.slice(0, -1):userRole;
-				if(!newData.profilePic)
-				newData.profilePic = img;
-        setData(newData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+	const navigate = useNavigate();
+	const id = window.location.pathname.split('/')[2];
+	const [isPending, setIsPending] = useState(false);
+	const [error, setError] = useState(null);
+	const [data, setData] = useState(null);
+	const [editorRunning, setEditorRunning] = useState(false);
+	const [userType, setUserType] = useState('');
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				if (!localStorage.getItem('role')) navigate('/');
+				setUserType(localStorage.getItem('role'));
+				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+					process.env.REACT_APP_TICKETS_URL + '/' + id,
+					'GET'
+				);
+				//remove last char
+				const userRole = localStorage.getItem('role');
+				newData.userType = userRole.match('agent') ? userRole.slice(0, -1) : userRole;
+				if (!newData.profilePic) newData.profilePic = img;
+				setData(newData);
+				console.log(newData);
+			} catch (error) {
+				console.error('Error fetching data:', error);
+			}
+		};
+		fetchData();
+	}, []);
 
-  return <>{data && <EntityTicketComponent data={data} />}</>;
+	return <>{data && <EntityTicketComponent data={data} />}</>;
 }
 
 // const data = {

@@ -205,7 +205,7 @@ export default function ProfileComponent({ setProfilePic }) {
 										) : (
 											<img
 												className="custom-file-upload border-4 border-secondary rounded"
-												src={profileData.profilePic || addImage.myFile}
+												src={addImage.myFile || profileData.profilePic}
 												alt=""
 											></img>
 										)}
@@ -223,7 +223,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								<>
 									{added && (
 										<button
-											className="btn btn-xs btn-secondary btn-outline my-6"
+											className="btn btn-xs btn-outline btn-primary btn-outline my-6"
 											onClick={handleAddProfilePic}
 										>
 											Upload

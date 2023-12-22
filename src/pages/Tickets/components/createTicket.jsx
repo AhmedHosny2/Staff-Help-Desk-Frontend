@@ -69,7 +69,8 @@ export default function CreatTicketComponent() {
       ...formData,
       sub_category: selectedSubCategory,
     });
-    getAutomaticWorkflow(formData.issue_type, selectedSubCategory)
+    // ay 7aga hena tgeb error benhlha ya bahy 
+    // getAutomaticWorkflow(formData.issue_type, selectedSubCategory)
   }
 
   const getAutomaticWorkflow = async (issue_type, sub_category,) => {
@@ -165,7 +166,7 @@ export default function CreatTicketComponent() {
                       </>
                     )}
                   </select>
-                  {formData.sub_category && automaticWorkflow.fixes.length > 0 && (
+                  {formData.sub_category && automaticWorkflow&& automaticWorkflow.fixes.length > 0 && (
                     <>
                       <div className="indicator mt-8 pt-4">
                         <span className="indicator-item badge badge-secondary">SOLUTIONS</span>

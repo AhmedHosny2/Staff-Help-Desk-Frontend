@@ -4,30 +4,10 @@ import { customFetch } from "../../../utils/Fetch";
 import { Toaster } from "react-hot-toast";
 import React from "react";
 import img from "../../../assets/account-avatar-profile.svg";
-export default function TicketComponent() {
+export default function TicketComponent({data}) {
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
   const [userType, setUserType] = useState("");
-  useEffect(() => {
-    const userRole = localStorage.getItem("role");
-    setUserType(userRole.match("agent") ? userRole.slice(0, -1) : userRole);
-    const fetchData = async (url) => {
-      try {
-        const { newData } = await customFetch(
-          process.env.REACT_APP_TICKETS_URL + url,
-          "GET"
-        );
-        setData(newData);
 
-        console.log("new " + newData[0]);
-        console.log("new " + newData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    if (userRole !== "user") fetchData("/getAgentTickets");
-    else fetchData("/getUserTickets");
-  }, []);
   const handleEmailClick = (e) => {
     window.location.href = `mailto:${e.target.value}`;
   };

@@ -15,9 +15,9 @@ export default function Ticket() {
           process.env.REACT_APP_TICKETS_URL + url,
           "GET"
         );
+        newData.userType=userType
         setData(newData);
-
-        console.log("new " + newData[0]);
+        console.log("new " + newData[0].userData.email);
         console.log("new " + newData);
       } catch (error) {
         console.error("Error fetching data:", error);

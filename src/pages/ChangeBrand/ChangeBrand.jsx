@@ -16,20 +16,23 @@ const heroVariant = {
 };
 
 const ChangeBrand = () => {
-    const [brandData, setBrandData] = useState({});
+    const [brandData, setBrandData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
         fetchData();
+        if(brandData) {
+            setIsLoading(false);
+        }
     }, []);
 
     const fetchData = async () => {
         setIsLoading(true);
         try {
-            const { newData } = await customFetch(process.env.REACT_APP_BRANDINFO_URL + 'brandInfo/getBrandInfo', 'GET');
+            const { newData } = await customFetch(process.env.REACT_APP_BRANDINFO_URL + '/getBrandInfo', 'GET');
+            console.log('Fetched brand data:', newData);
             setBrandData(newData);
-            setIsLoading(false);
         } catch (error) {
             console.error('Error fetching brand data:', error);
         }
@@ -66,7 +69,6 @@ const ChangeBrand = () => {
                             id="name"
                             name="name"
                             defaultValue={brandData.name || 'Default Name'}
-                            // Make sure to provide a default value if brandData.name is undefined
                             {...register('name')}
                             className="border border-gray-300 rounded px-4 py-2 w-full"
                         />

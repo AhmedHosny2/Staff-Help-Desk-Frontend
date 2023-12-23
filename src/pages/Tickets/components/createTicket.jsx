@@ -12,7 +12,7 @@ export default function CreatTicketComponent() {
 	});
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [automaticWorkflow, setAutomaticWorkflow] = useState('');
+	const [automaticWorkflow, setAutomaticWorkflow] = useState([]);
 
 	const [isPending, setIsPending] = useState(false);
 	const [error, setError] = useState(null);
@@ -68,8 +68,8 @@ export default function CreatTicketComponent() {
 			...formData,
 			sub_category: selectedSubCategory,
 		});
-		// ay 7aga hena tgeb error benhlha ya bahy
-		// getAutomaticWorkflow(formData.issue_type, selectedSubCategory)
+		setAutomaticWorkflow([]);
+		getAutomaticWorkflow(formData.issue_type, selectedSubCategory);
 	};
 
 	const getAutomaticWorkflow = async (issue_type, sub_category) => {
@@ -78,7 +78,8 @@ export default function CreatTicketComponent() {
 			`/getAutomaticWorkflow?issue_type=${issue_type}&sub_category=${sub_category}`,
 			'GET'
 		);
-		setAutomaticWorkflow(newData);
+		console.log(newData.fixes)
+		setAutomaticWorkflow(newData.fixes);
 	};
 
 	return (
@@ -154,7 +155,7 @@ export default function CreatTicketComponent() {
 											</>
 										)}
 									</select>
-									{formData.sub_category && automaticWorkflow && automaticWorkflow.fixes.length > 0 && (
+									{formData.sub_category && automaticWorkflow && automaticWorkflow.length > 0 && (
 										<>
 											<div className="indicator mt-8 pt-4">
 												<span className="indicator-item badge badge-secondary">SOLUTIONS</span>
@@ -164,7 +165,7 @@ export default function CreatTicketComponent() {
 											</div>
 											<div className="textarea flex w-full my-5">
 												<ul className="list-disc pl-5">
-													{automaticWorkflow.fixes.map((fix, index) => (
+													{automaticWorkflow.map((fix, index) => (
 														<li key={index}>{fix}</li>
 													))}
 												</ul>

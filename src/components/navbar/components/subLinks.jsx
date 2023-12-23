@@ -58,18 +58,30 @@ export default function SubLinks() {
 			case 'admin':
 				return (
 					<>
-						{' '}
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Admin Item 1</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 2</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 3</a>
-							</li>
-						</ul>
+
+						<li>
+							<details>
+								<summary>Tickets</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/createTicket">+ Ticket</Link>
+									</li>
+									<li>
+										<Link to="/ticket">All Tickets</Link>
+									</li>
+								</ul>
+							</details>
+						</li>
+						<li>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
+						</li>
+						<li>
+							<Link to="/report">Generate Report</Link>
+						</li>
+						<li>
+							<Link>Chat</Link>
+						</li>
+
 					</>
 				);
 

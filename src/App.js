@@ -109,7 +109,7 @@ function App() {
 	const [profilePic, setProfilePic] = useState(null);
 
 	useEffect(() => {
-		// function to check if a cookie exists
+		// Function to check if a cookie exists
 		const checkCookie = (cookieName) => {
 			const cookies = document.cookie.split(';');
 			for (let i = 0; i < cookies.length; i++) {

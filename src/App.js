@@ -3,7 +3,6 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
-
 // Imported Components
 
 import NavbarParent from "./components/navbarParent/navbarParent.jsx";
@@ -33,7 +32,10 @@ import Ticket from "./pages/Tickets/tickets.jsx";
 import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx";
 import Error from "./pages/error/error.jsx";
 import TicketEntity from "./pages/TicketEntity/entityTicket.jsx";
-
+/// osama imoprts ==================================
+import { useSocketContext } from "./pages/chat/context/SocketContext.jsx";
+import { ChatContext } from "./pages/chat/context/ChatContext.jsx";
+import { socketEmitEvent } from "./pages/chat/socket/emit.js";
 const privateRoutes = [
   `/home/user`,
   `/home/admin`,
@@ -51,6 +53,7 @@ const privateRoutes = [
   `/createTicket`,
   `/knowledgeBase`,
   `/profileGeneral`,
+  `/chat`,
   "*",
 ];
 
@@ -65,6 +68,7 @@ const roleHierarchy = {
     "/ticketEntity/:id",
     "/createTicket",
     "/knowledgeBase",
+	'/chat'
   ],
   agent: [
     "/home/agent",
@@ -75,6 +79,7 @@ const roleHierarchy = {
     "/ticket",
     "/ticketEntity/:id",
     "/knowledgeBase",
+	'/chat'
   ],
   manager: [
     "/home/manager",
@@ -88,6 +93,7 @@ const roleHierarchy = {
     "/ticket",
     "/ticketEntity/:id",
     "/knowledgeBase",
+	'/chat'
   ],
   admin: [
     "/home/admin",
@@ -103,6 +109,7 @@ const roleHierarchy = {
     "/ticketEntity/:id",
     "/createTicket",
     "/knowledgeBase",
+	'/chat'
   ],
 };
 
@@ -160,6 +167,23 @@ function App() {
     }
   }, [location.pathname, navigate]); // Include location.pathname and navigate in the dependency array
 
+  //osama part =-==============================================
+//   const {
+//     socketConnect,
+//     socketValue: { socket, socketId },
+//   } = useSocketContext();
+//   useEffect(() => {
+//     if (!socketId) {
+//       socketConnect();
+//     }
+//   }, [socketId, socketConnect]);
+// TODO : change the user id to the real one
+//   useEffect(() => {
+//     if (socketId) {
+//       socketEmitEvent(socket).userOnline("65814c05d03a8c84cff1b55f", socketId);
+//     }
+//   }, [socketId, socket]);
+
   return (
     <>
       <NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
@@ -202,6 +226,8 @@ function App() {
           <Route path="/createTicket" element={<CreatTicketComponent />} />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/changeBrand" element={<ChangeBrandPage />} />
+		  <Route path="/chat" element={  <ChatContext />}/>
+
           <Route path="*" element={<Error />} />
         </Routes>
       </AnimatePresence>

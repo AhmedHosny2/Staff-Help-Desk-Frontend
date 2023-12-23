@@ -12,7 +12,6 @@ export const getToastStyle = () => {
 			padding: '16px',
 			color: textColor,
 			background: backgroundColor,
-			zIndex: 999999,
 		},
 		iconTheme: {
 			primary: primaryColor,

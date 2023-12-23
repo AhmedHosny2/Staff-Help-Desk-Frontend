@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState ,useEffect } from 'react';
 
 function UserCard({ userType, userName, email, userID }) {
   const [open, setOpen] = useState(false);

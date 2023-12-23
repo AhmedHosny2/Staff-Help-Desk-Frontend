@@ -61,7 +61,7 @@ function Logs() {
         setActiveTab('basic-logs')
         setLoading(true);
         const { err, isPen, newData, newStatus } = await customFetch(
-            `${process.env.REACT_APP_LOGGING_URL}/`,
+            `${process.env.REACT_APP_LOGGING_URL}/logging`,
             "GET"
         );
         setLoading(false);
@@ -77,7 +77,7 @@ function Logs() {
         setActiveTab('advanced-logs')
         setLoading(true);
         const { err, isPen, newData, newStatus } = await customFetch(
-            `${process.env.REACT_APP_LOGGING_URL}/advanced`,
+            `${process.env.REACT_APP_LOGGING_URL}/logging/advanced`,
             "GET"
         );
         setLoading(false);

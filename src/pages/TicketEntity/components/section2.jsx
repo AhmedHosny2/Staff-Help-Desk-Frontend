@@ -5,7 +5,7 @@ import { customFetch } from '../../../utils/Fetch';
 import { useNavigate } from 'react-router-dom';
 import { Parser } from 'html-to-react';
 
-export default function Section2({ data }) {
+export default function Section2({ data, userData }) {
 	const navigate = useNavigate();
 	const [content, setContent] = useState('');
 	const [status, setStatus] = useState(null);
@@ -24,8 +24,14 @@ export default function Section2({ data }) {
 		console.log(e.target.value);
 		const body = {
 			ticketId: window.location.pathname.split('/')[2],
+			title: data.title,
+			issue: data.issueType,
+			category: data.sub_category,
+			description: data.description,
 			solution: editor.current.value,
+			date: formattedDate,
 			status: e.target.value,
+			email: userData.email,
 		};
 		const { newStatus } = await customFetch(
 			process.env.REACT_APP_TICKETS_URL + '/solveTicket',

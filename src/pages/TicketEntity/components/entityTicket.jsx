@@ -20,7 +20,7 @@ export default function EntityTicketComponent({ data, userData }) {
 								<Section1 data={data} />
 								{/* END SECTION 1 (on the left) */}
 								{/* START SECTION 2 (on the right) */}
-								<Section2 data={data} />
+								<Section2 data={data} userData={userData} />
 								{/* END SECTION 2 (on the right) */}
 							</div>
 						</div>

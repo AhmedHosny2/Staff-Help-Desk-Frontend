@@ -19,22 +19,23 @@ const Faq = () => {
 	const [FAQs, setFAQs] = useState([]);
 	const [isPending, setIsPending] = useState(true);
 
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
+				const { newData } = await customFetch(
+					process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll',
+					'GET'
+				);
 				// console.log('Fetched data:', newData);
 
-
-				const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
+				const popularFAQs = newData.filter((FAQ) => FAQ.viewCount > 20);
 				// console.log('Popular FAQs:', popularFAQs);
 
 				const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
 				// console.log('Sorted FAQs:', sortedFAQs);
 
 				const topFAQs = sortedFAQs.slice(0, 4);
-				// console.log('Top FAQs:', topFAQs); 
+				// console.log('Top FAQs:', topFAQs);
 
 				setFAQs(topFAQs);
 				setIsPending(false);
@@ -47,8 +48,6 @@ const Faq = () => {
 		fetchData();
 	}, []);
 
-
-
 	return (
 		<>
 			<motion.div variants={heroVariant} initial="hidden" animate="visible">
@@ -59,18 +58,24 @@ const Faq = () => {
 							Frequently Asked Questions
 						</h2>
 					</div>
-					<Link to="#" className="link link-hover text-sm">
+					<Link to="/knowledgeBase" className="link link-hover text-sm">
 						Go to knowledgebase instead?
 					</Link>
 				</div>
 
 				<div className="flex items-center justify-center mb-16">
 					{isPending ? (
-						<p>Loading FAQs...</p>
+						<>
+							<p>Loading FAQs</p>
+							<span className="loading loading-spinner loading-lg ml-6"></span>
+						</>
 					) : (
 						<div className="join join-vertical w-[90vw]">
 							{FAQs.map((FAQ) => (
-								<div key={FAQ.id} className="collapse collapse-arrow join-item border border-base-300">
+								<div
+									key={FAQ.id}
+									className="collapse collapse-arrow join-item border border-base-300"
+								>
 									<input type="checkbox" name={`my-accordion-${FAQ.id || 'default'}`} />
 									<div className="collapse-title text-xl font-medium">{FAQ.question}</div>
 									<div className="collapse-content">

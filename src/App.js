@@ -1,17 +1,10 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-
-// Restrict access to public pages
-// import PublicRoute from './utils/PublicRoute.js';
-
-// Restrict access to private pages
-// import PrivateRoute from './utils/PrivateRoute.js';
+import { useEffect, useState } from 'react';
 
 // Imported Components
 import NavbarParent from './components/navbarParent/navbarParent.jsx';
-import TestTicket from './components/TestTicket/testTicket.jsx';
 
 // Imported Pages
 import LandingPage from './pages/landing/landing.jsx';
@@ -23,6 +16,7 @@ import TestPage from './pages/test/test.jsx';
 import Login from './pages/login/login.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Profile from './pages/profile/profile.jsx';
+import ProfileGeneral from './pages/profileGeneral/profile.jsx';
 import Logs from './pages/Logs/Logs.jsx';
 import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
@@ -33,15 +27,136 @@ import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
 import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
 import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
 import Ticket from './pages/Tickets/tickets.jsx';
-import TicketEntity from './pages/TicketEntity/ticketEntity.jsx';
 import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
 import EditAutomaticWorkflow from './pages/EditAutomaticWorkflow/EditAutomaticWorkflow.jsx';
 import EditCustomWorkflow from './pages/EditCustomWorkflow/EditCustomWorkflow.jsx';
 import Error from './pages/error/error.jsx';
+import TicketEntity from './pages/TicketEntity/entityTicket.jsx';
+
+const privateRoutes = [
+	`/home/user`,
+	`/home/admin`,
+	`/home/agent`,
+	`/home/manager`,
+	`/logs`,
+	`/manageUsers`,
+	`/AddUser`,
+	`/profile`,
+	`/report`,
+	`/mfa/validate`,
+	`/mfa/enable-mfa`,
+	`/ticket`,
+	`/ticketEntity`,
+	`/createTicket`,
+	`/knowledgeBase`,
+	`/profileGeneral`,
+	'*',
+];
+
+const roleHierarchy = {
+	user: [
+		'/home/user',
+		'/profile',
+		`/profileGeneral`,
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/createTicket',
+		'/knowledgeBase',
+	],
+	agent: [
+		'/home/agent',
+		'/profile',
+		`/profileGeneral`,
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/knowledgeBase',
+	],
+	manager: [
+		'/home/manager',
+		'/logs',
+		'/manageUsers',
+		'/profile',
+		`/profileGeneral`,
+		'/report',
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/knowledgeBase',
+	],
+	admin: [
+		'/home/admin',
+		'/logs',
+		'/manageUsers',
+		'/AddUser',
+		'/profile',
+		`/profileGeneral`,
+		'/report',
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/createTicket',
+		'/knowledgeBase',
+	],
+};
 
 function App() {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const [profilePic, setProfilePic] = useState(null);
+
+	useEffect(() => {
+		// Function to check if a cookie exists
+		const checkCookie = (cookieName) => {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				if (cookie.startsWith(`${cookieName}=`)) {
+					return true; // Cookie exists
+				}
+			}
+			return false; // Cookie does not exist
+		};
+
+		// Function to get the user's role from localStorage
+		const getRole = () => {
+			var role = localStorage.getItem('role');
+			if (role && role.startsWith('agent')) {
+				return role.slice(0, -1); // Remove the trailing character from the agent role
+			}
+			return role;
+		};
+		const role = getRole();
+
+		// Check if the "authCookie" exists
+		const isAuthCookieExists = checkCookie('authcookie');
+
+		// Define an object to represent the role hierarchy and allowed pages for each role
+
+		// Check if the user is not logged in and is trying to access a private route
+		if (
+			!isAuthCookieExists &&
+			privateRoutes.some((route) => location.pathname.startsWith(route))
+		) {
+			navigate('/');
+		}
+
+		// Check if the user is logged in and trying to access a public route or not on a private route
+		if (
+			isAuthCookieExists &&
+			!roleHierarchy[role]?.some((route) => location.pathname.startsWith(route))
+		) {
+			// Construct the path based on the user's role
+			const homePath = roleHierarchy[role] ? roleHierarchy[role][0] : '/profile';
+			navigate(homePath);
+		}
+	}, [location.pathname, navigate]); // Include location.pathname and navigate in the dependency array
+
 	return (
 		<>
 			<NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
@@ -54,7 +169,6 @@ function App() {
 					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
 					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
 
-					<Route path="/testTicket" element={<TestTicket />} />
 					<Route path="/test" element={<TestPage />} />
 
 					{/* PRIVATE ROUTES */}
@@ -66,6 +180,7 @@ function App() {
 					<Route path="/manageUsers" element={<ManageUsers />} />
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
+					<Route path="/profile/:id" element={<ProfileGeneral />} />
 					<Route path="/report" element={<Report />} />
 					<Route path="/EditAutomaticWorkflow" element={<EditAutomaticWorkflow />} />
 					<Route path="/mfa/validate" element={<MFAValidationComponent />} />
@@ -77,8 +192,6 @@ function App() {
 					<Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />
 					<Route path="*" element={<Error />} />
 
-
-
 				</Routes>
 			</AnimatePresence>
 		</>
@@ -86,103 +199,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-// 	const location = useLocation();
-// 	const [profilePic, setProfilePic] = useState(null);
-
-// 	console.log('HERE LOGGED IN??');
-// 	console.log(localStorage.getItem('loggedin'));
-
-// 	return (
-// 		<>
-// 			<NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
-// 			<AnimatePresence>
-// 				<Routes location={location} key={location.key}>
-// 					{/* PUBLIC ROUTES */}
-// 					<Route
-// 						path="/"
-// 						element={<PublicRoute element={<LandingPage />} fallbackPath="/home/user" />}
-// 					/>
-// 					<Route path="/" element={<LandingPage />} />
-// 					<Route path="/login" element={<Login />} />
-// 					<Route path="/signup" element={<Signup />} />
-// 					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
-// 					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
-
-// 					<Route path="/testTicket" element={<TestTicket />} />
-// 					<Route path="/test" element={<TestPage />} />
-
-// 					{/* PRIVATE ROUTES */}
-// 					<Route
-// 						path="/home/user"
-// 						element={<PrivateRoute element={<UserHomePage />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/home/admin"
-// 						element={<PrivateRoute element={<AdminHomePage />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/home/agent"
-// 						element={<PrivateRoute element={<AgentHomePage />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/home/manager"
-// 						element={<PrivateRoute element={<ManagerHomePage />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/logs"
-// 						element={<PrivateRoute element={<Logs />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/manageUsers"
-// 						element={<PrivateRoute element={<ManageUsers />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/AddUser"
-// 						element={<PrivateRoute element={<AddUser />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/profile"
-// 						element={<PrivateRoute element={<Profile />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/report"
-// 						element={<PrivateRoute element={<Report />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/report"
-// 						element={<PrivateRoute element={<Report />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/mfa/validate"
-// 						element={
-// 							<PrivateRoute element={<MFAValidationComponent />} fallbackPath="/login" />
-// 						}
-// 					/>
-// 					<Route
-// 						path="/mfa/enable-mfa"
-// 						element={<PrivateRoute element={<EnableMFAComponent />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/ticket"
-// 						element={<PrivateRoute element={<Ticket />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/ticketEntity/:id"
-// 						element={<PrivateRoute element={<TicketEntity />} fallbackPath="/login" />}
-// 					/>
-// 					<Route
-// 						path="/createTicket"
-// 						element={
-// 							<PrivateRoute element={<CreatTicketComponent />} fallbackPath="/login" />
-// 						}
-// 					/>
-// 					<Route path="*" element={<Error />} />
-// 				</Routes>
-// 			</AnimatePresence>
-// 		</>
-// 	);
-// }
-
-// export default App;

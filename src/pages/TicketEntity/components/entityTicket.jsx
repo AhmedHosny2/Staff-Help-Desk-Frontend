@@ -2,8 +2,7 @@ import ProfileSection from './profileSection';
 import Section1 from './section1';
 import Section2 from './section2';
 
-export default function TestTicketComponent({ data }) {
-
+export default function EntityTicketComponent({ data, userData }) {
 	return (
 		<>
 			<div className="container my-24 mx-auto md:px-6">
@@ -12,7 +11,7 @@ export default function TestTicketComponent({ data }) {
 					<div className="container px-6 md:px-12">
 						{/* START PARENT CONTAINER */}
 						<div className="block rounded-lg bg-transparent px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-transparent dark:shadow-black/20 md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
-							<ProfileSection data={data} />
+							<ProfileSection data={data} userData={userData} />
 							<div className="divider"></div>
 							<h2 className="text-center my-16 text-3xl font-bold">Ticket Info</h2>
 
@@ -21,7 +20,7 @@ export default function TestTicketComponent({ data }) {
 								<Section1 data={data} />
 								{/* END SECTION 1 (on the left) */}
 								{/* START SECTION 2 (on the right) */}
-								<Section2 data={data} />
+								<Section2 data={data} userData={userData} />
 								{/* END SECTION 2 (on the right) */}
 							</div>
 						</div>

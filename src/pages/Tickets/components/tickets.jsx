@@ -1,42 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { customFetch } from '../../../utils/Fetch';
-import { getToastStyle, removeToast } from '../../../utils/toastStyle';
-import toast, { Toaster } from 'react-hot-toast';
-import TicketEntity from '../../TicketEntity/ticketEntity';
-import { set } from 'animejs';
+import { Toaster } from 'react-hot-toast';
 import React from 'react';
-export default function TicketComponent() {
+import img from '../../../assets/account-avatar-profile.svg';
+
+export default function TicketComponent({ data }) {
 	const navigate = useNavigate();
-
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [loggingin, setLoggingin] = useState(false);
-
-	const [isPending, setIsPending] = useState(false);
-	const [error, setError] = useState(null);
-	const [data, setData] = useState(null);
-	const [status, setStatus] = useState(null);
-	const [statusText, setStatusText] = useState('');
-	const [message, setMessage] = useState('');
 	const [userType, setUserType] = useState('');
-	// put this in use effect
+	const userRole = localStorage.getItem('role');
 	useEffect(() => {
-		setUserType(localStorage.getItem('role'));
-		const fetchData = async () => {
-			try {
-				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-					process.env.REACT_APP_TICKETS_URL + '/getAgentTickets',
-					'GET'
-				);
-				await setData(newData);
-				console.log(data);
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			}
-		};
-		fetchData();
+		setUserType(userRole.match('agent') ? userRole.slice(0, -1) : userRole);
 	}, []);
+
 	const handleEmailClick = (e) => {
 		window.location.href = `mailto:${e.target.value}`;
 	};
@@ -46,10 +22,7 @@ export default function TicketComponent() {
 	return (
 		<>
 			{/* <div className="badge bg-base-300">Pending</div>
-      <div className="badge badge-accent ">Open</div>
-      <div className="badge bg-neutral text-base-300">Closed</div>
-      <Toaster /> */}
-			{/*
+
       
       tickets for admin he can see all the tickets  ========================
 
@@ -61,29 +34,15 @@ export default function TicketComponent() {
 
 
 */}
-			<div className="overflow-x-auto">
+			<div className="overflow-x-auto mt-10">
 				<table className="table">
 					<thead>
 						<tr>
-							{userType === 'agent' && (
-								<React.Fragment>
-									<th>REQUESTER</th>
-									<th>SUBJECT</th>
-									<th>PRIORITY</th>
-									<th>ID</th>
-								</React.Fragment>
-							)}
-
-							{(userType === 'manger' || userType === 'admin') && (
-								<React.Fragment>
-									<th>User</th>
-									<th>AGENT</th>
-									<th>PRIORITY</th>
-									<th>STATUS</th>
-									<th>CREATION</th>
-									<th>ID</th>
-								</React.Fragment>
-							)}
+							<th>REQUESTER</th>
+							<th>SUBJECT</th>
+							<th>PRIORITY</th>
+							<th>STATUS</th>
+							<th>ID</th>
 
 							<th></th>
 						</tr>
@@ -91,53 +50,77 @@ export default function TicketComponent() {
 					<tbody>
 						{/* row 1 */}
 						{/* we should iterate over the data here  */}
-						{data &&
+						{data ? (
 							data.map((ticketData) => (
-								<tr key={ticketData.userData._id}>
-									<td>
-										<div className="flex items-center gap-3">
-											<div className="avatar">
-												<div className="mask mask-squircle w-12 h-12">
-													<img
-														src={ticketData.userData.profilePic}
-														alt="Avatar Tailwind CSS Component"
-													/>
-												</div>
-											</div>
-											<div>
-												<div className="font-bold">
-													{ticketData.userData.firstName +
-														' ' +
-														ticketData.userData.lastName}
-												</div>
-												<div
-													className="text-black-400 hover:underline"
-													onClick={handleEmailClick}
-												>
-													{' '}
-													{ticketData.userData.email}
-												</div>
-											</div>
-										</div>
-									</td>
-									<td>
-										{ticketData.ticket.title}
-										<br />
-										<span className="badge badge-ghost badge-sm">
-											{ticketData.ticket.issue_type}
-										</span>
-									</td>
-									<td>
-										{ticketData.ticket.ticketPriority === 'low' && (
-											<div className="badge bg-success">Low</div>
+								<tr key={ticketData.ticket._id}>
+									{/* user / resquester  for ( admin / manager / agent ) */}
+									{(userType === 'manager' ||
+										userType === 'admin' ||
+										userType === 'agent') &&
+										ticketData.userData && (
+											<>
+												<td>
+													<div className="flex items-center gap-3">
+														<div className="avatar">
+															<div className="mask mask-squircle w-12 h-12">
+																<img
+																	src={
+																		ticketData.userData.profilePic
+																			? ticketData.userData.profilePic
+																			: img
+																	}
+																	alt="Avatar Tailwind CSS Component"
+																/>
+															</div>
+														</div>
+														<div>
+															<div className="font-bold">
+																{ticketData.userData.firstName +
+																	' ' +
+																	ticketData.userData.lastName}
+															</div>
+															<div
+																className="text-black-400 hover:underline"
+																onClick={handleEmailClick}
+															>
+																{ticketData.userData.email}
+															</div>
+														</div>
+													</div>
+												</td>
+
+												<td>
+													{ticketData.ticket.title}
+													<br />
+													<span className="badge badge-ghost badge-sm">
+														{ticketData.ticket.issue_type}
+													</span>
+												</td>
+												<td>
+													{ticketData.ticket.ticketPriority === 'low' && (
+														<div className="badge bg-success">Low</div>
+													)}
+													{ticketData.ticket.ticketPriority === 'medium' && (
+														<div className="badge badge-warning">Medium</div>
+													)}
+													{ticketData.ticket.ticketPriority === 'high' && (
+														<div className="badge bg-error">High</div>
+													)}
+												</td>
+												<td>
+													{ticketData.ticket.status === 'open' && (
+														<div className="badge bg-primary">open</div>
+													)}
+													{ticketData.ticket.status === 'pending' && (
+														<div className="badge badge-ghost">pending</div>
+													)}
+													{ticketData.ticket.status === 'updated' && (
+														<div className="badge bg-accent">updated</div>
+													)}
+												</td>
+											</>
 										)}
-										{ticketData.ticket.ticketPriority === 'medium' && (
-											<div className="badge badge-warning">Medium</div>
-										)}
-										{ticketData.ticket.ticketPriority === 'high' && (
-											<div className="badge bg-error">High</div>
-										)}
-									</td>
+
 									<th>
 										<button
 											className="btn btn-ghost btn-xs "
@@ -148,7 +131,41 @@ export default function TicketComponent() {
 										</button>
 									</th>
 								</tr>
-							))}
+							))
+						) : (
+							<>
+								{[1, 2, 3, 4].map((index) => (
+									<React.Fragment key={index}>
+										<tr>
+											<td className="w-3/12">
+												<div className="flex items-center gap-3">
+													<div className="skeleton w-14 h-14 rounded-full shrink-0"></div>
+													<div className="flex flex-col gap-1 w-6/12">
+														<div className="skeleton h-4 w-7/12"></div>
+														<div className="skeleton h-4 w-10/12"></div>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div className="flex flex-col gap-1 w-6/12">
+													<div className="skeleton h-4 w-full"></div>
+													<div className="skeleton h-4 w-5/12"></div>
+												</div>
+											</td>
+											<td>
+												<div className="skeleton h-4 w-3/12"></div>
+											</td>
+											<td>
+												<div className="skeleton h-4 w-3/12"></div>
+											</td>
+											<td>
+												<div className="skeleton h-2 w-full"></div>
+											</td>
+										</tr>
+									</React.Fragment>
+								))}
+							</>
+						)}
 					</tbody>
 					{/* foot */}
 					<tfoot>
@@ -156,13 +173,14 @@ export default function TicketComponent() {
 							<th>REQUESTER</th>
 							<th>SUBJECT</th>
 							<th>PRIORITY</th>
+							<th>STATUS</th>
 							<th>ID</th>
 
 							<th></th>
 						</tr>
 					</tfoot>
 				</table>
-			</div>{' '}
+			</div>
 			<Toaster />
 		</>
 	);

@@ -24,125 +24,24 @@ const defaultProfile = {
 	},
 };
 
-export default function ProfileComponent({ setProfilePic }) {
+export default function ProfileComponent() {
+	const id = window.location.pathname.split('/')[2];
 	const [profileData, setProfileData] = useState(defaultProfile);
-	const [isEditing, setIsEditing] = useState(false);
 	const [editedBio, setEditedBio] = useState(null);
 	const [linkName, setLinkName] = useState('');
 	const [linkUrl, setLinkUrl] = useState('');
-	const [addImage, setAddImage] = useState({ myFile: '' });
-	const [added, setAdded] = useState(false);
 
 	const handleLinkClick = (e, linkName, linkUrl) => {
-		console.log('HENA');
 		e.preventDefault();
 
-		if (!isEditing) {
-			const finalLink = (profileData.links && profileData.links[linkName.toLowerCase()]) || '';
+		const finalLink = (profileData.links && profileData.links[linkName.toLowerCase()]) || '';
 
-			if (finalLink.trim() !== '') {
-				if (!finalLink.startsWith('https://')) {
-					window.open('https://' + finalLink, '_blank');
-				} else {
-					window.open(finalLink, '_blank');
-				}
-			}
-		} else {
-			setLinkName(linkName);
-
-			const finalLink = (profileData.links && profileData.links[linkName.toLowerCase()]) || '';
-			setLinkUrl(finalLink || profileData.links[linkName.toLowerCase()] || '');
-
-			// Show the modal
-			const modal = document.getElementById('my_modal_2');
-			modal.showModal();
-		}
-	};
-
-	const updateLinksObject = (linkName, linkUrl) => {
-		// Make a copy of the profileData to avoid mutating the state directly
-		const updatedProfileData = { ...profileData };
-
-		// Update the link in the copied profileData with lowercase linkName
-		updatedProfileData.links[linkName.toLowerCase()] = linkUrl;
-
-		// Update the state with the modified profileData
-		setProfileData(updatedProfileData);
-	};
-
-	const convertToBase64 = (file) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
-			fileReader.onload = () => {
-				resolve(fileReader.result);
-			};
-			fileReader.onerror = (error) => {
-				reject(error);
-			};
-		});
-	};
-
-	const handleAddProfilePic = async (e) => {
-		e.preventDefault();
-
-		const body = addImage;
-
-		try {
-			const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-				process.env.REACT_APP_USERS_URL + 'profile/addProfilePic',
-				'POST',
-				body
-			);
-
-			if (newStatusText === 'success') {
-				var toastId = toast.success('Your Profile is up to Date!', getToastStyle());
+		if (finalLink.trim() !== '') {
+			if (!finalLink.startsWith('https://')) {
+				window.open('https://' + finalLink, '_blank');
 			} else {
-				toastId = toast.error('Your image size is too large', getToastStyle());
+				window.open(finalLink, '_blank');
 			}
-			removeToast(toast, toastId);
-			setAdded(false);
-			setProfilePic(newData.profilePic);
-		} catch (error) {
-			console.error('Error fetching data:', error);
-		}
-	};
-
-	const handleProfilePicUpload = async (e) => {
-		const file = e.target.files[0];
-		if (!file) {
-			return;
-		}
-		const base64 = await convertToBase64(file);
-		setAddImage({ ...addImage, myFile: base64 });
-		setAdded(true);
-	};
-
-	const handleDeleteProfilePic = async (e) => {
-		e.preventDefault();
-
-		try {
-			const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-				process.env.REACT_APP_USERS_URL + 'profile/deleteProfilePic',
-				'PUT'
-			);
-
-			if (newStatusText === 'success') {
-				// Nullify the profilePic attribute in the local state
-				setProfileData((prevProfileData) => ({
-					...prevProfileData,
-					profilePic: null,
-				}));
-
-				var toastId = toast.success('Your Profile is up to Date!', getToastStyle());
-				setAdded(false);
-				setProfilePic(null);
-			} else {
-				toastId = toast.error(newMessage, getToastStyle());
-			}
-			removeToast(toast, toastId);
-		} catch (error) {
-			console.error('Error fetching data:', error);
 		}
 	};
 
@@ -150,20 +49,18 @@ export default function ProfileComponent({ setProfilePic }) {
 		const fetchData = async () => {
 			try {
 				const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
-					process.env.REACT_APP_USERS_URL + 'profile',
+					process.env.REACT_APP_USERS_URL + 'profile/' + id,
 					'GET'
 				);
 
 				setProfileData(newData);
-				setEditedBio(newData.bio);
-				setProfilePic(newData.profilePic);
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
 		};
 
 		fetchData();
-	}, [added, setProfilePic]);
+	}, []);
 
 	return (
 		<>
@@ -175,7 +72,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								{/* START PROFILE PICTURE PLACEHOLDER */}
 								<div className="profilePic">
 									<label htmlFor="file-upload">
-										{!added && !profileData.profilePic ? (
+										{!profileData.profilePic ? (
 											<div className="bg-neutral text-neutral-content rounded-full w-25">
 												<svg
 													width="140px"
@@ -205,55 +102,14 @@ export default function ProfileComponent({ setProfilePic }) {
 										) : (
 											<img
 												className="custom-file-upload border-4 border-secondary rounded"
-												src={addImage.myFile || profileData.profilePic}
+												src={profileData.profilePic}
 												alt=""
 											></img>
 										)}
 									</label>
-									<input
-										className="ppInput"
-										type="file"
-										lable="Image"
-										name="myFile"
-										id="file-upload"
-										accept=".jpeg, .png, .jpg"
-										onChange={(e) => handleProfilePicUpload(e)}
-									/>
 								</div>
-								<>
-									{added && (
-										<button
-											className="btn btn-xs btn-outline btn-primary btn-outline my-6"
-											onClick={handleAddProfilePic}
-										>
-											Upload
-										</button>
-									)}
-									{profileData.profilePic && (
-										<button
-											className="btn btn-xs btn-error btn-outline my-6"
-											onClick={handleDeleteProfilePic}
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="h-6 w-6"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth="2"
-													d="M6 18L18 6M6 6l12 12"
-												/>
-											</svg>
-											Remove Profile Picture
-										</button>
-									)}
-								</>
-
 								{/* END PROFILE PICTURE PLACEHOLDER */}
+
 								<h1 className="text-xl font-bold text-neutral-content">
 									{profileData.firstName} {profileData.lastName}
 								</h1>
@@ -263,41 +119,6 @@ export default function ProfileComponent({ setProfilePic }) {
 								<div className="badge badge-xs badge-outline text-neutral-content py-2">
 									{profileData.role}
 								</div>
-
-								<div className="mt-6 flex flex-wrap gap-4 justify-center">
-									<div className="collapse">
-										<input type="checkbox" />
-										<div className="collapse-title text-xl font-medium text-neutral-content">
-											Customize your entire profile here!
-										</div>
-
-										<div className="collapse-content">
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Update profile info</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Change your password</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Link your social media</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content mt-2">
-												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
-												me field to write a new line
-											</p>
-											<button className="btn btn-wide btn-outline">Enable MFA</button>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -306,32 +127,18 @@ export default function ProfileComponent({ setProfilePic }) {
 							{profileData ? (
 								<>
 									<h2 className="text-xl font-bold mb-4 text-neutral-content">About Me</h2>
-									{isEditing ? (
-										<textarea
-											className="textarea textarea-lg w-full text-sm"
-											style={{
-												height: '7rem',
-												minHeight: '7rem',
-												maxHeight: '10rem',
-											}}
-											placeholder="Bio"
-											value={editedBio}
-											onChange={(e) => setEditedBio(e.target.value)}
-										></textarea>
-									) : (
-										<textarea
-											className="textarea textarea-lg w-full text-sm"
-											style={{
-												height: '7rem',
-												minHeight: '7rem',
-												maxHeight: '10rem',
-											}}
-											placeholder="Bio"
-											value={editedBio}
-											onChange={(e) => setEditedBio(e.target.value)}
-											disabled
-										></textarea>
-									)}
+
+									<textarea
+										className="textarea textarea-lg w-full text-sm"
+										style={{
+											height: '7rem',
+											minHeight: '7rem',
+											maxHeight: '10rem',
+										}}
+										placeholder="Bio"
+										value={editedBio}
+										disabled
+									></textarea>
 
 									<h3 className="font-semibold text-center mt-3 -mb-2 text-neutral-content">
 										Find me on
@@ -428,41 +235,7 @@ export default function ProfileComponent({ setProfilePic }) {
 											</svg>
 										</Link>
 									</div>
-
-									<dialog id="my_modal_2" className="modal">
-										<div className="modal-box">
-											<h3 className="font-bold text-lg">
-												Update {linkName}
-												{"'s "} link?
-											</h3>
-											<div className="flex items-center justify-center mt-4">
-												<input
-													type="text"
-													placeholder="Type here"
-													className="input input-bordered input-xs w-full max-w-xs"
-													value={linkUrl}
-													onChange={(e) => setLinkUrl(e.target.value)}
-												/>
-											</div>
-										</div>
-										<form method="dialog" className="modal-backdrop">
-											<button
-												onClick={() => {
-													document.getElementById('my_modal_2').close();
-													updateLinksObject(linkName, linkUrl);
-												}}
-											>
-												close
-											</button>
-										</form>
-									</dialog>
-
-									<ProfileInfo
-										profileData={profileData}
-										isEditing={isEditing}
-										setIsEditing={setIsEditing}
-										editedBio={editedBio}
-									/>
+									<ProfileInfo profileData={profileData} editedBio={editedBio} />
 								</>
 							) : (
 								<>

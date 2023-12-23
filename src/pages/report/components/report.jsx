@@ -1,5 +1,6 @@
 import { Charts1, Charts2, Charts3, generatePDF } from './chartComponent';
 import Info from './infoComponent';
+import TypeWriterLoading from './typewriter/typewriter';
 import { mockData } from './mockData';
 
 export default function ReportComponent({ data }) {
@@ -23,8 +24,12 @@ export default function ReportComponent({ data }) {
 				{!data ? (
 					<>
 						<div className="flex flex-col items-center mt-16">
-							<h2 className="text-center text-2xl font-bold mt-16">Writing Report</h2>
-							<span className="loading loading-dots loading-lg"></span>
+							<div className="flex gap-4">
+								<h2 className="text-center text-2xl font-bold my-16">Writing Report</h2>
+								<span className="loading loading-dots loading-lg"></span>
+							</div>
+
+							<TypeWriterLoading />
 						</div>
 					</>
 				) : (

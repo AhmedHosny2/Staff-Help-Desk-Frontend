@@ -33,8 +33,8 @@ export default function LandingPage() {
 				<Features />
 				<Colors />
 				<App />
-				<Footer />
 			</motion.div>
+			<Footer />
 		</>
 	);
 }

@@ -34,54 +34,6 @@ function App() {
 	const location = useLocation();
 	const [loggedin, setLoggedin] = useState(localStorage.getItem('loggedin') === 'true');
 	const [profilePic, setProfilePic] = useState(null);
-
-	useEffect(() => {
-		// Function to check if a cookie exists
-		const checkCookie = (cookieName) => {
-			const cookies = document.cookie.split(';');
-			for (let i = 0; i < cookies.length; i++) {
-				const cookie = cookies[i].trim();
-				if (cookie.startsWith(`${cookieName}=`)) {
-					return true; // Cookie exists
-				}
-			}
-			return false; // Cookie does not exist
-		};
-
-		// Function to get the user's role from localStorage
-		const getRole = () => {
-			var role = localStorage.getItem('role');
-			if (role && role.startsWith('agent')) {
-				return role.slice(0, -1); // Remove the trailing character from the agent role
-			}
-			return role;
-		};
-		const role = getRole();
-
-		// Check if the "authCookie" exists
-		const isAuthCookieExists = checkCookie('authcookie');
-
-		// Define an object to represent the role hierarchy and allowed pages for each role
-
-		// Check if the user is not logged in and is trying to access a private route
-		if (
-			!isAuthCookieExists &&
-			privateRoutes.some((route) => location.pathname.startsWith(route))
-		) {
-			navigate('/');
-		}
-
-		// Check if the user is logged in and trying to access a public route or not on a private route
-		if (
-			isAuthCookieExists &&
-			!roleHierarchy[role]?.some((route) => location.pathname.startsWith(route))
-		) {
-			// Construct the path based on the user's role
-			const homePath = roleHierarchy[role] ? roleHierarchy[role][0] : '/profile';
-			navigate(homePath);
-		}
-	}, [location.pathname, navigate]); // Include location.pathname and navigate in the dependency array
-
 	return (
 		<>
 			<NavbarParent

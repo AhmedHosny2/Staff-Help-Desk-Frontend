@@ -29,7 +29,7 @@ import Ticket from './pages/Tickets/tickets.jsx';
 import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
 import Error from './pages/error/error.jsx';
 import TicketEntity from './pages/TicketEntity/entityTicket.jsx';
-
+import Bot from "./pages/bot/bot.jsx"
 const privateRoutes = [
 	`/home/user`,
 	`/home/admin`,
@@ -153,6 +153,7 @@ function App() {
 		<>
 			<NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
 			<AnimatePresence>
+			<Bot/>
 				<Routes location={location} key={location.key}>
 					{/* PUBLIC ROUTES */}
 					<Route path="/" element={<LandingPage />} />

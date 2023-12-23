@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 // Restrict access to pages
 import PublicRoute from './utils/PublicRoute.js';
 

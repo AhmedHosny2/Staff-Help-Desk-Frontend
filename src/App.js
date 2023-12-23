@@ -1,16 +1,9 @@
-import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// Restrict access to pages
-import PublicRoute from './utils/PublicRoute.js';
-
-// Restrict access to pages
-import PrivateRoute from './utils/PrivateRoute.js';
+import './App.css';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 // Imported Components
-
 import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
@@ -28,7 +21,88 @@ import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
 import AddUser from './pages/AddUser/AddUser.jsx';
 import Report from './pages/report/report.jsx';
 import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
-import ChangeBrandPage from "./pages/ChangeBrand/ChangeBrand.jsx";
+import ChangeBrandPage from './pages/ChangeBrand/ChangeBrand.jsx';
+import MFAValidationComponent from './pages/MFA/MFAValidationComponent.jsx';
+import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
+import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
+import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
+import Ticket from './pages/Tickets/tickets.jsx';
+import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
+import Error from './pages/error/error.jsx';
+import TicketEntity from './pages/TicketEntity/entityTicket.jsx';
+
+const privateRoutes = [
+	`/home/user`,
+	`/home/admin`,
+	`/home/agent`,
+	`/home/manager`,
+	`/logs`,
+	`/manageUsers`,
+	`/AddUser`,
+	`/profile`,
+	`/report`,
+	`/mfa/validate`,
+	`/mfa/enable-mfa`,
+	`/ticket`,
+	`/ticketEntity`,
+	`/createTicket`,
+	`/knowledgeBase`,
+	`/profileGeneral`,
+	'*',
+];
+
+const roleHierarchy = {
+	user: [
+		'/home/user',
+		'/profile',
+		`/profileGeneral`,
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/createTicket',
+		'/knowledgeBase',
+	],
+	agent: [
+		'/home/agent',
+		'/profile',
+		`/profileGeneral`,
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/knowledgeBase',
+	],
+	manager: [
+		'/home/manager',
+		'/logs',
+		'/manageUsers',
+		'/profile',
+		`/profileGeneral`,
+		'/report',
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/knowledgeBase',
+	],
+	admin: [
+		'/home/admin',
+		'/logs',
+		'/manageUsers',
+		'/AddUser',
+		'/profile',
+		`/profileGeneral`,
+		'/report',
+		'/mfa/validate',
+		'/mfa/enable-mfa',
+		'/ticket',
+		'/ticketEntity/:id',
+		'/createTicket',
+		'/knowledgeBase',
+	],
+};
+
 
 function App() {
 	const location = useLocation();
@@ -59,6 +133,7 @@ function App() {
 					<Route path="/report" element={<Report />} />
 					<Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
 					<Route path="/changeBrand" element={<ChangeBrandPage />} />
+					<Route path="*" element={<Error />} />
 				</Routes>
 			</AnimatePresence>
 		</>

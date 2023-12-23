@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useStatem ,useEffect } from 'react';
+import { useState ,useEffect } from 'react';
+
 function UserCard({ userType, userName, email, userID }) {
   const [open, setOpen] = useState(false);
   let iconComponent;
@@ -120,6 +120,14 @@ function UserCard({ userType, userName, email, userID }) {
         </svg>
       );
   }
+
+  // const renderImage = () => {
+  //   if (profilePicture) {
+  //     return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={profilePicture} alt={`${userName} image`} />;
+  //   } else {
+  //     return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={defaultProfile} alt="Default image" />;
+  //   }
+  // };
 
   return (
     <div className="w-full max-w-md bg-primary border border-gray-300 rounded-lg shadow-lg overflow-hidden">

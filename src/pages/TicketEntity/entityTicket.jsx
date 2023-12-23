@@ -42,6 +42,7 @@ export default function TicketEntity() {
 					process.env.REACT_APP_USERS_URL + '/profile/' + userId,
 					'GET'
 				);
+				console.log('THE NEW USER DATA', newData);
 				setUserData(newData);
 			} catch (error) {
 				console.error('Error fetching data:', error);

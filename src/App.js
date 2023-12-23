@@ -126,7 +126,7 @@ function App() {
 					return true; // Cookie exists
 				}
 			}
-			return false; // Cookie doesn't exist
+			return false; // Cookie does not exist
 		};
 
 		// Function to get the user's role from localStorage

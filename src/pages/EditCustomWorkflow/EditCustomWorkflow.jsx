@@ -1,4 +1,3 @@
-// EditCustomWorkflow.js
 import React, { useState, useEffect } from 'react';
 import { customFetch } from "../../utils/Fetch";
 import { getToastStyle, removeToast } from '../../utils/toastStyle';
@@ -11,7 +10,7 @@ const EditCustomWorkflow = () => {
     const [fixes, setFixes] = useState([]);
 
     useEffect(() => {
-        getAutomaticWorkflow(selectedCategory, selectedSubcategory);
+        getCustomWorkflow(selectedCategory, selectedSubcategory);
     }, [selectedCategory, selectedSubcategory]);
 
     const handleCategoryChange = (event) => {
@@ -30,10 +29,10 @@ const EditCustomWorkflow = () => {
         if (value === '') {
             setSelectedSubcategory('');
         }
-        getAutomaticWorkflow(selectedCategory, value);
+        getCustomWorkflow(selectedCategory, value);
     };
 
-    const getAutomaticWorkflow = async (issue_type, sub_category) => {
+    const getCustomWorkflow = async (issue_type, sub_category) => {
         if (sub_category === '' || issue_type === '') {
             return;
         }
@@ -69,7 +68,7 @@ const EditCustomWorkflow = () => {
             var toastId = toast.error(newMessage, getToastStyle());
         }
         removeToast(toast, toastId);
-        getAutomaticWorkflow(selectedCategory, selectedSubcategory)
+        getCustomWorkflow(selectedCategory, selectedSubcategory)
     };
 
 

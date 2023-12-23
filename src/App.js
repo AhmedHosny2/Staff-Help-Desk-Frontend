@@ -35,6 +35,8 @@ import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPas
 import Ticket from './pages/Tickets/tickets.jsx';
 import TicketEntity from './pages/TicketEntity/ticketEntity.jsx';
 import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
+import EditAutomaticWorkflow from './pages/EditAutomaticWorkflow/EditAutomaticWorkflow.jsx';
+import EditCustomWorkflow from './pages/EditCustomWorkflow/EditCustomWorkflow.jsx';
 import Error from './pages/error/error.jsx';
 
 function App() {
@@ -65,17 +67,17 @@ function App() {
 					<Route path="/AddUser" element={<AddUser />} />
 					<Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
 					<Route path="/report" element={<Report />} />
-
+					<Route path="/EditAutomaticWorkflow" element={<EditAutomaticWorkflow />} />
 					<Route path="/mfa/validate" element={<MFAValidationComponent />} />
 					<Route path="/mfa/enable-mfa" element={<EnableMFAComponent />} />
 					<Route path="/ticket" element={<Ticket />} />
 					<Route path="/ticketEntity/:id" element={<TicketEntity />} />
 					<Route path="/createTicket" element={<CreatTicketComponent />} />
 					<Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
-
+					<Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />
 					<Route path="*" element={<Error />} />
 
-					
+
 
 				</Routes>
 			</AnimatePresence>

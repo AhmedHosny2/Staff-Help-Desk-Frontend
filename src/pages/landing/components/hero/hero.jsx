@@ -1,8 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import itSupport from '../../../../assets/itsupport3.jpg';
+import { customFetch } from '../../../../utils/Fetch';
 
 export default function Hero() {
-	const navigate = useNavigate();
+
+
 
 	return (
 		<>
@@ -12,7 +13,7 @@ export default function Hero() {
 						src={itSupport}
 						className="max-w-full lg:max-w-xl rounded-lg shadow-2xl mb-6 lg:mb-0 lg:mr-6"
 						alt="IT Support"
-					/>
+					/>{' '}
 					<div>
 						<h1 className="text-5xl font-bold">Welcome to Deskmate</h1>
 						<p className="py-6">
@@ -23,9 +24,7 @@ export default function Hero() {
 								<span className="text-secondary-content font-semibold">Seamless</span>
 							</span>
 						</p>
-						<button className="btn btn-secondary" onClick={() => navigate('/signup')}>
-							Sign Up
-						</button>
+						<button className="btn btn-secondary">Sign Up</button>
 					</div>
 				</div>
 			</div>

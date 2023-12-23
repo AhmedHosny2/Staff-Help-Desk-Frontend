@@ -3,8 +3,6 @@ import Card from '../card1/card1';
 import homePets from '../../../../assets/herobg2.jpg';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
-import { Link } from 'react-router-dom';
-
 
 const heroVariant = {
 	hidden: {
@@ -75,11 +73,9 @@ export default function Hero() {
 						</div>
 
 						<div className="flex flex-wrap gap-6 justify-center">
-							<Link to="/report">
-								<motion.div variants={childCardVariant1}>
-									<Card first={<InsertChartOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REPORTS & ANALYTICS'} />
-								</motion.div>
-							</Link >
+							<motion.div variants={childCardVariant1}>
+								<Card first={<InsertChartOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REPORTS & ANALYTICS'} />
+							</motion.div>
 							<motion.div variants={childCardVariant2}>
 								<Card first={<FormatListBulletedOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'WORK FlOW'} />
 							</motion.div>

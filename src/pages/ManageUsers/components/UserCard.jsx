@@ -121,14 +121,6 @@ function UserCard({ userType, userName, email, userID }) {
       );
   }
 
-  const renderImage = () => {
-    if (profilePicture) {
-      return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={profilePicture} alt={`${userName} image`} />;
-    } else {
-      return <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={defaultProfile} alt="Default image" />;
-    }
-  };
-
   return (
     <div className="w-full max-w-md bg-primary border border-gray-300 rounded-lg shadow-lg overflow-hidden">
       <div className="flex justify-end p-4">{iconComponent}</div>

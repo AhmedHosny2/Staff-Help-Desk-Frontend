@@ -4,7 +4,6 @@ import homePets from '../../../../assets/herobg2.jpg';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
-import { Link } from 'react-router-dom';
 
 const heroVariant = {
 	hidden: {
@@ -86,11 +85,9 @@ export default function Hero() {
 						</div>
 
 						<div className="flex flex-wrap gap-6 justify-center">
-							<Link to="/ticket">
-								<motion.div variants={childCardVariant1}>
-									<Card first={<ConfirmationNumberOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'TICKETS'} />
-								</motion.div>
-							</Link>
+							<motion.div variants={childCardVariant1}>
+								<Card first={<ConfirmationNumberOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'TICKETS'} />
+							</motion.div>
 							<motion.div variants={childCardVariant2}>
 								<Card first={<ChatOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'CHATS'} />
 							</motion.div>

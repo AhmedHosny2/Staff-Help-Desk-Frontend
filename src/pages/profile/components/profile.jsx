@@ -168,7 +168,7 @@ export default function ProfileComponent({ setProfilePic }) {
 	return (
 		<>
 			<div className="container mx-auto py-8 z-[-10]">
-				<div className="grid grid-cols-4 lg:grid-cols-12 gap-6 px-4">
+				<div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
 					<div className="col-span-4 sm:col-span-3">
 						<div className="bg-neutral shadow rounded-lg p-6">
 							<div className="flex flex-col items-center">
@@ -205,7 +205,7 @@ export default function ProfileComponent({ setProfilePic }) {
 										) : (
 											<img
 												className="custom-file-upload border-4 border-secondary rounded"
-												src={addImage.myFile || profileData.profilePic}
+												src={profileData.profilePic || addImage.myFile}
 												alt=""
 											></img>
 										)}
@@ -223,7 +223,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								<>
 									{added && (
 										<button
-											className="btn btn-xs btn-outline btn-primary btn-outline my-6"
+											className="btn btn-xs btn-secondary btn-outline my-6"
 											onClick={handleAddProfilePic}
 										>
 											Upload
@@ -257,7 +257,7 @@ export default function ProfileComponent({ setProfilePic }) {
 								<h1 className="text-xl font-bold text-neutral-content">
 									{profileData.firstName} {profileData.lastName}
 								</h1>
-								<div className="badge badge-xs badge-outline text-neutral-content my-2 py-2">
+								<div className="badge badge-xs badge-outline text-neutral-content my-2">
 									{profileData._id}
 								</div>
 								<div className="badge badge-xs badge-outline text-neutral-content py-2">
@@ -270,34 +270,40 @@ export default function ProfileComponent({ setProfilePic }) {
 										<div className="collapse-title text-xl font-medium text-neutral-content">
 											Customize your entire profile here!
 										</div>
-
 										<div className="collapse-content">
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Update profile info</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Change your password</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Link your social media</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content">
-												<div className="badge badge-ghost">Add a profile picture</div>
-											</p>
-											<p className="text-neutral-content mt-2">
-												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
-												me field to write a new line
-											</p>
-											<button className="btn btn-wide btn-outline">Enable MFA</button>
+											<p className="text-neutral-content">Add a profile picture</p>
+											<p className="text-neutral-content">Update profile info</p>
+											<p className="text-neutral-content">Change your password</p>
 										</div>
 									</div>
 								</div>
+							</div>
+							<div className="flex justify-center items-center">
+								<label className="swap swap-flip text-9xl">
+									{/* this hidden checkbox controls the state */}
+									<input type="checkbox" />
+
+									<div className="swap-on stats shadow bg-secondary">
+										<div className="stat">
+											<div className="stat-title text-lg text-neutral-content">
+												Tickets opened
+											</div>
+											<div className="stat-value text-neutral-content">89,400</div>
+											<div className="stat-desc text-neutral-content">
+												Jan 1st - Feb 1st
+											</div>
+										</div>
+									</div>
+									<div className="swap-off stats shadow bg-secondary">
+										<div className="stat">
+											<div className="stat-title text-lg text-neutral-content">
+												Total Page Views
+											</div>
+											<div className="stat-value text-neutral-content">2,500</div>
+											<div className="stat-desc text-neutral-content">21% more</div>
+										</div>
+									</div>
+								</label>
 							</div>
 						</div>
 					</div>

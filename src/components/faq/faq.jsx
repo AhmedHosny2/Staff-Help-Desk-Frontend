@@ -19,34 +19,35 @@ const Faq = () => {
 	const [FAQs, setFAQs] = useState([]);
 	const [isPending, setIsPending] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const { newData } = await customFetch(
-					process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll',
-					'GET'
-				);
-				// console.log('Fetched data:', newData);
 
-				const popularFAQs = newData.filter((FAQ) => FAQ.viewCount > 20);
-				// console.log('Popular FAQs:', popularFAQs);
+		useEffect(() => {
+				const fetchData = async () => {
+					try {
+						const { newData } = await customFetch(process.env.REACT_APP_KNOWLEDGEBASE_URL + '/getAll', 'GET');
+						console.log('Fetched data:', newData);  // Log the fetched data
 
-				const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
-				// console.log('Sorted FAQs:', sortedFAQs);
+						
+						const popularFAQs = newData.filter(FAQ => FAQ.viewCount > 20);
+						console.log('Popular FAQs:', popularFAQs);  // Log the popular FAQs
 
-				const topFAQs = sortedFAQs.slice(0, 4);
-				// console.log('Top FAQs:', topFAQs);
+						const sortedFAQs = popularFAQs.sort((a, b) => b.viewcount - a.viewcount);
+						console.log('Sorted FAQs:', sortedFAQs);  // Log the sorted FAQs
 
-				setFAQs(topFAQs);
-				setIsPending(false);
-			} catch (error) {
-				console.error('Error fetching FAQs:', error);
-				setIsPending(false);
-			}
-		};
+						const topFAQs = sortedFAQs.slice(0, 4);
+						console.log('Top FAQs:', topFAQs);  // 
 
-		fetchData();
-	}, []);
+						setFAQs(topFAQs);
+						setIsPending(false);
+					} catch (error) {
+						console.error('Error fetching FAQs:', error);
+						setIsPending(false);
+					}
+				};
+
+				fetchData();
+			}, []);
+	
+	
 
 	return (
 		<>
@@ -58,24 +59,18 @@ const Faq = () => {
 							Frequently Asked Questions
 						</h2>
 					</div>
-					<Link to="/knowledgeBase" className="link link-hover text-sm">
+					<Link to="#" className="link link-hover text-sm">
 						Go to knowledgebase instead?
 					</Link>
 				</div>
 
 				<div className="flex items-center justify-center mb-16">
 					{isPending ? (
-						<>
-							<p>Loading FAQs</p>
-							<span className="loading loading-spinner loading-lg ml-6"></span>
-						</>
+						<p>Loading FAQs...</p>
 					) : (
 						<div className="join join-vertical w-[90vw]">
 							{FAQs.map((FAQ) => (
-								<div
-									key={FAQ.id}
-									className="collapse collapse-arrow join-item border border-base-300"
-								>
+								<div key={FAQ.id} className="collapse collapse-arrow join-item border border-base-300">
 									<input type="checkbox" name={`my-accordion-${FAQ.id || 'default'}`} />
 									<div className="collapse-title text-xl font-medium">{FAQ.question}</div>
 									<div className="collapse-content">

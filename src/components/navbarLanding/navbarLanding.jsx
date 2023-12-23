@@ -8,10 +8,9 @@ const navigationVariants = {
 	visible: {
 		y: '0vh',
 		transition: {
-			duration: 3000,
 			delay: 0,
 			type: 'spring',
-			stiffness: 300,
+			stiffness: 200,
 		},
 	},
 	exit: {
@@ -19,7 +18,7 @@ const navigationVariants = {
 		transition: {
 			delay: 0,
 			type: 'spring',
-			stiffness: 400,
+			stiffness: 200,
 		},
 	},
 };

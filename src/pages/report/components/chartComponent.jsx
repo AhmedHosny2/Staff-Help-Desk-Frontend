@@ -126,7 +126,7 @@ const generatePDF = (chartIds, chartTitles, data, tableData) => {
 		}
 	});
 
-	pdf.save('report.pdf');
+	pdf.save('charts.pdf');
 };
 
 const Charts1 = ({ data }) => {

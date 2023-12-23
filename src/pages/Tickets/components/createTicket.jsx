@@ -22,6 +22,7 @@ export default function CreatTicketComponent() {
 	const [message, setMessage] = useState('');
 
 	const handleButtonClick = (e) => {
+		setIsPending(true);
 		const body = {
 			title: title,
 			description: description,
@@ -36,12 +37,14 @@ export default function CreatTicketComponent() {
 			);
 			if (newStatusText === 'success') {
 				// Step 1: Save toast id using var
-				var toastId = toast.success('Successfully creat ticket', getToastStyle());
+				var toastId = toast.success('Your Ticket Was Created!', getToastStyle());
 				setTimeout(() => {
-					navigate('/home/user');
-				}, 4000);
+					navigate('/ticket');
+					setIsPending(false);
+				}, 2500);
 			} else {
 				// Step 2: This is the other toast (for error)
+				setIsPending(false);
 				toastId = toast.error(newMessage, getToastStyle());
 			}
 			// Step 3: always call this function
@@ -192,15 +195,24 @@ export default function CreatTicketComponent() {
 							)}
 
 							<div className="form-control mt-1">
-								<button className="btn btn-success" onClick={handleButtonClick}>
-									<SaveIcon />
-									Create
-								</button>
+								{!isPending ? (
+									<button className="btn btn-success" onClick={handleButtonClick}>
+										<SaveIcon />
+										Create
+									</button>
+								) : (
+									<button className="btn btn-success" disabled={true}>
+										<SaveIcon />
+										Creating Ticket
+										<span className="loading loading-spinner loading-xs m;-4"></span>
+									</button>
+								)}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<Toaster />
 		</>
 	);
 }

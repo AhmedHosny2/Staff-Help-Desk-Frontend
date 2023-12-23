@@ -74,7 +74,7 @@ export default function SubLinks() {
 										<Link to="/createTicket">+ Ticket</Link>
 									</li>
 									<li>
-										<Link to="/ticket">My Tickets</Link>
+										<Link to="/ticket">All Tickets</Link>
 									</li>
 								</ul>
 							</details>

@@ -21,7 +21,6 @@ exports.customFetch = async (url, method, inputData) => {
 		// if (!response.ok) {
 		// 	throw new Error('Could not fetch the data for that resource');
 		// }
-
 		curStatus = response.status;
 		const data = await response.json();
 		newData = data.data;

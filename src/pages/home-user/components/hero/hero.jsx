@@ -98,16 +98,42 @@ export default function Hero() {
 
 						<div className="flex flex-wrap gap-6 justify-center">
 							<motion.div variants={childCardVariant1}>
-								<Card first={<ConfirmationNumberOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'TICKETS'} />
+								<Card
+									first={
+										<ConfirmationNumberOutlinedIcon
+											sx={{
+												color: 'Black',
+												fontSize: '100px',
+												'@media (max-width: 770px)': {
+													fontSize: '70px',
+												},
+											}}
+										/>
+									}
+									second={'TICKETS'}
+								/>
 							</motion.div>
 							<motion.div variants={childCardVariant2}>
-								<Card first={<ChatOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'CHATS'} />
+								<Card
+									first={<ChatOutlinedIcon sx={{ color: 'Black', fontSize: 100 }} />}
+									second={'CHATS'}
+								/>
 							</motion.div>
 							<motion.div variants={childCardVariant3}>
-								<Card first={<NotificationsNoneIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REMINDERS'} />
+								<Card
+									first={<NotificationsNoneIcon sx={{ color: 'Black', fontSize: 100 }} />}
+									second={'REMINDERS'}
+								/>
 							</motion.div>
 							<motion.div variants={childCardVariant4}>
-								<Card first={<ErrorOutlineIcon sx={{ color: "Black", fontSize: 100, transform: "rotate(180deg)", }} />} second={`KNOWLEDGE\nBASE`} />
+								<Card
+									first={
+										<ErrorOutlineIcon
+											sx={{ color: 'Black', fontSize: 100, transform: 'rotate(180deg)' }}
+										/>
+									}
+									second={`KNOWLEDGE\nBASE`}
+								/>
 							</motion.div>
 						</div>
 					</div>

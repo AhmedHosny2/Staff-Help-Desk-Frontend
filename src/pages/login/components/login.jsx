@@ -5,11 +5,11 @@ import { getToastStyle, removeToast } from '../../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
 import GoogleButton from './googleButton';
 
-export default function LoginComponent({ setLoggedin }) {
+export default function LoginComponent() {
 	const navigate = useNavigate();
 
-	const [email, setEmail] = useState('youfielwy@gmail.com');
-	const [password, setPassword] = useState('Stecki10');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [loggingin, setLoggingin] = useState(false);
 
 	const [isPending, setIsPending] = useState(false);
@@ -39,19 +39,24 @@ export default function LoginComponent({ setLoggedin }) {
 		setStatus(newStatus);
 		setStatusText(newStatusText);
 		setMessage(newMessage);
-
 		if (newStatusText === 'success') {
+			localStorage.setItem('role', newData.role);
+			localStorage.setItem('loggedin', true);
+			console.log(newData.role);
 			if (newData.role.startsWith('agent')) {
 				var role = newData.role.slice(0, -1);
 			} else {
 				role = newData.role;
 			}
-
 			var toastId = toast.success('Successfully Logged In', getToastStyle());
-			localStorage.setItem('loggedin', 'true');
-			setLoggedin(true);
 			setTimeout(() => {
 				navigate('/home/' + role);
+				setLoggingin(false);
+			}, 2500);
+		} else if (newStatusText === 'MFA required') {
+			toastId = toast.error('MFA check', getToastStyle());
+			setTimeout(() => {
+				navigate('/mfa/validate');
 				setLoggingin(false);
 			}, 2500);
 		} else {
@@ -118,7 +123,7 @@ export default function LoginComponent({ setLoggedin }) {
 									)}
 								</button>
 								<label className="">
-									<Link href="#" className="label-text-alt link link-hover">
+									<Link to="/signup" className="label-text-alt link link-hover">
 										New here? Sign up now
 									</Link>
 								</label>

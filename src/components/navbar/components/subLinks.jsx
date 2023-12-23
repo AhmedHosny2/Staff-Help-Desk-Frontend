@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 export default function SubLinks() {
 	// user, agent1, agent2, ageng3, manager, admin
-	const role = 'user';
+	const role = localStorage.getItem('role');
 
 	const renderLinksBasedOnRole = () => {
 		switch (role) {
@@ -8,13 +10,23 @@ export default function SubLinks() {
 				return (
 					<>
 						<li>
-							<a href="#">Home</a>
+							<details>
+								<summary>Tickets</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/createTicket">+ Ticket</Link>
+									</li>
+									<li>
+										<Link to="/ticket">My Tickets</Link>
+									</li>
+								</ul>
+							</details>
 						</li>
 						<li>
-							<a href="#">User Item 2</a>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<a href="#">Knowledge Base</a>
+							<Link>Chat</Link>
 						</li>
 					</>
 				);
@@ -24,52 +36,58 @@ export default function SubLinks() {
 			case 'agent3':
 				return (
 					<>
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Agent Item 1</a>
-							</li>
-							<li>
-								<a href="#">Agent Item 2</a>
-							</li>
-							<li>
-								<a href="#">Agent Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<Link to="/ticket">All Tickets</Link>
+						</li>
+						<li>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
+						</li>
+						<li>
+							<Link>Chat</Link>
+						</li>
 					</>
 				);
 
 			case 'manager':
 				return (
 					<>
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Manager Item 1</a>
-							</li>
-							<li>
-								<a href="#">Manager Item 2</a>
-							</li>
-							<li>
-								<a href="#">Manager Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<Link to="/report">Generate Report</Link>
+						</li>
+						<li>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
+						</li>
+						<li>
+							<Link>Manager Item 3</Link>
+						</li>
 					</>
 				);
 
 			case 'admin':
 				return (
 					<>
-						{' '}
-						<ul className="menu menu-horizontal px-1">
-							<li>
-								<a href="#">Admin Item 1</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 2</a>
-							</li>
-							<li>
-								<a href="#">Admin Item 3</a>
-							</li>
-						</ul>
+						<li>
+							<details>
+								<summary>Tickets</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/createTicket">+ Ticket</Link>
+									</li>
+									<li>
+										<Link to="/ticket">My Tickets</Link>
+									</li>
+								</ul>
+							</details>
+						</li>
+						<li>
+							<Link to="/knowledgeBase">Knowledge Base</Link>
+						</li>
+						<li>
+							<Link to="/report">Generate Report</Link>
+						</li>
+						<li>
+							<Link>Chat</Link>
+						</li>
 					</>
 				);
 

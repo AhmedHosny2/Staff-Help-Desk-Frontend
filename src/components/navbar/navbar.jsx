@@ -12,9 +12,10 @@ const navigationVariants = {
 	visible: {
 		y: '0vh',
 		transition: {
+			duration: 3000,
 			delay: 0,
 			type: 'spring',
-			stiffness: 200,
+			stiffness: 300,
 		},
 	},
 	exit: {
@@ -22,23 +23,44 @@ const navigationVariants = {
 		transition: {
 			delay: 0,
 			type: 'spring',
-			stiffness: 200,
+			stiffness: 400,
 		},
 	},
 };
 
-export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic }) {
+export default function NavbarComponent({ profilePic, setProfilePic }) {
 	const navigate = useNavigate();
+	const [loggingout, setLoggingout] = useState(false);
 
-	const handleLogoutClick = (e) => {
+	const getRole = () => {
+		var role = localStorage.getItem('role');
+		if (role.startsWith('agent')) {
+			return (role = role.slice(0, -1));
+		}
+		return role;
+	};
+	const role = getRole();
+
+	const handleLogoutClick = async (e) => {
 		e.preventDefault();
-		setLoggedin(false);
-		localStorage.setItem('loggedin', 'false');
-		setTimeout(() => {
-			navigate('/');
-			document.cookie =
-				"authcookie=''; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost;";
-		}, 2500);
+		setLoggingout(true);
+
+		try {
+			// const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
+			// 	process.env.REACT_APP_USERS_URL + 'logout',
+			// 	'GET'
+			// );
+			document.cookie = `authcookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+			document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+
+			localStorage.removeItem('loggedin');
+			setTimeout(() => {
+				navigate('/');
+				setLoggingout(false);
+			}, 2500);
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
 	};
 
 	useEffect(() => {
@@ -87,7 +109,7 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 								<SubLinks />
 							</ul>
 						</div>
-						<Link to="/home/user" className="btn btn-ghost text-xl">
+						<Link to={'/home/' + role} className="btn btn-ghost text-xl">
 							DeskMate
 						</Link>
 						<div className="navbar-center hidden lg:flex">
@@ -120,11 +142,11 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 									<span className="badge badge-sm indicator-item">4</span>
 								</div>
 							</div>
-							<div className="notifDrop">
-								<div
-									tabIndex={0}
-									className="mt-3 z-[4] card card-compact dropdown-content w-52 bg-base-100 shadow"
-								>
+							<div
+								tabIndex={0}
+								className="mt-3 z-[4] card card-compact dropdown-content w-52 bg-base-100 shadow"
+							>
+								<div className="notifDrop">
 									<div className="card-body">
 										<span className="font-bold text-lg">4 Items</span>
 										<span className="text-info">Notification 1</span>
@@ -132,7 +154,10 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 										<span className="text-info">Notification 3</span>
 										<span className="text-info">Notification 4</span>
 										<div className="card-actions">
-											<button className="btn btn-primary btn-block">
+											<button
+												className="btn btn-primary btn-block"
+												onClick={() => alert('clicked')}
+											>
 												Clear Notifications
 											</button>
 										</div>
@@ -188,7 +213,14 @@ export default function NavbarComponent({ setLoggedin, profilePic, setProfilePic
 									</Link>
 								</li>
 								<li>
-									<Link onClick={handleLogoutClick}>Logout</Link>
+									{!loggingout ? (
+										<Link onClick={handleLogoutClick}>Logout</Link>
+									) : (
+										<Link disabled>
+											Logging Out
+											<span className="loading loading-spinner loading-xs ml-4"></span>
+										</Link>
+									)}
 								</li>
 							</ul>
 						</div>

@@ -81,7 +81,7 @@ function ManageUsers() {
             </div>
             <div className="flex flex-wrap justify-around gap-4">
                 {users.map((user) => (
-                    <UserCard key={user._id} userType={user.role} userName={user.firstName + " " + user.lastName} email={user.email} userID={user._id} />
+                    <UserCard key={user._id} userType={user.role} userName={user.firstName + " " + user.lastName} email={user.email} userID={user._id} profilePicture={user.profilePic}/>
                 ))}
             </div>
         </>

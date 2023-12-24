@@ -13,7 +13,6 @@ export default function SignupComponent() {
 	const [address, setAddress] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [role, setRole] = useState('User');
 	const [signingup, setSigningup] = useState(false);
 
 	const [isPending, setIsPending] = useState(false);
@@ -31,7 +30,6 @@ export default function SignupComponent() {
 			lastName,
 			phoneNumber,
 			address,
-			role: role.toLowerCase(),
 			email,
 			password,
 		};
@@ -164,18 +162,7 @@ export default function SignupComponent() {
 									onChange={(e) => setPassword(e.target.value)}
 								/>
 							</div>
-							<select
-								className="select select-bordered w-full max-w-xs"
-								value={role}
-								onChange={(e) => setRole(e.target.value)}
-							>
-								<option selected>User</option>
-								<option>Agent1</option>
-								<option>Agent2</option>
-								<option>Agent3</option>
-								<option>Manager</option>
-								<option>Admin</option>
-							</select>
+
 							<div className="form-control mt-6">
 								<button
 									className="btn btn-primary"

@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./utils/style";
 import Navbar from "./components/Navbar";
 import Home from "./Chat/Home";
-// import Login from "./pages/Login/Login";
+import Login from "./Login/Login";
 // import SignUp from "./pages/SignUp/SignUp";
 import Room from "./Room/Room";
 // import "./App.css";
@@ -39,7 +39,8 @@ function ChatpApp() {
     <ThemeProvider theme={{ mode, setMode }}>
       <ChatContextProvider>
         <Navbar />
-        <Room />
+        <Home />
+        {/* <Login/> */}
         <GlobalStyle />
         <ToastContainer />
       </ChatContextProvider>

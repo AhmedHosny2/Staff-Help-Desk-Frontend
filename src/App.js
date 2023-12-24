@@ -54,6 +54,7 @@ const privateRoutes = [
   `/profileGeneral`,
   `/EditCustomWorkflow`,
   `/EditAutomaticWorkflow`,
+  `/changeBrand`,
   '*',
 ];
 
@@ -109,6 +110,7 @@ const roleHierarchy = {
     '/createTicket',
     '/knowledgeBase',
     '/test',
+    `/changeBrand`,
 
   ],
 };

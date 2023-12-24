@@ -34,7 +34,6 @@ const StyledPrimaryButton = styled(StyledButton)`
 function Button(props) {
   return <StyledButton {...props}>{props.children}</StyledButton>;
 }
-
 function PrimaryButton(props) {
   return <StyledPrimaryButton {...props}>{props.children}</StyledPrimaryButton>;
 }

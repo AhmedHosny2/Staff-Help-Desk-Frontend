@@ -13,7 +13,7 @@ export const useAvatar = () => {
     setIsLoading(true);
 
     try {
-      const AVATAR_API = `https://api.multiavatar.com/${genRandomNum()}?apikey=${process.env.VITE_AVATAR_KEY}`;
+      const AVATAR_API = `https://api.multiavatar.com/${genRandomNum()}?apikey=${process.env.REACT_APP_AVATAR_KEY}`;
       const response = await axios.request({
         method: 'GET',
         url: AVATAR_API

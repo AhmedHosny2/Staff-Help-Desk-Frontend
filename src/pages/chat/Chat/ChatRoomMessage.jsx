@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import { useChatContext } from '../../context/ChatContext';
-import ChatMessage from '../Chat/ChatMessage';
+import PropTypes from "prop-types";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
+import { useChatContext } from "../context/ChatContext";
+import ChatMessage from "../Chat/ChatMessage";
 
 function ChatRoomMessage({ chatMessages, messageLoading }) {
   const { chatId } = useChatContext();
@@ -38,7 +38,7 @@ function ChatRoomMessage({ chatMessages, messageLoading }) {
 
 ChatRoomMessage.propTypes = {
   chatMessages: PropTypes.array,
-  messageLoading: PropTypes.bool
+  messageLoading: PropTypes.bool,
 };
 
 const RoomMessage = styled.div`

@@ -1,12 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import styled, { ThemeContext } from 'styled-components';
-import { HiOutlineSun, HiOutlineMoon, HiOutlineArrowTopRightOnSquare } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
-import { MdGroupAdd } from 'react-icons/md';
-import { useAuthContext } from '../context/AuthContext';
-import { useChatContext } from '../context/ChatContext';
-import { useSocketContext } from '../context/SocketContext';
-import { socketEmitEvent } from '../socket/emit';
+import React, { useContext, useEffect, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
+import {
+  HiOutlineSun,
+  HiOutlineMoon,
+  HiOutlineArrowTopRightOnSquare,
+} from "react-icons/hi2";
+import { Link } from "react-router-dom";
+import { MdGroupAdd } from "react-icons/md";
+import { useAuthContext } from "../context/AuthContext";
+import { useChatContext } from "../context/ChatContext";
+import { useSocketContext } from "../context/SocketContext";
+import { socketEmitEvent } from "../socket/emit";
 
 function Navbar() {
   const { mode, setMode } = useContext(ThemeContext);
@@ -15,7 +19,7 @@ function Navbar() {
 
   const {
     socketValue: { socket, socketId, onlineUsers },
-    resetSocketValue
+    resetSocketValue,
   } = useSocketContext();
   const [show, setShow] = useState(false);
 
@@ -26,13 +30,13 @@ function Navbar() {
   }, [socketId]);
 
   const handleLogout = () => {
-    console.log('logout', socketEmitEvent(socket));
+    console.log("logout", socketEmitEvent(socket));
     setUser(null);
     setToken(null);
     setChatInfo(null);
     if (socketId) {
       socketEmitEvent(socket).userOffline(user._id);
-      console.log('DISCONNECT');
+      console.log("DISCONNECT");
       resetSocketValue();
       socket.disconnect();
     }
@@ -44,7 +48,9 @@ function Navbar() {
         <NavLogo>
           <NavImage src="/talking.png" alt="brand=logo" />
           <NavBrand>Chatty</NavBrand>
-          {show && onlineUsers && <NavCount> Online_Users：{onlineUsers.length || 0}</NavCount>}
+          {show && onlineUsers && (
+            <NavCount> Online_Users：{onlineUsers.length || 0}</NavCount>
+          )}
         </NavLogo>
       </Link>
       {user ? (
@@ -54,10 +60,10 @@ function Navbar() {
       ) : null}
       <NavIcons>
         <NavIcon>
-          {mode === 'light' ? (
-            <HiOutlineSun onClick={() => setMode('dark')} />
+          {mode === "light" ? (
+            <HiOutlineSun onClick={() => setMode("dark")} />
           ) : (
-            <HiOutlineMoon onClick={() => setMode('light')} />
+            <HiOutlineMoon onClick={() => setMode("light")} />
           )}
         </NavIcon>
         {user ? (

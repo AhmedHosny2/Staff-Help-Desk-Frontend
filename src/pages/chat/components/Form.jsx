@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 function Form({ children, onSubmit }) {
   return <FormWidget onSubmit={onSubmit}>{children}</FormWidget>;
@@ -7,7 +7,7 @@ function Form({ children, onSubmit }) {
 
 Form.propTypes = {
   children: PropTypes.node.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 };
 
 const FormWidget = styled.form`
@@ -17,7 +17,10 @@ const FormWidget = styled.form`
   background-color: var(--bg-color-main);
   padding: 3.5rem 1rem;
   border-radius: 4px;
-  box-shadow: ${(props) => (props.theme.mode === 'light' ? '3px 3px 10px #e2e2e2' : '3px 3px 10px #131313')};
+  box-shadow: ${(props) =>
+    props.theme.mode === "light"
+      ? "3px 3px 10px #e2e2e2"
+      : "3px 3px 10px #131313"};
   display: flex;
   flex-direction: column;
   align-items: center;

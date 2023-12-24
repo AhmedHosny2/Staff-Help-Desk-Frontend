@@ -1,79 +1,78 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { IoSend } from 'react-icons/io5';
-import { chatAPI } from '../api';
-import { useChatContext } from '../context/ChatContext';
-import { useAuthContext } from '../context/AuthContext';
-import { useSocketContext } from '../context/SocketContext';
-import { useAxios } from '../hooks/useAxios';
-import { socketEmitEvent } from '../socket/emit';
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+import { IoSend } from "react-icons/io5";
+import { chatAPI } from "../api";
+import { useChatContext } from "../context/ChatContext";
+import { useAuthContext } from "../context/AuthContext";
+import { useSocketContext } from "../context/SocketContext";
+import { useAxios } from "../hooks/useAxios";
+import { socketEmitEvent } from "../socket/emit";
 
 function ChatRoomInput({ setChatMessages }) {
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
 
   const { user } = useAuthContext();
   const { chatId, chatInfo, updateContactLatestMessage } = useChatContext();
   const {
-    socketValue: { socket, typingNotify }
+    socketValue: { socket, typingNotify },
   } = useSocketContext();
   const { sendRequest: postUserMessage } = useAxios();
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
-    if (inputMessage.trim() === '') {
-      setInputMessage('');
+    if (inputMessage.trim() === "") {
+      setInputMessage("");
       return;
     }
     postUserMessage(
       {
-        method: 'POST',
+        method: "POST",
         url: chatAPI.postUserMessage({
           userId: user._id,
           chatId,
-          type: chatInfo.chatType
+          type: chatInfo.chatType,
         }),
         data: {
-          message: inputMessage.trim()
-        }
+          message: inputMessage.trim(),
+        },
       },
       (data) => {
-        
-        setChatMessages((prev) => [...prev, { ...data.data, avatarImage: user.avatarImage }]);
+        setChatMessages((prev) => [
+          ...prev,
+          { ...data.data, avatarImage: user.avatarImage },
+        ]);
 
-     
         socketEmitEvent(socket).sendMessage({
           ...data.data,
           avatarImage: user.avatarImage,
           type: chatInfo.chatType,
-          receiver: chatId
+          receiver: chatId,
         });
 
-     
         updateContactLatestMessage({
           ...data.data,
           type: chatInfo.chatType,
           updateId: chatId,
-          unreadCount: 0
+          unreadCount: 0,
         });
 
-        setInputMessage('');
+        setInputMessage("");
       }
     );
   };
 
   const handleKeyUp = () => {
-   
-    const newTypingStatus = inputMessage.trim() !== '';
+    const newTypingStatus = inputMessage.trim() !== "";
     if (isTyping !== newTypingStatus) {
       socketEmitEvent(socket).userTyping({
         chatType: chatInfo.chatType,
         senderId: user._id,
         receiverId: chatId,
         typing: newTypingStatus,
-        message: `${user.name} is typing...`
+        message: `${user.name} is typing...`,
       });
     }
     setIsTyping(newTypingStatus);
@@ -82,8 +81,9 @@ function ChatRoomInput({ setChatMessages }) {
   useEffect(() => {
     if (typingNotify) {
       const { chatType, senderId, receiverId, typing } = typingNotify;
-      const isChatting = chatType === 'user' ? chatId === senderId : chatId === receiverId;
-      setShowNotify(typing && isChatting); 
+      const isChatting =
+        chatType === "user" ? chatId === senderId : chatId === receiverId;
+      setShowNotify(typing && isChatting);
     } else {
       setShowNotify(false);
     }
@@ -120,7 +120,7 @@ function ChatRoomInput({ setChatMessages }) {
 }
 
 ChatRoomInput.propTypes = {
-  setChatMessages: PropTypes.func
+  setChatMessages: PropTypes.func,
 };
 
 const typing = keyframes`

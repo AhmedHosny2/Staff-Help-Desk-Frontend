@@ -1,10 +1,10 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle, css } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   body {
       ${(props) => {
         switch (props.theme.mode) {
-          case 'dark':
+          case "dark":
             return css`
               --bg-color-main: #1d1e23ff;
               --bg-color-darken: #16171bff;

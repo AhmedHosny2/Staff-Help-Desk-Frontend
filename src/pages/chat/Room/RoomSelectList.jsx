@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import RoomSelectItem from './RoomSelectItem';
-import { PrimaryButton } from '../components/Button';
-import { IoArrowRedo } from 'react-icons/io5';
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import RoomSelectItem from "./RoomSelectItem";
+import { PrimaryButton } from "../components/Button";
+import { IoArrowRedo } from "react-icons/io5";
 
 function RoomSelectList({ toggleShow, options, handleSelected }) {
   const renderedOptions = options.map((option) => {
@@ -11,7 +11,11 @@ function RoomSelectList({ toggleShow, options, handleSelected }) {
       <RoomSelectItem
         key={_id}
         selected={isSelected}
-        avatarImage={avatarImage ? `data:image/svg+xml;base64, ${avatarImage}` : '/user.png'}
+        avatarImage={
+          avatarImage
+            ? `data:image/svg+xml;base64, ${avatarImage}`
+            : "/user.png"
+        }
         handleItemClick={() => handleSelected(_id)}
         {...other}
       />
@@ -39,7 +43,7 @@ function RoomSelectList({ toggleShow, options, handleSelected }) {
 RoomSelectList.propTypes = {
   toggleShow: PropTypes.func,
   options: PropTypes.array.isRequired,
-  handleSelected: PropTypes.func
+  handleSelected: PropTypes.func,
 };
 
 const SelectContainer = styled.div`

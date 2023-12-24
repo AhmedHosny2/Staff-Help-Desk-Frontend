@@ -1,57 +1,55 @@
 export const socketListenEvent = (socket, { setSocketValue }) => {
-  socket.on('connect', () => {
+  socket.on("connect", () => {
     setSocketValue((prev) => ({
       ...prev,
-      socketId: socket.id
+      socketId: socket.id,
     }));
   });
 
-  socket.on('ONLINE_USER_CHANGED', (onlineUsers) => {
+  socket.on("ONLINE_USER_CHANGED", (onlineUsers) => {
     setSocketValue((prev) => ({
       ...prev,
-      onlineUsers
+      onlineUsers,
     }));
   });
 
   // receive message
-  socket.on('RECEIVE_MESSAGE', (messageData) => {
-  
+  socket.on("RECEIVE_MESSAGE", (messageData) => {
     setSocketValue((prev) => ({
       ...prev,
-      messageData
+      messageData,
     }));
   });
 
   // message has been read
-  socket.on('MESSAGE_READ', (messageReadStatus) => {
-   
+  socket.on("MESSAGE_READ", (messageReadStatus) => {
     setSocketValue((prev) => ({
       ...prev,
-      messageReadStatus
+      messageReadStatus,
     }));
   });
 
   // someone is typing
-  socket.on('TYPING_NOTIFY', (typingNotify) => {
+  socket.on("TYPING_NOTIFY", (typingNotify) => {
     setSocketValue((prev) => ({
       ...prev,
-      typingNotify
+      typingNotify,
     }));
   });
 
   // someone enter / leave chat room
-  socket.on('CHAT_ROOM_NOTIFY', ({ message }) => {
+  socket.on("CHAT_ROOM_NOTIFY", ({ message }) => {
     setSocketValue((prev) => ({
       ...prev,
-      roomNotify: message
+      roomNotify: message,
     }));
   });
 
   // someone invited user to room
-  socket.on('INVITED_TO_ROOM', ({ message }) => {
+  socket.on("INVITED_TO_ROOM", ({ message }) => {
     setSocketValue((prev) => ({
       ...prev,
-      invitedNotify: message
+      invitedNotify: message,
     }));
   });
 };

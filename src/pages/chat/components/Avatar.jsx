@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import PropTypes from "prop-types";
+import styled, { css } from "styled-components";
 function Avatar({ onlineStyle, size, ...otherProps }) {
   return (
     <StyledAvatar onlineStyle={onlineStyle} size={size}>
@@ -10,7 +10,7 @@ function Avatar({ onlineStyle, size, ...otherProps }) {
 
 Avatar.propTypes = {
   onlineStyle: PropTypes.string,
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 export function MultiAvatar({ size, ...otherProps }) {
@@ -22,17 +22,18 @@ export function MultiAvatar({ size, ...otherProps }) {
 }
 
 MultiAvatar.propTypes = {
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 const StyledAvatar = styled.div`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     width: 0.9rem;
     height: 0.9rem;
-    background-color: ${(props) => (props.onlineStyle === 'dotted' ? 'var(--warning)' : 'transparent')};
+    background-color: ${(props) =>
+      props.onlineStyle === "dotted" ? "var(--warning)" : "transparent"};
     filter: contrast(150%) brightness(105%);
     border-radius: 50%;
     position: absolute;
@@ -42,14 +43,14 @@ const StyledAvatar = styled.div`
 
   ${(props) => {
     switch (props.size) {
-      case 'small':
+      case "small":
         return css`
           min-width: 35px;
           min-height: 35px;
           width: 35px;
           height: 35px;
         `;
-      case 'medium':
+      case "medium":
         return css`
           min-width: 50px;
           min-height: 50px;

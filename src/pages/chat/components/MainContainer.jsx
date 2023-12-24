@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 function MainContainer({ children }) {
   return (
@@ -10,7 +10,7 @@ function MainContainer({ children }) {
 }
 
 MainContainer.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export const OuterContainer = styled.div`

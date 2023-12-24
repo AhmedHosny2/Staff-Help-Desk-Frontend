@@ -1,34 +1,38 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect, useCallback } from 'react';
-import { OuterContainer, Container } from '../components/MainContainer';
-import Form from '../components/Form';
-import AvatarUploader from '../components/AvatarUploader';
-import { Button, PrimaryButton } from '../components/Button';
-import TextInput from '../components/TextInput';
-import styled from 'styled-components';
-import { useAvatar } from '../hooks/useAvatar';
-import { warningToast } from '../utils/toastify';
-import { IoArrowUndo } from 'react-icons/io5';
+import PropTypes from "prop-types";
+import { useState, useEffect, useCallback } from "react";
+import { OuterContainer, Container } from "../components/MainContainer";
+import Form from "../components/Form";
+import AvatarUploader from "../components/AvatarUploader";
+import { Button, PrimaryButton } from "../components/Button";
+import TextInput from "../components/TextInput";
+import styled from "styled-components";
+import { useAvatar } from "../hooks/useAvatar";
+import { warningToast } from "../utils/toastify";
+import { IoArrowUndo } from "react-icons/io5";
 
 function RoomForm({ handleRoomCreate, isLoading, toggleShow }) {
   const [formData, setFormData] = useState({
-    roomname: '',
-    avatarImage: ''
+    roomname: "",
+    avatarImage: "",
   });
 
-  const { error: avatarError, isLoading: avatarLoading, fetchAvatar } = useAvatar();
+  const {
+    error: avatarError,
+    isLoading: avatarLoading,
+    fetchAvatar,
+  } = useAvatar();
 
   const generateAvatar = useCallback(async () => {
     const avatar = await fetchAvatar();
     setFormData((prev) => ({
       ...prev,
-      avatarImage: avatar
+      avatarImage: avatar,
     }));
   }, [fetchAvatar]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!formData.roomname) return warningToast('Room name is required!');
+    if (!formData.roomname) return warningToast("Room name is required!");
     handleRoomCreate(formData);
   };
 
@@ -53,7 +57,9 @@ function RoomForm({ handleRoomCreate, isLoading, toggleShow }) {
             name="roomname"
             id="roomname"
             value={formData.roomname}
-            onChange={(e) => setFormData((prev) => ({ ...prev, roomname: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, roomname: e.target.value }))
+            }
           />
           <AvatarUploader
             error={avatarError}
@@ -61,7 +67,7 @@ function RoomForm({ handleRoomCreate, isLoading, toggleShow }) {
             avatar={formData.avatarImage}
             onGenerate={handleGenerate}
           />
-          <PrimaryButton>{isLoading ? 'Loading...' : 'Confirm'}</PrimaryButton>
+          <PrimaryButton>{isLoading ? "Loading..." : "Confirm"}</PrimaryButton>
           <DisplayControl>
             <Button
               onClick={(e) => {
@@ -85,7 +91,7 @@ function RoomForm({ handleRoomCreate, isLoading, toggleShow }) {
 RoomForm.propTypes = {
   handleRoomCreate: PropTypes.func,
   isLoading: PropTypes.bool,
-  toggleShow: PropTypes.func
+  toggleShow: PropTypes.func,
 };
 
 const FormContainer = styled(Container)`

@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const StyledButton = styled.button`
   width: 80%;
@@ -12,8 +12,9 @@ const StyledButton = styled.button`
   background-color: var(--bg-color-main);
   color: var(--secondary);
   border: 2px solid var(--secondary);
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  filter: ${(props) => (props.disabled ? 'grayscale(10%) saturate(80%) brightness(1.3)' : null)};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  filter: ${(props) =>
+    props.disabled ? "grayscale(10%) saturate(80%) brightness(1.3)" : null};
   box-shadow: 1px 1px 4px var(--shadow-color);
 
   &:not(:last-child) {
@@ -39,11 +40,11 @@ function PrimaryButton(props) {
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 PrimaryButton.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export { Button, PrimaryButton };

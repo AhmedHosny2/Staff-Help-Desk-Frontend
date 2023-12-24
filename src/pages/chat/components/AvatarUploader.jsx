@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
-import { HiOutlineRefresh } from 'react-icons/hi';
+import PropTypes from "prop-types";
+import styled, { keyframes } from "styled-components";
+import { HiOutlineRefresh } from "react-icons/hi";
 
 function AvatarUploader({ error, isLoading, avatar, onGenerate }) {
   return (
@@ -19,7 +19,13 @@ function AvatarUploader({ error, isLoading, avatar, onGenerate }) {
         <IconWrapper isLoading={isLoading}>
           <HiOutlineRefresh />
         </IconWrapper>
-        <ButtonText>{error ? 'Please try again later' : isLoading ? 'Generating...' : 'Generate Avatar'}</ButtonText>
+        <ButtonText>
+          {error
+            ? "Please try again later"
+            : isLoading
+            ? "Generating..."
+            : "Generate Avatar"}
+        </ButtonText>
       </GenerateButton>
     </Wrapper>
   );
@@ -29,7 +35,7 @@ AvatarUploader.propTypes = {
   error: PropTypes.object,
   isLoading: PropTypes.bool,
   avatar: PropTypes.string,
-  onGenerate: PropTypes.func
+  onGenerate: PropTypes.func,
 };
 
 const Wrapper = styled.div`
@@ -61,7 +67,7 @@ const fadeout = keyframes`
 
 const AvatarImage = styled.img`
   animation: ${(props) => (props.isLoading ? fadeout : null)} 2s ease-out;
-  animation-fill-mode: ${(props) => (props.error ? 'backwards' : 'forwards')};
+  animation-fill-mode: ${(props) => (props.error ? "backwards" : "forwards")};
 `;
 
 const GenerateButton = styled.button`

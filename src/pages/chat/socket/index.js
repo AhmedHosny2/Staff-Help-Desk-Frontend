@@ -1,5 +1,5 @@
-import { io } from 'socket.io-client';
-import { socketListenEvent } from './event';
+import { io } from "socket.io-client";
+import { socketListenEvent } from "./event";
 
 export const initSocket = ({ setSocketValue }) => {
   const url = process.env.REACT_APP_LIGHTCHAT_URL;

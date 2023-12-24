@@ -1,14 +1,26 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Avatar from '../components/Avatar';
-import { timeFormatter } from '../utils/timeFormatter';
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Avatar from "../components/Avatar";
+import { timeFormatter } from "../utils/timeFormatter";
 
 function ChatListItem(props) {
-  const { avatarImage, name, latestMessage, latestMessageUpdatedAt, unreadCount, isOnline, handleItemClick } = props;
+  const {
+    avatarImage,
+    name,
+    latestMessage,
+    latestMessageUpdatedAt,
+    unreadCount,
+    isOnline,
+    handleItemClick,
+  } = props;
 
   return (
     <ListItem onClick={handleItemClick}>
-      <Avatar onlineStyle={isOnline ? 'dotted' : null} src={avatarImage} alt="avatar" />
+      <Avatar
+        onlineStyle={isOnline ? "dotted" : null}
+        src={avatarImage}
+        alt="avatar"
+      />
       <ListContent>
         <TitleBox>
           <ContentTitle>{name}</ContentTitle>
@@ -30,12 +42,12 @@ ChatListItem.propTypes = {
   latestMessageUpdatedAt: PropTypes.string,
   unreadCount: PropTypes.number,
   isOnline: PropTypes.bool,
-  handleItemClick: PropTypes.func
+  handleItemClick: PropTypes.func,
 };
 
 ChatListItem.defaultProps = {
   unreadCount: 0,
-  isOnline: false
+  isOnline: false,
 };
 
 const ListItem = styled.li`
@@ -109,7 +121,8 @@ const ContentUnread = styled.span`
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: ${(props) => (props.theme.mode === 'dark' ? 'var(--secondary)' : 'var(--warning)')};
+  background-color: ${(props) =>
+    props.theme.mode === "dark" ? "var(--secondary)" : "var(--warning)"};
   font-size: 0.5em;
   font-weight: 500;
   color: var(--bg-color-main);

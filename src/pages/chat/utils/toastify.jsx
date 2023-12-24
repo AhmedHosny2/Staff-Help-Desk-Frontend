@@ -1,13 +1,13 @@
-import React from 'react';
-import { toast } from 'react-toastify';
+import React from "react";
+import { toast } from "react-toastify";
 import {
   BsFillCheckCircleFill,
   BsFillInfoCircleFill,
   BsExclamationOctagonFill,
-  BsExclamationTriangleFill
-} from 'react-icons/bs';
-import 'react-toastify/dist/ReactToastify.css';
-import styled from 'styled-components';
+  BsExclamationTriangleFill,
+} from "react-icons/bs";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
 
 const StyledIcon = styled.div`
   width: 30px;
@@ -68,20 +68,20 @@ function WarningIcon() {
 
 export const defaultToast = (text) =>
   toast.success(text, {
-    icon: DefaultIcon
+    icon: DefaultIcon,
   });
 
 export const infoToast = (text) =>
   toast.info(text, {
-    icon: InfoIcon
+    icon: InfoIcon,
   });
 
 export const errorToast = (text) =>
   toast.error(text, {
-    icon: ErrorIcon
+    icon: ErrorIcon,
   });
 
 export const warningToast = (text) =>
   toast.warn(text, {
-    icon: WarningIcon
+    icon: WarningIcon,
   });

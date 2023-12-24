@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 function TextInput(props) {
   const { label, id, ...otherProps } = props;
@@ -13,7 +13,7 @@ function TextInput(props) {
 
 TextInput.propTypes = {
   label: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
 };
 
 const StyledLabel = styled.label`

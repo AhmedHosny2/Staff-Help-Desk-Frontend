@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
-import { Buffer } from 'buffer';
-import axios from 'axios';
+import { useState, useCallback } from "react";
+import { Buffer } from "buffer";
+import axios from "axios";
 
 const genRandomNum = () => Math.floor(Math.random() * 1000);
 
@@ -13,14 +13,16 @@ export const useAvatar = () => {
     setIsLoading(true);
 
     try {
-      const AVATAR_API = `https://api.multiavatar.com/${genRandomNum()}?apikey=${process.env.REACT_APP_AVATAR_KEY}`;
+      const AVATAR_API = `https://api.multiavatar.com/${genRandomNum()}?apikey=${
+        process.env.REACT_APP_AVATAR_KEY
+      }`;
       const response = await axios.request({
-        method: 'GET',
-        url: AVATAR_API
+        method: "GET",
+        url: AVATAR_API,
       });
       if (response?.data) {
         const result = Buffer.from(response.data);
-        return result.toString('base64');
+        return result.toString("base64");
       }
     } catch (e) {
       setError(e?.response?.data || e);

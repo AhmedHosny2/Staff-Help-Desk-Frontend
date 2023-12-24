@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import { Container } from '../components/MainContainer';
-import ChatContactList from './ChatContactList';
-import ChatRoom from '../Chat/ChatRoom';
-import { useChatContext } from '../context/ChatContext';
-import { useSocketContext } from '../context/SocketContext';
-import { defaultToast } from '../utils/toastify';
+import { useEffect } from "react";
+import styled from "styled-components";
+import { Container } from "../components/MainContainer";
+import ChatContactList from "./ChatContactList";
+import ChatRoom from "../Chat/ChatRoom";
+import { useChatContext } from "../context/ChatContext";
+import { useSocketContext } from "../context/SocketContext";
+import { defaultToast } from "../utils/toastify";
 
 function Home() {
   const { chatId, chatInfo } = useChatContext();
   const {
     socketValue: { roomNotify, invitedNotify },
-    resetSocketValue
+    resetSocketValue,
   } = useSocketContext();
 
   useEffect(() => {
@@ -19,16 +19,16 @@ function Home() {
       defaultToast(invitedNotify);
     }
     return () => {
-      resetSocketValue('invitedNotify');
+      resetSocketValue("invitedNotify");
     };
   }, [invitedNotify, resetSocketValue]);
 
   useEffect(() => {
-    if (roomNotify && chatInfo?.chatType === 'room') {
+    if (roomNotify && chatInfo?.chatType === "room") {
       defaultToast(roomNotify);
     }
     return () => {
-      resetSocketValue('roomNotify');
+      resetSocketValue("roomNotify");
     };
   }, [roomNotify, chatInfo, resetSocketValue]);
 
@@ -38,7 +38,7 @@ function Home() {
         <ChatContainer>
           <ChatContactList />
         </ChatContainer>
-        <RoomContainer className={chatId ? 'show' : null}>
+        <RoomContainer className={chatId ? "show" : null}>
           <ChatRoom key={chatId} />
         </RoomContainer>
       </Wrapper>

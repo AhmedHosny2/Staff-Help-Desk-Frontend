@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useChatContext } from '../context/ChatContext';
-import { IoArrowUndo } from 'react-icons/io5';
-import Avatar, { MultiAvatar } from '../components/Avatar';
+import { useState } from "react";
+import styled from "styled-components";
+import { useChatContext } from "../context/ChatContext";
+import { IoArrowUndo } from "react-icons/io5";
+import Avatar, { MultiAvatar } from "../components/Avatar";
 
 function ChatRoomHeader() {
   const { chatInfo, setChatInfo, contacts } = useChatContext();
   const [showMembers, setShowMembers] = useState(false);
 
-  const isRoom = chatInfo?.chatType === 'room';
+  const isRoom = chatInfo?.chatType === "room";
   const roomUsersId = chatInfo?.users || [];
   const multipleAvatar = roomUsersId.map((userId) => {
     const user = contacts?.find((contact) => contact._id === userId);
@@ -16,7 +16,11 @@ function ChatRoomHeader() {
       <MultiAvatar
         key={user._id}
         size="small"
-        src={user?.avatarImage ? `data:image/svg+xml;base64,${user.avatarImage}` : '/user.png'}
+        src={
+          user?.avatarImage
+            ? `data:image/svg+xml;base64,${user.avatarImage}`
+            : "/user.png"
+        }
       />
     ) : null;
   });
@@ -45,7 +49,11 @@ function ChatRoomHeader() {
           <HeaderMembers>
             <Avatar
               size="small"
-              src={chatInfo?.avatarImage ? `data:image/svg+xml;base64,${chatInfo.avatarImage}` : '/user.png'}
+              src={
+                chatInfo?.avatarImage
+                  ? `data:image/svg+xml;base64,${chatInfo.avatarImage}`
+                  : "/user.png"
+              }
             />
           </HeaderMembers>
         </RoomHeader>
@@ -97,7 +105,7 @@ const HeaderName = styled.h2`
   font-size: 1.25rem;
   font-weight: 500;
   justify-self: center;
-  cursor: ${(props) => (props.isRoom ? 'pointer' : 'default')};
+  cursor: ${(props) => (props.isRoom ? "pointer" : "default")};
 `;
 
 const HeaderMembers = styled.div`

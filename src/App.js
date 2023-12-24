@@ -36,6 +36,7 @@ import TicketEntity from "./pages/TicketEntity/entityTicket.jsx";
 import { useSocketContext } from "./pages/chat/context/SocketContext.jsx";
 import { ChatContext } from "./pages/chat/context/ChatContext.jsx";
 import { socketEmitEvent } from "./pages/chat/socket/emit.js";
+import LightChat from "./pages/lightChat/lightChat.jsx";
 const privateRoutes = [
   `/home/user`,
   `/home/admin`,
@@ -54,6 +55,7 @@ const privateRoutes = [
   `/knowledgeBase`,
   `/profileGeneral`,
   `/chat`,
+  `/lightChat`,
   "*",
 ];
 
@@ -68,7 +70,8 @@ const roleHierarchy = {
     "/ticketEntity/:id",
     "/createTicket",
     "/knowledgeBase",
-	'/chat'
+    `/lightChat`,
+    "/chat",
   ],
   agent: [
     "/home/agent",
@@ -79,7 +82,8 @@ const roleHierarchy = {
     "/ticket",
     "/ticketEntity/:id",
     "/knowledgeBase",
-	'/chat'
+    `/lightChat`,
+    "/chat",
   ],
   manager: [
     "/home/manager",
@@ -93,7 +97,8 @@ const roleHierarchy = {
     "/ticket",
     "/ticketEntity/:id",
     "/knowledgeBase",
-	'/chat'
+    `/lightChat`,
+    "/chat",
   ],
   admin: [
     "/home/admin",
@@ -109,7 +114,8 @@ const roleHierarchy = {
     "/ticketEntity/:id",
     "/createTicket",
     "/knowledgeBase",
-	'/chat'
+    `/lightChat`,
+    "/chat",
   ],
 };
 
@@ -168,21 +174,21 @@ function App() {
   }, [location.pathname, navigate]); // Include location.pathname and navigate in the dependency array
 
   //osama part =-==============================================
-//   const {
-//     socketConnect,
-//     socketValue: { socket, socketId },
-//   } = useSocketContext();
-//   useEffect(() => {
-//     if (!socketId) {
-//       socketConnect();
-//     }
-//   }, [socketId, socketConnect]);
-// TODO : change the user id to the real one
-//   useEffect(() => {
-//     if (socketId) {
-//       socketEmitEvent(socket).userOnline("65814c05d03a8c84cff1b55f", socketId);
-//     }
-//   }, [socketId, socket]);
+  //   const {
+  //     socketConnect,
+  //     socketValue: { socket, socketId },
+  //   } = useSocketContext();
+  //   useEffect(() => {
+  //     if (!socketId) {
+  //       socketConnect();
+  //     }
+  //   }, [socketId, socketConnect]);
+  // TODO : change the user id to the real one
+  //   useEffect(() => {
+  //     if (socketId) {
+  //       socketEmitEvent(socket).userOnline("65814c05d03a8c84cff1b55f", socketId);
+  //     }
+  //   }, [socketId, socket]);
 
   return (
     <>
@@ -226,7 +232,8 @@ function App() {
           <Route path="/createTicket" element={<CreatTicketComponent />} />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/changeBrand" element={<ChangeBrandPage />} />
-		  <Route path="/chat" element={  <ChatContext />}/>
+          <Route path="/chat" element={<ChatContext />} />
+          <Route path="/lightChat" element={<LightChat />} />
 
           <Route path="*" element={<Error />} />
         </Routes>

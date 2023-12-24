@@ -67,27 +67,6 @@ export default function ProfileInfo({ profileData }) {
 						disabled
 					/>
 				</div>
-
-				<div className="form-control">
-					<label className="label">
-						<span className="label-text text-neutral-content">Password</span>
-					</label>
-
-					<div className="diff h-[3rem] w-[20rem] rounded-[1rem]">
-						<div className="diff-item-1">
-							<div className="bg-primary text-primary-content text-md grid place-content-center">
-								hidden
-							</div>
-						</div>
-						<div className="diff-item-2">
-							<div className="bg-base-200 text-xl grid place-content-center">
-								{generateStars()}
-							</div>
-						</div>
-						<div className="diff-resizer"></div>
-					</div>
-				</div>
-
 				<div className="form-control">
 					<label className="label">
 						<span className="label-text text-neutral-content">Phone Number</span>

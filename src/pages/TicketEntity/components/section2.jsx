@@ -62,10 +62,12 @@ export default function Section2({ data, userData }) {
 	};
 
 	useEffect(() => {
+		if(data.userType === 'agent')
 		getCustomWorkflow(data.issue_type, data.sub_category);
 	}, []);
 
 	useEffect(() => {
+		if(data.userType === 'agent')
 		if (buttonRef.current) {
 			buttonRef.current.style.height = `${buttonRef.current.scrollHeight}px`;
 		}

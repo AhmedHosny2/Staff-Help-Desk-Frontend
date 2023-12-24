@@ -294,7 +294,7 @@ export default function ProfileComponent({ setProfilePic }) {
 												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
 												me field to write a new line
 											</p>
-											<button className="btn btn-wide btn-outline">Enable MFA</button>
+											<a className="btn btn-wide btn-outline" href="/mfa/enable-mfa">Enable MFA</a>
 										</div>
 									</div>
 								</div>

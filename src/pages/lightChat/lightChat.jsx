@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-
+import { customFetch } from "../../utils/Fetch.js";
 export default function LightChat() {
+  // TODO get chatID from DB
+  const receiverId = "6585499917702460a099806f";
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [socket, setSocket] = useState(null);
@@ -10,13 +12,13 @@ export default function LightChat() {
     const url = process.env.REACT_APP_LIGHTCHAT_URL;
     console.log(url);
     const socketInstance = io(url);
-  
+
     setSocket(socketInstance);
-  
+
     socketInstance.on("connect", () => {
       console.log("Connected to server");
+      socketInstance.emit("joinRoom", receiverId);
     });
-  
 
     socketInstance.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
@@ -28,8 +30,17 @@ export default function LightChat() {
   }, []);
 
   const sendMessage = () => {
+    // use custom fetch to store the message
+    const body = {
+      receiver: "6585499917702460a099806f",
+      //TODO get receiver from DB
+      message: messageInput,
+    };
+    console.log("lol/n/n\n\n");
+    console.log(process.env.REACT_APP_LIGHTCHAT_URL);
+    customFetch(process.env.REACT_APP_LIGHTCHAT_URL + "chat/send", "POST", body);
     if (socket && messageInput.trim() !== "") {
-      socket.emit("chat message", messageInput);
+      socket.emit("message", { receiverId, message: messageInput });
       setMessageInput("");
     }
   };

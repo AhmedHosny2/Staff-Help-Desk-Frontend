@@ -12,7 +12,6 @@ import UserHomePage from './pages/home-user/home.jsx';
 import AdminHomePage from './pages/home-admin/home.jsx';
 import AgentHomePage from './pages/home-agent/home.jsx';
 import ManagerHomePage from './pages/home-manager/home.jsx';
-import TestPage from './pages/test/test.jsx';
 import Login from './pages/login/login.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Profile from './pages/profile/profile.jsx';
@@ -50,6 +49,8 @@ const privateRoutes = [
 	`/createTicket`,
 	`/knowledgeBase`,
 	`/profileGeneral`,
+	`/EditCustomWorkflow`,
+	`/EditAutomaticWorkflow`,
 	'*',
 ];
 
@@ -74,6 +75,7 @@ const roleHierarchy = {
 		'/ticket',
 		'/ticketEntity/:id',
 		'/knowledgeBase',
+		`/EditCustomWorkflow`,
 	],
 	manager: [
 		'/home/manager',
@@ -87,6 +89,7 @@ const roleHierarchy = {
 		'/ticket',
 		'/ticketEntity/:id',
 		'/knowledgeBase',
+		'/EditAutomaticWorkflow',
 	],
 	admin: [
 		'/home/admin',
@@ -102,6 +105,8 @@ const roleHierarchy = {
 		'/ticketEntity/:id',
 		'/createTicket',
 		'/knowledgeBase',
+		'/test',
+
 	],
 };
 
@@ -169,7 +174,6 @@ function App() {
 					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
 					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
 
-					<Route path="/test" element={<TestPage />} />
 
 					{/* PRIVATE ROUTES */}
 					<Route path="/home/user" element={<UserHomePage />} />

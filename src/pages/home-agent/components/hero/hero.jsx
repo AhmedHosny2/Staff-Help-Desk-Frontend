@@ -94,9 +94,11 @@ export default function Hero() {
 							<motion.div variants={childCardVariant2}>
 								<Card first={<ChatOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'CHATS'} />
 							</motion.div>
+							<Link to="/EditCustomWorkflow">
 							<motion.div variants={childCardVariant3}>
 								<Card first={<FormatListBulletedOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'WORK FlOW'} />
 							</motion.div>
+							</Link>
 						</div>
 					</div>
 				</div>

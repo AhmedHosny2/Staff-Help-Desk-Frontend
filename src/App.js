@@ -37,6 +37,7 @@ import { useSocketContext } from "./pages/chat/context/SocketContext.jsx";
 import { ChatContext } from "./pages/chat/context/ChatContext.jsx";
 import { socketEmitEvent } from "./pages/chat/socket/emit.js";
 import LightChat from "./pages/lightChat/lightChat.jsx";
+import ChatMain from "./pages/chat/chatMain.jsx";
 const privateRoutes = [
   `/home/user`,
   `/home/admin`,
@@ -232,7 +233,7 @@ function App() {
           <Route path="/createTicket" element={<CreatTicketComponent />} />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/changeBrand" element={<ChangeBrandPage />} />
-          <Route path="/chat" element={<ChatContext />} />
+          <Route path="/chat" element={<ChatMain />} />
           <Route path="/lightChat" element={<LightChat />} />
 
           <Route path="*" element={<Error />} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import defaultProfile from '../../../assets/defaultProfile.jpg';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import PersonIcon from '@mui/icons-material/Person';
@@ -49,12 +50,12 @@ function UserCard({ userType, userName, email, userID, profilePicture }) {
         <span className="text-sm text-primary-content">{email}</span>
         <span className="text-sm text-primary-content">User ID: {userID}</span>
         <div className="flex mt-4 md:mt-6">
-          <button
-            type="button"
+          <Link
+            to={"/profile/" + userID}
             className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-primary-content bg-primary rounded-lg hover:bg-base-100"
           >
             View Profile
-          </button>
+          </Link>
 
           <button
             type="button"

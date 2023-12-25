@@ -1,8 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { customFetch } from '../../../utils/Fetch';
-import { getToastStyle, removeToast } from '../../../utils/toastStyle';
-import toast, { Toaster } from 'react-hot-toast';
 import ProfileInfo from './profileInfo';
 
 const defaultProfile = {
@@ -28,7 +26,6 @@ export default function ProfileComponent() {
 	const id = window.location.pathname.split('/')[2];
 	const [profileData, setProfileData] = useState(defaultProfile);
 	const [editedBio, setEditedBio] = useState(null);
-	const [linkName, setLinkName] = useState('');
 	const [linkUrl, setLinkUrl] = useState('');
 
 	const handleLinkClick = (e, linkName, linkUrl) => {
@@ -136,7 +133,7 @@ export default function ProfileComponent() {
 											maxHeight: '10rem',
 										}}
 										placeholder="Bio"
-										value={editedBio}
+										value={profileData.bio}
 										disabled
 									></textarea>
 
@@ -246,7 +243,6 @@ export default function ProfileComponent() {
 					</div>
 				</div>
 			</div>
-			<Toaster />
 		</>
 	);
 }

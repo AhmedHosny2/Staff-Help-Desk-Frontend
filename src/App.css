@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Wallpoet&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
 body {
-	font-family: 'Comfortaa', sans-serif;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 /* Or for specific elements */
@@ -13,7 +12,7 @@ h1,
 h2,
 h3,
 p {
-	font-family: 'Comfortaa', sans-serif;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .ppInput {

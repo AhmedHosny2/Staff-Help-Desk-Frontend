@@ -35,7 +35,7 @@ function ChatContextProvider({ children }) {
       return getUserContacts(
         {
           method: "GET",
-          url: chatAPI.getUserContacts(user._id),
+          url: chatAPI.getUserContacts(),
         },
         (data) => {
           const contactsWithOnlineStatus = data.data.map((contact) => ({

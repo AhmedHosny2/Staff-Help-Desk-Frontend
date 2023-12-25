@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { customFetch } from './utils/Fetch.js';
 
 
 // Imported Components
@@ -80,6 +81,7 @@ const roleHierarchy = {
     '/ticketEntity/:id',
     '/knowledgeBase',
     `/EditCustomWorkflow`,
+    `/changeBrand`
   ],
   manager: [
     '/home/manager',
@@ -119,6 +121,25 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState('');
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { newData } = await customFetch(process.env.REACT_APP_BRANDINFO_URL + '/getBrandInfo', 'GET');
+        console.log('Fetched brand data:', newData[0]);
+        setCurrentTheme(newData[0].theme);
+        localStorage.setItem("theme", newData[0]);
+        document.querySelector("html").setAttribute("data-theme", newData[0].theme);
+        console.log('documentTheme:', newData[0].theme);
+        
+      } catch (error) {
+        console.error('Error fetching brand data:', error);
+      }
+    };
+    fetchData();
+  }, [currentTheme]);
 
   useEffect(() => {
     // Function to check if a cookie exists
@@ -206,7 +227,7 @@ function App() {
           <Route path="/createTicket" element={<CreatTicketComponent />} />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />
-          <Route path="/changeBrand" element={<ChangeBrandPage />} />
+          <Route path="/changeBrand" element={<ChangeBrandPage setCurrentTheme={setCurrentTheme}/>} />
           <Route path="*" element={<Error />} />
 
         </Routes>

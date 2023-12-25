@@ -4,7 +4,6 @@ export default function ProfileInfo({ profileData }) {
 	const [editedFirstName, setEditedFirstName] = useState(profileData.firstName);
 	const [editedLastName, setEditedLastName] = useState(profileData.lastName);
 	const [editedEmail, setEditedEmail] = useState(profileData.email);
-	const [editedPassword, setEditedPassword] = useState('');
 	const [editedPhoneNumber, setEditedPhoneNumber] = useState(profileData.phonenumber);
 	const [editedAddress, setEditedAddress] = useState(profileData.address);
 
@@ -13,14 +12,9 @@ export default function ProfileInfo({ profileData }) {
 		setEditedFirstName(profileData.firstName);
 		setEditedLastName(profileData.lastName);
 		setEditedEmail(profileData.email);
-		setEditedPassword('');
 		setEditedPhoneNumber(profileData.phoneNumber);
 		setEditedAddress(profileData.address);
 	}, [profileData]);
-
-	const generateStars = () => {
-		return '*'.repeat(6);
-	};
 
 	return (
 		<>

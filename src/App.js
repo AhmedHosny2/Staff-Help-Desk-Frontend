@@ -90,7 +90,8 @@ const roleHierarchy = {
     "/ticketEntity/:id",
     "/knowledgeBase",
     `/EditCustomWorkflow`,
-    `/changeBrand``/lightChat`,
+    `/changeBrand`,
+    `/lightChat`,
     "/chat",
   ],
   manager: [

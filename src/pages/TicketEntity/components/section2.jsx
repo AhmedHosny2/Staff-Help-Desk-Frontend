@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import JoditEditor from 'jodit-react';
-import { useRef, useState } from 'react';
 import { customFetch } from '../../../utils/Fetch';
 import { useNavigate } from 'react-router-dom';
 import { Parser } from 'html-to-react';
@@ -10,8 +9,10 @@ export default function Section2({ data, userData }) {
 	const [content, setContent] = useState('');
 	const [status, setStatus] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const [fixes, setFixes] = useState([]);
 
 	const editor = useRef(null);
+	const buttonRef = useRef(null);
 
 	const formattedDate = new Date(data.timeCreated).toLocaleDateString('en-US', {
 		year: 'numeric',
@@ -47,6 +48,34 @@ export default function Section2({ data, userData }) {
 			alert('Error');
 		}
 	};
+
+	const getCustomWorkflow = async (issue_type, sub_category) => {
+		if (sub_category === '' || issue_type === '') {
+			return;
+		}
+		const { err, isPen, newData, newStatus, newStatusText, newMessage } =
+			await customFetch(
+				process.env.REACT_APP_USERS_URL + `getCustomWorkflow?issue_type=${issue_type}&sub_category=${sub_category}`,
+				"GET",
+			);
+		setFixes(newData.fixes);
+	};
+
+	useEffect(() => {
+		if(data.userType === 'agent')
+		getCustomWorkflow(data.issue_type, data.sub_category);
+	}, []);
+
+	useEffect(() => {
+		if(data.userType === 'agent')
+		if (buttonRef.current) {
+			buttonRef.current.style.height = `${buttonRef.current.scrollHeight}px`;
+		}
+	}, [content, fixes]);
+
+	const handleWorkflowAdd = (e) => {
+		setContent(content + " " + e.target.value);
+	}
 
 	return (
 		<>
@@ -84,6 +113,24 @@ export default function Section2({ data, userData }) {
 							<input type="checkbox" />
 							<div className="collapse-title text-xl font-medium">Solution</div>
 							<div className="collapse-content">
+								{fixes.length > 0 ? (
+									<>
+										<span className="indicator-item badge badge-secondary text-lg font-bold p-4">Custom Workflow : </span>
+										<div className="flex flex-wrap">
+											{fixes.map((fix, index) => (
+												<button
+													key={index}
+													value={fix}
+													className="btn btn-outline btn-primary flex w-full my-3"
+													onClick={(e) => handleWorkflowAdd(e)}
+													ref={buttonRef}
+												>
+													{fix}
+												</button>
+											))}
+										</div>
+									</>
+								) : null}
 								<JoditEditor ref={editor} value={content} />
 
 								<div className="flex mt-3">
@@ -168,21 +215,21 @@ export default function Section2({ data, userData }) {
 
 {
 	/* //   <div className="flex justify-between mt-8">
-              //   <button
-              //     className="flex items-center btn btn-success"
-              //     value="closed"
-              //     onClick={handleButtonClick}
-              //   >
-              //     <img src={saveButton} alt="Save & Close Ticket" className="mr-2" />
-              //     Save & Close Ticket
-              //   </button>
-              //   <button
-              //     className="flex items-center btn btn-info"
-              //     value="updated"
-              //     onClick={handleButtonClick}
-              //   >
-              //     <img src={updateButton} alt="Update" className="mr-2" />
-              //     Update
-              //   </button>
-              // </div>/ */
+			  //   <button
+			  //     className="flex items-center btn btn-success"
+			  //     value="closed"
+			  //     onClick={handleButtonClick}
+			  //   >
+			  //     <img src={saveButton} alt="Save & Close Ticket" className="mr-2" />
+			  //     Save & Close Ticket
+			  //   </button>
+			  //   <button
+			  //     className="flex items-center btn btn-info"
+			  //     value="updated"
+			  //     onClick={handleButtonClick}
+			  //   >
+			  //     <img src={updateButton} alt="Update" className="mr-2" />
+			  //     Update
+			  //   </button>
+			  // </div>/ */
 }

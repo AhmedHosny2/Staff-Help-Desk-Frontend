@@ -26,7 +26,7 @@ export default function SubLinks() {
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Chat</Link>
+							<Link to="/chat">Chat</Link>
 						</li>
 					</>
 				);
@@ -43,7 +43,7 @@ export default function SubLinks() {
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Chat</Link>
+							<Link to="/chat">Chat</Link>
 						</li>
 					</>
 				);
@@ -58,7 +58,7 @@ export default function SubLinks() {
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Manager Item 3</Link>
+							<Link to="/chat">Chat</Link>
 						</li>
 					</>
 				);
@@ -86,7 +86,7 @@ export default function SubLinks() {
 							<Link to="/report">Generate Report</Link>
 						</li>
 						<li>
-							<Link>Chat</Link>
+							<Link to="/chat">Chat</Link>
 						</li>
 					</>
 				);

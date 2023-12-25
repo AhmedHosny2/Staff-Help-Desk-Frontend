@@ -46,8 +46,10 @@ export default function TicketEntity() {
 				setUserData(newData);
 			} catch (error) {
 				console.error('Error fetching data:', error);
-			}
+			} 
 		};
+
+		
 
 		fetchData();
 	}, []);

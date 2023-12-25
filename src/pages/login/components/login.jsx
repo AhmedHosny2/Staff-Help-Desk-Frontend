@@ -101,9 +101,9 @@ export default function LoginComponent() {
         }
       })
       .then((data) => {
-        console.log(data);
-        setUser({ ...data });
-        setToken({ accessToken: data.accessToken });
+		const { accessToken, ...other } = data.data;
+        setUser({ ...other });
+        setToken({ accessToken });
         socketConnect();
       })
       .catch((err) => {

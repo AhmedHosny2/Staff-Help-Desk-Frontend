@@ -25,6 +25,15 @@ const KnowledgeBase = () => {
 	const [fuse, setFuse] = useState(null);
 	const [filteredData, setFilteredData] = useState([]);
 
+	const getRole = () => {
+		var role = localStorage.getItem('role');
+		if (role.startsWith('agent')) {
+			return (role = role.slice(0, -1));
+		}
+		return role;
+	};
+	const role = getRole();
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -97,7 +106,7 @@ const KnowledgeBase = () => {
 			<div className="flex flex-col block wrap items-center my-16 transform transition duration-1000 ease-in-out hover:scale-105">
 				<div className="indicator">
 					<span className="indicator-item badge badge-secondary">Knowledge Base</span>
-					<div className="flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-4 space-y-2 sm:space-y-0">
+					<div className="flex flex-col xl:flex-row items-center justify-center space-x-0 md:space-x-4 space-y-2 md:space-y-0">
 						<h2 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
 							Explore our Knowledge Base
 						</h2>
@@ -169,7 +178,7 @@ const KnowledgeBase = () => {
 						</select>
 					</div>
 				</div>
-				<Link to="" className="link link-hover text-sm">
+				<Link to={'/home/' + role} className="link link-hover text-sm">
 					Go to FAQs instead?
 				</Link>
 			</div>

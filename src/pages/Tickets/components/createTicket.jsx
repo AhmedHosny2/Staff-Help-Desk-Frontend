@@ -12,7 +12,7 @@ export default function CreatTicketComponent() {
 	});
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [automaticWorkflow, setAutomaticWorkflow] = useState('');
+	const [automaticWorkflow, setAutomaticWorkflow] = useState([]);
 
 	const [isPending, setIsPending] = useState(false);
 	const [error, setError] = useState(null);
@@ -68,17 +68,18 @@ export default function CreatTicketComponent() {
 			...formData,
 			sub_category: selectedSubCategory,
 		});
-		// ay 7aga hena tgeb error benhlha ya bahy
-		// getAutomaticWorkflow(formData.issue_type, selectedSubCategory)
+		setAutomaticWorkflow([]);
+		getAutomaticWorkflow(formData.issue_type, selectedSubCategory);
 	};
 
 	const getAutomaticWorkflow = async (issue_type, sub_category) => {
 		const { err, isPen, newData, newStatus, newStatusText, newMessage } = await customFetch(
 			process.env.REACT_APP_TICKETS_URL +
-				`/getAutomaticWorkflow?issue_type=${issue_type}&sub_category=${sub_category}`,
+			`/getAutomaticWorkflow?issue_type=${issue_type}&sub_category=${sub_category}`,
 			'GET'
 		);
-		setAutomaticWorkflow(newData);
+		console.log(newData.fixes)
+		setAutomaticWorkflow(newData.fixes);
 	};
 
 	return (
@@ -129,59 +130,49 @@ export default function CreatTicketComponent() {
 									>
 										<option value="">Select a category</option>
 
-										{formData.issue_type === 'Hardware' && (
+										{formData.issue_type === "Hardware" && (
 											<>
 												<option value="desktops">Desktops</option>
-												<option value="printers">Printers</option>
 												<option value="laptops">Laptops</option>
-												<option value="servers">Servers</option>
-												<option value="networking equipment">
-													Networking Equipment
-												</option>
 											</>
 										)}
-										{formData.issue_type === 'Software' && (
+										{formData.issue_type === "Software" && (
 											<>
-												<option value="operating system">Operating System</option>
+												<option value="operating system">
+													Operating System
+												</option>
 												<option value="application software">
 													Application Software
 												</option>
-												<option value="custom software">Custom Software</option>
-												<option value="integration issues">Integration Issues</option>
 											</>
 										)}
-										{formData.issue_type === 'Network' && (
+										{formData.issue_type === "Network" && (
 											<>
 												<option value="email issues">Email Issues</option>
 												<option value="internet connection problems">
 													Internet Connection Problems
 												</option>
-												<option value="website errors">Website Errors</option>
 											</>
 										)}
 									</select>
-									{formData.sub_category &&
-										automaticWorkflow &&
-										automaticWorkflow.fixes.length > 0 && (
-											<>
-												<div className="indicator mt-8 pt-4">
-													<span className="indicator-item badge badge-secondary">
-														SOLUTIONS
-													</span>
-													<h3 className="text-center text-lg sm:text-l md:text-2xl lg:text-3xl xl:text-4xl font-bold">
-														Try one of these solutions:
-													</h3>
-												</div>
-												<div className="textarea flex w-full my-5">
-													<ul className="list-disc pl-5">
-														{automaticWorkflow.fixes.map((fix, index) => (
-															<li key={index}>{fix}</li>
-														))}
-													</ul>
-												</div>
-											</>
-										)}
-									{formData.sub_category && (
+									{formData.sub_category && automaticWorkflow && automaticWorkflow.length > 0 && (
+										<>
+											<div className="indicator mt-8 pt-4">
+												<span className="indicator-item badge badge-secondary">SOLUTIONS</span>
+												<h3 className="text-center text-lg sm:text-l md:text-2xl lg:text-3xl xl:text-4xl font-bold">
+													Try one of these fixes first:
+												</h3>
+											</div>
+											<div className="textarea flex w-full my-5">
+												<ul className="list-disc pl-5">
+													{automaticWorkflow.map((fix, index) => (
+														<li key={index}>{fix}</li>
+													))}
+												</ul>
+											</div>
+										</>
+									)}
+									{formData.sub_category && automaticWorkflow !== null && (
 										<>
 											<textarea
 												className="textarea textarea-success flex w-full my-5"
@@ -193,7 +184,6 @@ export default function CreatTicketComponent() {
 									)}
 								</div>
 							)}
-
 							<div className="form-control mt-1">
 								{!isPending ? (
 									<button className="btn btn-success" onClick={handleButtonClick}>

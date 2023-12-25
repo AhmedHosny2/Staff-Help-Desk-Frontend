@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { customFetch } from '../../utils/Fetch';
 import SubLinks from './components/subLinks';
+import Bot from '../Bot/Bot';
 
 const navigationVariants = {
 	hidden: {
@@ -80,6 +81,23 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 		fetchData();
 	}, [setProfilePic]);
 
+	const [isModalOpen, setModalOpen] = useState(false);
+
+	const openModal = () => {
+		setModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
+
+
+	const closeModalESC = (e) => {
+		if (e.key === 'Escape') {
+			closeModal();
+		}
+	};
+
 	return (
 		<>
 			<motion.div variants={navigationVariants} initial="hidden" animate="visible" exit="exit">
@@ -120,6 +138,10 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 					</div>
 
 					<div className="navbar-end">
+						<button className="btn btn-ghost btn-circle"
+							onClick={openModal} onKeyDown={closeModalESC}>
+							<SmartToyIcon />
+						</button>
 						{/* NOTIFICATION DROP DOWN START */}
 						<div className="dropdown dropdown-end">
 							<div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -227,6 +249,7 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 					</div>
 				</div>
 			</motion.div>
+			<Bot isModalOpen={isModalOpen} closeModal={closeModal} />
 		</>
 	);
 }

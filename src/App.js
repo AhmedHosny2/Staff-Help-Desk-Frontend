@@ -7,101 +7,101 @@ import { useState, useEffect } from 'react';
 import NavbarParent from './components/navbarParent/navbarParent.jsx';
 
 // Imported Pages
-import LandingPage from './pages/landing/landing.jsx';
-import UserHomePage from './pages/home-user/home.jsx';
-import AdminHomePage from './pages/home-admin/home.jsx';
-import AgentHomePage from './pages/home-agent/home.jsx';
-import ManagerHomePage from './pages/home-manager/home.jsx';
-import TestPage from './pages/test/test.jsx';
-import Login from './pages/login/login.jsx';
-import Signup from './pages/signup/signup.jsx';
-import Profile from './pages/profile/profile.jsx';
-import Logs from './pages/Logs/Logs.jsx';
-import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
-import AddUser from './pages/AddUser/AddUser.jsx';
-import Report from './pages/report/report.jsx';
-import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
-import ChangeBrandPage from './pages/ChangeBrand/ChangeBrand.jsx';
-import MFAValidationComponent from './pages/MFA/MFAValidationComponent.jsx';
-import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
-import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
-import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
-import Ticket from './pages/Tickets/tickets.jsx';
-import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
-import Error from './pages/error/error.jsx';
-import TicketEntity from './pages/TicketEntity/entityTicket.jsx';
+// import LandingPage from './pages/landing/landing.jsx';
+// import UserHomePage from './pages/home-user/home.jsx';
+// import AdminHomePage from './pages/home-admin/home.jsx';
+// import AgentHomePage from './pages/home-agent/home.jsx';
+// import ManagerHomePage from './pages/home-manager/home.jsx';
+// import TestPage from './pages/test/test.jsx';
+// import Login from './pages/login/login.jsx';
+// import Signup from './pages/signup/signup.jsx';
+// import Profile from './pages/profile/profile.jsx';
+// import Logs from './pages/Logs/Logs.jsx';
+// import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
+// import AddUser from './pages/AddUser/AddUser.jsx';
+// import Report from './pages/report/report.jsx';
+// import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
+// import ChangeBrandPage from './pages/ChangeBrand/ChangeBrand.jsx';
+// import MFAValidationComponent from './pages/MFA/MFAValidationComponent.jsx';
+// import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
+// import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
+// import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
+// import Ticket from './pages/Tickets/tickets.jsx';
+// import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
+// import Error from './pages/error/error.jsx';
+// import TicketEntity from './pages/TicketEntity/entityTicket.jsx';
 
-const privateRoutes = [
-	`/home/user`,
-	`/home/admin`,
-	`/home/agent`,
-	`/home/manager`,
-	`/logs`,
-	`/manageUsers`,
-	`/AddUser`,
-	`/profile`,
-	`/report`,
-	`/mfa/validate`,
-	`/mfa/enable-mfa`,
-	`/ticket`,
-	`/ticketEntity`,
-	`/createTicket`,
-	`/knowledgeBase`,
-	`/profileGeneral`,
-	'*',
-];
+// const privateRoutes = [
+// 	`/home/user`,
+// 	`/home/admin`,
+// 	`/home/agent`,
+// 	`/home/manager`,
+// 	`/logs`,
+// 	`/manageUsers`,
+// 	`/AddUser`,
+// 	`/profile`,
+// 	`/report`,
+// 	`/mfa/validate`,
+// 	`/mfa/enable-mfa`,
+// 	`/ticket`,
+// 	`/ticketEntity`,
+// 	`/createTicket`,
+// 	`/knowledgeBase`,
+// 	`/profileGeneral`,
+// 	'*',
+// ];
 
-const roleHierarchy = {
-	user: [
-		'/home/user',
-		'/profile',
-		`/profileGeneral`,
-		'/mfa/validate',
-		'/mfa/enable-mfa',
-		'/ticket',
-		'/ticketEntity/:id',
-		'/createTicket',
-		'/knowledgeBase',
-	],
-	agent: [
-		'/home/agent',
-		'/profile',
-		`/profileGeneral`,
-		'/mfa/validate',
-		'/mfa/enable-mfa',
-		'/ticket',
-		'/ticketEntity/:id',
-		'/knowledgeBase',
-	],
-	manager: [
-		'/home/manager',
-		'/logs',
-		'/manageUsers',
-		'/profile',
-		`/profileGeneral`,
-		'/report',
-		'/mfa/validate',
-		'/mfa/enable-mfa',
-		'/ticket',
-		'/ticketEntity/:id',
-		'/knowledgeBase',
-	],
-	admin: [
-		'/home/admin',
-		'/logs',
-		'/manageUsers',
-		'/AddUser',
-		'/profile',
-		`/profileGeneral`,
-		'/report',
-		'/mfa/validate',
-		'/mfa/enable-mfa',
-		'/ticket',
-		'/ticketEntity/:id',
-		'/createTicket',
-		'/knowledgeBase',
-	],
-};
+// const roleHierarchy = {
+// 	user: [
+// 		'/home/user',
+// 		'/profile',
+// 		`/profileGeneral`,
+// 		'/mfa/validate',
+// 		'/mfa/enable-mfa',
+// 		'/ticket',
+// 		'/ticketEntity/:id',
+// 		'/createTicket',
+// 		'/knowledgeBase',
+// 	],
+// 	agent: [
+// 		'/home/agent',
+// 		'/profile',
+// 		`/profileGeneral`,
+// 		'/mfa/validate',
+// 		'/mfa/enable-mfa',
+// 		'/ticket',
+// 		'/ticketEntity/:id',
+// 		'/knowledgeBase',
+// 	],
+// 	manager: [
+// 		'/home/manager',
+// 		'/logs',
+// 		'/manageUsers',
+// 		'/profile',
+// 		`/profileGeneral`,
+// 		'/report',
+// 		'/mfa/validate',
+// 		'/mfa/enable-mfa',
+// 		'/ticket',
+// 		'/ticketEntity/:id',
+// 		'/knowledgeBase',
+// 	],
+// 	admin: [
+// 		'/home/admin',
+// 		'/logs',
+// 		'/manageUsers',
+// 		'/AddUser',
+// 		'/profile',
+// 		`/profileGeneral`,
+// 		'/report',
+// 		'/mfa/validate',
+// 		'/mfa/enable-mfa',
+// 		'/ticket',
+// 		'/ticketEntity/:id',
+// 		'/createTicket',
+// 		'/knowledgeBase',
+// 	],
+// };
 
 
 function App() {
@@ -116,7 +116,7 @@ function App() {
 				profilePic={profilePic}
 				setProfilePic={setProfilePic}
 			/>
-			<AnimatePresence>
+			{/* <AnimatePresence>
 				<Routes location={location} key={location.key}>
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/home/user" element={<UserHomePage />} />
@@ -135,7 +135,7 @@ function App() {
 					<Route path="/changeBrand" element={<ChangeBrandPage />} />
 					<Route path="*" element={<Error />} />
 				</Routes>
-			</AnimatePresence>
+			</AnimatePresence> */}
 		</>
 	);
 

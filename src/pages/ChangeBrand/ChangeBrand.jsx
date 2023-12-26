@@ -164,16 +164,16 @@ const ChangeBrand = ({ setCurrentTheme }) => {
     const onSubmit = async (data) => {
         setIsSubmitting(true);
 
-        if (name === originalName && theme === originalTheme) {
+        if (theme === '' && name === '') {
             var toastId = toast.error('Nothing To Save', getToastStyle());
             return;
         }
 
-        if (name !== originalName && theme === originalTheme) {
+        if (theme === '' && name !== '') {
             toastId = toast.success('Name changed', getToastStyle());
         }
 
-        if (name === originalName && theme !== originalTheme) {
+        else if (name === '' && theme !== '') {
             toastId = toast.success('Theme changed', getToastStyle());
         } else {
             toastId = toast.success('Brand Info Updated Successfully', getToastStyle());

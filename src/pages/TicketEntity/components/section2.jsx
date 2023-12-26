@@ -3,13 +3,15 @@ import JoditEditor from "jodit-react";
 import { customFetch } from "../../../utils/Fetch";
 import { useNavigate } from "react-router-dom";
 import { Parser } from "html-to-react";
+import { io } from "socket.io-client";
 
-export default function Section2({ data, userData }) {
+export default function Section2({ data, userData, socket }) {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fixes, setFixes] = useState([]);
+  if (!socket) socket = io("http://localhost:5011");
 
   const editor = useRef(null);
   const buttonRef = useRef(null);
@@ -19,10 +21,27 @@ export default function Section2({ data, userData }) {
     month: "long",
     day: "numeric",
   });
+  //notfi
+  useEffect(() => {
+    if (userData && socket) {
+      socket.emit("newUser", {
+        username: userData.firstName,
+      });
+    }
+  }, [socket, userData]);
 
+  const handleNotification = (type) => {
+    socket.emit("sendNotification", {
+      senderName: "We",
+      receiverName: userData.firstName,
+      type,
+    });
+  };
+  // notif end
   const handleButtonClick = async (e) => {
     setLoading(true);
     console.log(e.target.value);
+    handleNotification(e.target.value);
     const body = {
       ticketId: window.location.pathname.split("/")[2],
       title: data.title,

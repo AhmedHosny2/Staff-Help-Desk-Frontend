@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { alertConfirm, alertError } from '../../utils/alerts';
 import { customFetch } from '../../utils/Fetch';
 import { getToastStyle, removeToast } from '../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
@@ -32,7 +31,7 @@ function AddUser() {
             Object.entries(user)
                 .filter(([k, v]) => v === '')
                 .forEach(([k]) => (nullKeys += `${k} `));
-            alertError(`Please fill the following data : ${nullKeys}`);
+            toastId = toast.error(`Please fill the following data : ${nullKeys}`, getToastStyle());
             return;
         }
         const { err, isPen, newMessage, newStatus } = await customFetch(

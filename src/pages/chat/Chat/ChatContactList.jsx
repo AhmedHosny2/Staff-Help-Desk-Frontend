@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ListItem from "./ChatListItem";
 import { useChatContext } from "../context/ChatContext";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-
+import img from "../../../assets/proflepng.png";
 function ChatContactList() {
   const { contacts, handleChatSelect } = useChatContext();
   const [display, setDisplay] = useState({
@@ -33,11 +33,7 @@ function ChatContactList() {
         <ListItem
           key={_id}
           contactId={_id}
-          avatarImage={
-            avatarImage
-              ? `data:image/svg+xml;base64, ${avatarImage}`
-              : "/user.png"
-          }
+          avatarImage={img}
           handleItemClick={(e) => handleChatSelect(contact)}
           {...otherContact}
         />

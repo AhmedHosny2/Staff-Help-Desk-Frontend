@@ -1,4 +1,3 @@
-// ResetPasswordRequestComponent.jsx
 import { useState } from 'react';
 import { customFetch } from '../../utils/Fetch';
 
@@ -18,7 +17,7 @@ export default function ResetPasswordRequestComponent() {
     // Log the entire response for debugging
     console.log('Full API Response:', response);
 
-    if ( response.newStatus== 200) {
+    if (response.newStatus === 200) {
       setResetTokenSent(true);
       setResultMessage('A reset password link will be sent to this email if it exists on our website!');
     } else {
@@ -44,23 +43,23 @@ export default function ResetPasswordRequestComponent() {
             {/* ... existing code ... */}
           </div>
         ) : (
-          <div>
-            <div className="mb-6">
+          <div className="flex flex-col items-center mb-6">
+            <div className="mb-4 w-full">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            <div className="mb-6">
+            <div className="w-full">
               <button
-                className="btn btn-primary"
+                className="btn btn-primary w-full"
                 onClick={handleSendResetToken}
               >
                 Send Reset Token

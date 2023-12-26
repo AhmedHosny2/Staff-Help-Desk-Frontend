@@ -80,9 +80,12 @@ export default function Hero() {
 									<Card first={<InsertChartOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'REPORTS & ANALYTICS'} />
 								</motion.div>
 							</Link >
-							<motion.div variants={childCardVariant2}>
-								<Card first={<FormatListBulletedOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'WORK FlOW'} />
-							</motion.div>
+							<Link to="/EditAutomaticWorkflow">
+								<motion.div variants={childCardVariant2}>
+									<Card first={<FormatListBulletedOutlinedIcon sx={{ color: "Black", fontSize: 100 }} />} second={'WORK FlOW'} />
+								</motion.div>
+							</Link >
+
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { customFetch } from '../../utils/Fetch';
 import Fuse from 'fuse.js';
@@ -178,9 +177,6 @@ const KnowledgeBase = () => {
 						</select>
 					</div>
 				</div>
-				<Link to={'/home/' + role} className="link link-hover text-sm">
-					Go to FAQs instead?
-				</Link>
 			</div>
 			<div className="container block wrap mx-auto px-4 sm:px-6 lg:px-0">
 				<motion.div

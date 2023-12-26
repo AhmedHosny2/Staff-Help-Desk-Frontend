@@ -148,6 +148,9 @@ const handleNotification = (type) => {
 											<>
 												<option value="desktops">Desktops</option>
 												<option value="laptops">Laptops</option>
+												<option value="printers">Printers</option>
+												<option value="servers">Servers</option>
+												<option value="networking equipment">Networking Equipment</option>
 											</>
 										)}
 										{
@@ -159,20 +162,18 @@ const handleNotification = (type) => {
 										}
 										{formData.issue_type === "Software" && (
 											<>
-												<option value="operating system">
-													Operating System
-												</option>
-												<option value="application software">
-													Application Software
-												</option>
+												<option value="operating system">Operating System</option>
+												<option value="application software">Application Software</option>
+												<option value="custom software">Custom Software</option>
+												<option value="integration issues">Integration Issues</option>
+
 											</>
 										)}
 										{formData.issue_type === "Network" && (
 											<>
 												<option value="email issues">Email Issues</option>
-												<option value="internet connection problems">
-													Internet Connection Problems
-												</option>
+												<option value="internet connection problems">Internet Connection Problems</option>
+												<option value="website errors">@ebsite Errors</option>
 											</>
 										)}
 									</select>

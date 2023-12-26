@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Card from '../card1/card1';
 import homePets from '../../../../assets/herobg2.jpg';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -97,6 +98,7 @@ export default function Hero() {
 						</div>
 
 						<div className="flex flex-wrap gap-6 justify-center">
+						<Link to="/ticket">
 							<motion.div variants={childCardVariant1}>
 								<Card
 									first={
@@ -113,6 +115,7 @@ export default function Hero() {
 									second={'TICKETS'}
 								/>
 							</motion.div>
+							</Link >
 							<motion.div variants={childCardVariant2}>
 								<Card
 									first={<ChatOutlinedIcon sx={{ color: 'Black', fontSize: 100 }} />}
@@ -125,6 +128,7 @@ export default function Hero() {
 									second={'REMINDERS'}
 								/>
 							</motion.div>
+							<Link to="/knowledgeBase">
 							<motion.div variants={childCardVariant4}>
 								<Card
 									first={
@@ -135,6 +139,7 @@ export default function Hero() {
 									second={`KNOWLEDGE\nBASE`}
 								/>
 							</motion.div>
+							</Link>
 						</div>
 					</div>
 				</div>

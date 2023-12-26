@@ -76,6 +76,8 @@
   "devDependencies": {
     "daisyui": "^4.4.24",
     "json-loader": "^0.5.7",
-    "tailwindcss": "^3.3.6"
+    "tailwindcss": "^3.3.6",
+    "workbox-webpack-plugin": "^7.0.0"
+
   }
 }

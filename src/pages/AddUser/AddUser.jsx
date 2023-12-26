@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { alertConfirm, alertError } from '../../utils/alerts';
 import { customFetch } from '../../utils/Fetch';
-import { ToastContainer } from 'react-toastify';
+import { getToastStyle, removeToast } from '../../utils/toastStyle';
+import toast, { Toaster } from 'react-hot-toast';
 
 function AddUser() {
 
@@ -31,11 +31,11 @@ function AddUser() {
             Object.entries(user)
                 .filter(([k, v]) => v === '')
                 .forEach(([k]) => (nullKeys += `${k} `));
-            alertError(`Please fill the following data : ${nullKeys}`);
+            toastId = toast.error(`Please fill the following data : ${nullKeys}`, getToastStyle());
             return;
         }
-        const { err, isPen, newData, newStatus } = await customFetch(
-            `${process.env.REACT_APP_USERS_URL}/user/adminAddUser`,
+        const { err, isPen, newMessage, newStatus } = await customFetch(
+            `${process.env.REACT_APP_USERS_URL}adminAddUser`,
             "POST",
             {
                 firstName: user.firstName,
@@ -47,7 +47,7 @@ function AddUser() {
                 role: user.role,
             }
         );
-        
+
         if (newStatus === 200) {
             setUser({
                 firstName: '',
@@ -58,11 +58,12 @@ function AddUser() {
                 address: '',
                 role: '',
             })
-            alertConfirm("User added Succesfully");
+            var toastId = toast.success("User added Succesfully", getToastStyle());
         }
         else {
-            alertError(err);
+            toastId = toast.error(newMessage, getToastStyle());
         }
+        removeToast(toast, toastId);
 
     }
 
@@ -199,7 +200,7 @@ function AddUser() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+            <Toaster />
         </>
     );
 }

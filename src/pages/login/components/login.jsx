@@ -149,7 +149,7 @@ export default function LoginComponent() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <label className="label">
-                  <Link href="#" className="label-text-alt link link-hover">
+                  <Link href="/resetPassword" className="label-text-alt link link-hover">
                     Forgot password?
                   </Link>
                 </label>

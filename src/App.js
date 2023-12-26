@@ -64,7 +64,8 @@ const privateRoutes = [
   `/EditCustomWorkflow`,
   `/EditAutomaticWorkflow`,
   `/changeBrand`,
-  "*",
+  `/addUser`,
+  '*',
 ];
 
 const roleHierarchy = {
@@ -131,6 +132,8 @@ const roleHierarchy = {
     `/changeBrand`,
     `/lightChat`,
     "/chat",
+    `/addUser`
+
   ],
 };
 
@@ -300,11 +303,8 @@ function App() {
           />
           <Route path="/logs" element={<Logs />} />
           <Route path="/manageUsers" element={<ManageUsers />} />
-          <Route path="/AddUser" element={<AddUser />} />
-          <Route
-            path="/profile"
-            element={<Profile setProfilePic={setProfilePic} />}
-          />
+          <Route path="/addUser" element={<AddUser />} />
+          <Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
           <Route path="/profile/:id" element={<ProfileGeneral />} />
           <Route path="/report" element={<Report />} />
           <Route

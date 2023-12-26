@@ -10,6 +10,7 @@ const ChatMessage = forwardRef(function ChatMessage(
   { sender, avatarImage, _id, message, updatedAt, readers },
   ref
 ) {
+  console.log("avatar image", avatarImage);
   const { user } = useAuthContext();
   const { chatInfo } = useChatContext();
   const messageRef = useRef(null);

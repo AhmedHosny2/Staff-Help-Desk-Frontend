@@ -44,15 +44,17 @@ function Navbar() {
 
   return (
     <NavContainer>
-      <Link to="/">
-        <NavLogo>
-          <NavImage src="/talking.png" alt="brand=logo" />
-          <NavBrand>Chatty</NavBrand>
+      <div className="badge badge-success badge-sm"></div>
+      <div className="indicator">
+        <span className="indicator-item indicator-start badge badge-secondary"></span>
+        <div className="grid w-32 h-32  place-items-center">
+          {" "}
           {show && onlineUsers && (
-            <NavCount> Online_Users：{onlineUsers.length || 0}</NavCount>
+            <NavCount> Online Users：{onlineUsers.length || 0}</NavCount>
           )}
-        </NavLogo>
-      </Link>
+        </div>
+      </div>
+
       {user ? (
         <NavUser>
           Welcome! <span>{user.name}</span>
@@ -66,18 +68,6 @@ function Navbar() {
             <HiOutlineMoon onClick={() => setMode("light")} />
           )}
         </NavIcon>
-        {user ? (
-          <>
-            <NavIcon>
-              <Link to="/open-room">
-                <MdGroupAdd />
-              </Link>
-            </NavIcon>
-            <NavIcon>
-              <HiOutlineArrowTopRightOnSquare onClick={handleLogout} />
-            </NavIcon>
-          </>
-        ) : null}
       </NavIcons>
     </NavContainer>
   );

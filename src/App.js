@@ -40,7 +40,7 @@ import { ChatContext } from "./pages/chat/context/ChatContext.jsx";
 import { socketEmitEvent } from "./pages/chat/socket/emit.js";
 import LightChat from "./pages/lightChat/lightChat.jsx";
 import ChatMain from "./pages/chat/chatMain.jsx";
-import Bot from "./pages/bot/bot.jsx"
+import Bot from "./pages/bot/bot.jsx";
 
 const privateRoutes = [
   `/home/user`,
@@ -223,18 +223,23 @@ function App() {
   //     }
   //   }, [socketId, socket]);
 
-	return (
-		<>
-			<NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
-			<AnimatePresence>
-			<Bot/>
-				<Routes location={location} key={location.key}>
-					{/* PUBLIC ROUTES */}
-					<Route path="/" element={<LandingPage />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/signup" element={<Signup />} />
-					<Route path="/resetPassword" element={<ResetPasswordRequestComponent />} />
-					<Route path="/confirmReset/:token" element={<ConfirmResetPasswordComponent />} />
+  return (
+    <>
+      <NavbarParent profilePic={profilePic} setProfilePic={setProfilePic} />
+      <AnimatePresence>
+        <Routes location={location} key={location.key}>
+          {/* PUBLIC ROUTES */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/resetPassword"
+            element={<ResetPasswordRequestComponent />}
+          />
+          <Route
+            path="/confirmReset/:token"
+            element={<ConfirmResetPasswordComponent />}
+          />
 
           {/* PRIVATE ROUTES */}
           <Route path="/home/user" element={<UserHomePage />} />

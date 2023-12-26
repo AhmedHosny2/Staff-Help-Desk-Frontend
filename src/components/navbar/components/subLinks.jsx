@@ -80,13 +80,23 @@ export default function SubLinks() {
 							</details>
 						</li>
 						<li>
+							<Link to="/chat">Chat</Link>
+						</li>
+						<li>
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link to="/report">Generate Report</Link>
-						</li>
-						<li>
-							<Link to="/chat">Chat</Link>
+							<details>
+								<summary>Site Management</summary>
+								<ul className="w-44">
+									<li>
+										<Link to="/report">Generate Report</Link>
+									</li>
+									<li>
+										<Link to="/changeBrand">Customize Website</Link>
+									</li>
+								</ul>
+							</details>
 						</li>
 					</>
 				);

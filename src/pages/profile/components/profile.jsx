@@ -204,7 +204,7 @@ export default function ProfileComponent({ setProfilePic }) {
 											</div>
 										) : (
 											<img
-												className="custom-file-upload border-4 border-secondary rounded"
+												className="custom-file-upload border-4 border-secondary"
 												src={addImage.myFile || profileData.profilePic}
 												alt=""
 											></img>

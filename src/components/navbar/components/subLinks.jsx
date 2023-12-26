@@ -43,6 +43,9 @@ export default function SubLinks() {
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
+							<Link to="/EditCustomWorkflow">Edit Custom Workflow</Link>
+						</li>
+						<li>
 							<Link>Chat</Link>
 						</li>
 					</>
@@ -58,7 +61,7 @@ export default function SubLinks() {
 							<Link to="/knowledgeBase">Knowledge Base</Link>
 						</li>
 						<li>
-							<Link>Manager Item 3</Link>
+							<Link to="/EditAutomaticWorkflow">Edit Automatic Workflow</Link>
 						</li>
 					</>
 				);
@@ -84,6 +87,15 @@ export default function SubLinks() {
 						</li>
 						<li>
 							<Link to="/report">Generate Report</Link>
+						</li>
+						<li>
+							<Link to="/manageUsers">Manage Users</Link>
+						</li>
+						<li>
+							<Link to="/addUser">Add User</Link>
+						</li>
+						<li>
+							<Link to="/logs">View Logs</Link>
 						</li>
 						<li>
 							<Link>Chat</Link>

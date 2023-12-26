@@ -62,7 +62,7 @@ export default function ProfileComponent() {
 	return (
 		<>
 			<div className="container mx-auto py-8 z-[-10]">
-				<div className="grid grid-cols-4 lg:grid-cols-12 gap-6 px-4">
+				<div className="grid grid-cols-4 xl:grid-cols-12 gap-6 px-4">
 					<div className="col-span-4 sm:col-span-3">
 						<div className="bg-neutral shadow rounded-lg p-6">
 							<div className="flex flex-col items-center">
@@ -98,7 +98,7 @@ export default function ProfileComponent() {
 											</div>
 										) : (
 											<img
-												className="custom-file-upload border-4 border-secondary rounded"
+												className="custom-file-upload border-4 border-secondary"
 												src={profileData.profilePic}
 												alt=""
 											></img>

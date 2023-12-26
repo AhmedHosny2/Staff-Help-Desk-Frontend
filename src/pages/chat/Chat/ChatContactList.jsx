@@ -28,7 +28,6 @@ function ChatContactList() {
 
   const renderedGroups = Object.entries(contactGroups).map(([key, values]) => {
     const renderedContacts = values.map((contact) => {
-      console.log("other user " + contact);
       const { _id, avatarImage, ...otherContact } = contact;
       return (
         <ListItem

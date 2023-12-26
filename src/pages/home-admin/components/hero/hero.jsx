@@ -88,20 +88,33 @@ export default function Hero() {
 						<div className="flex flex-wrap gap-6 justify-center">
 							<Link to="/manageUsers">
 								<motion.div variants={childCardVariant1}>
-									<Card first={<PeopleOutlineIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Manage Users'} />
+									<Card
+										first={<PeopleOutlineIcon sx={{ color: 'Black', fontSize: 100 }} />}
+										second={
+											<div>
+												Manage <br />
+												Users
+											</div>
+										}
+									/>
 								</motion.div>
 							</Link>
 							<Link to="/addUser">
 								<motion.div variants={childCardVariant2}>
-									<Card first={<PersonAddAltIcon sx={{ color: "Black", fontSize: 100 }} />} second={'Add User'} />
+									<Card
+										first={<PersonAddAltIcon sx={{ color: 'Black', fontSize: 100 }} />}
+										second={'Add User'}
+									/>
 								</motion.div>
 							</Link>
 							<Link to="/logs">
 								<motion.div variants={childCardVariant3}>
-									<Card first={<TocIcon sx={{ color: "Black", fontSize: 100 }} />} second={'View Logs'} />
+									<Card
+										first={<TocIcon sx={{ color: 'Black', fontSize: 100 }} />}
+										second={'View Logs'}
+									/>
 								</motion.div>
 							</Link>
-
 						</div>
 					</div>
 				</div>

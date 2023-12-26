@@ -63,7 +63,6 @@ function ChatRoom() {
 
   useEffect(() => {
     if (messageData) {
-      console.log("=== socket ===", messageData);
 
       const isChatting = checkIsChatting(messageData);
 
@@ -93,7 +92,6 @@ function ChatRoom() {
       const isChatting =
         type === "user" ? chatId === readerId : chatId === receiveRoomId;
       if (isChatting) {
-        console.log("*** set chat message read status ***", messageReadStatus);
         setChatMessages((prev) =>
           prev.map((msg) =>
             msg.sender !== readerId

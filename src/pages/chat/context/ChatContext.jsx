@@ -38,7 +38,7 @@ function ChatContextProvider({ children }) {
           url: chatAPI.getUserContacts(),
         },
         (data) => {
-          console.log("data", data);
+          // console.log("data", data);
           const contactsWithOnlineStatus = data.data.map((contact) => ({
             ...contact,
             isOnline:

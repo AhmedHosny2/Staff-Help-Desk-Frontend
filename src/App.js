@@ -1,4 +1,3 @@
-// import { customFetch } from './utils/Fetch.js';
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -152,6 +151,7 @@ function App() {
   useEffect(() => {
     socket?.emit("newUser", user.firstName);
   }, [socket, user]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -173,13 +173,21 @@ function App() {
     fetchData();
   }, [currentTheme]);
 
+
+
+
   useEffect(() => {
+    const needMFA = localStorage.getItem("MFA");
+
+    if (needMFA) {
+      navigate("/mfa/validate");
+    }
     // Function to check if a cookie exists
     const checkCookie = (cookieName) => {
       const cookies = document.cookie.split(";");
       for (let i = 0; i < cookies.length; i++) {
         const cookie = cookies[i].trim();
-        if (cookie.startsWith(`${cookieName}=`)) {
+        if (cookie && cookie.startsWith(`${cookieName}=`)) {
           return true; // Cookie exists
         }
       }

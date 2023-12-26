@@ -34,7 +34,6 @@ export default function ProfileComponent({ setProfilePic }) {
 	const [added, setAdded] = useState(false);
 
 	const handleLinkClick = (e, linkName, linkUrl) => {
-		console.log('HENA');
 		e.preventDefault();
 
 		if (!isEditing) {
@@ -146,6 +145,17 @@ export default function ProfileComponent({ setProfilePic }) {
 		}
 	};
 
+	const handleDisableMFA = async () => {
+		try {
+			const response = await customFetch(process.env.REACT_APP_USERS_URL + 'disableMfa', 'POST');
+			var toastId = toast.success('MFA Disabled!', getToastStyle());
+		} catch (error) {
+			console.error('Error fetching data:', error);
+			toastId = toast.error('Error...Could not disable MFA!', getToastStyle());
+		}
+		removeToast(toast, toastId);
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -157,6 +167,7 @@ export default function ProfileComponent({ setProfilePic }) {
 				setProfileData(newData);
 				setEditedBio(newData.bio);
 				setProfilePic(newData.profilePic);
+				console.log(newData);
 			} catch (error) {
 				console.error('Error fetching data:', error);
 			}
@@ -168,7 +179,7 @@ export default function ProfileComponent({ setProfilePic }) {
 	return (
 		<>
 			<div className="container mx-auto py-8 z-[-10]">
-				<div className="grid grid-cols-4 lg:grid-cols-12 gap-6 px-4">
+				<div className="grid grid-cols-4 xl:grid-cols-12 gap-6 px-4">
 					<div className="col-span-4 sm:col-span-3">
 						<div className="bg-neutral shadow rounded-lg p-6">
 							<div className="flex flex-col items-center">
@@ -294,7 +305,25 @@ export default function ProfileComponent({ setProfilePic }) {
 												Press <kbd className="kbd bg-neutral">Enter</kbd> in the About
 												me field to write a new line
 											</p>
-											<button className="btn btn-wide btn-outline">Enable MFA</button>
+											{profileData.pin ? (
+												<>
+													<button
+														className="btn btn-wide btn-outline"
+														onClick={handleDisableMFA}
+													>
+														Disable MFA
+													</button>
+												</>
+											) : (
+												<>
+													<Link
+														to="/mfa/enable-mfa"
+														className="btn btn-wide btn-outline"
+													>
+														Enable MFA
+													</Link>
+												</>
+											)}
 										</div>
 									</div>
 								</div>

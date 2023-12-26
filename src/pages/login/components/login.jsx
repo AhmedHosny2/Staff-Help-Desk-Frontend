@@ -61,7 +61,9 @@ export default function LoginComponent() {
         setLoggingin(false);
       }, 2500);
     } else if (newStatusText === "MFA required") {
+      localStorage.setItem("MFA",true)
       toastId = toast.error("MFA check", getToastStyle());
+      console.log("MFA check");
       setTimeout(() => {
         navigate("/mfa/validate");
         setLoggingin(false);

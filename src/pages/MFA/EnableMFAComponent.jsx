@@ -48,6 +48,7 @@ export default function EnableMFAComponent() {
     );
     if (response.newStatus === 200) {
       setVerificationResult(response.newData);
+      localStorage.setItem("loggedin", true);
 
       // Set the state to indicate that MFA is enabled successfully
       setIsMFAEnabled(true);

@@ -79,6 +79,7 @@ const roleHierarchy = {
 		`/lightChat`,
 		'/chat',
 		'/ticket',
+		`/changeBrand`,
 	],
 	agent: [
 		'/home/agent',

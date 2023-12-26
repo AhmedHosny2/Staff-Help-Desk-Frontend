@@ -119,6 +119,7 @@ export default function CreatTicketComponent() {
 								<option value="Software">Software</option>
 								<option value="Hardware">Hardware</option>
 								<option value="Network">Network</option>
+								<option value="Other">Other</option>
 							</select>
 
 							{formData.issue_type && (
@@ -136,6 +137,13 @@ export default function CreatTicketComponent() {
 												<option value="laptops">Laptops</option>
 											</>
 										)}
+										{
+											formData.issue_type === "Other" && (
+												<>
+													{navigate('/chat')}
+												</>
+											)
+										}
 										{formData.issue_type === "Software" && (
 											<>
 												<option value="operating system">

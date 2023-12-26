@@ -4,7 +4,9 @@ import { customFetch } from '../../../utils/Fetch';
 import SaveIcon from '@mui/icons-material/Save';
 import { getToastStyle, removeToast } from '../../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
-export default function CreatTicketComponent() {
+import { io } from "socket.io-client";
+
+export default function CreatTicketComponent({socket}) {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		issue_type: null,
@@ -20,8 +22,17 @@ export default function CreatTicketComponent() {
 	const [status, setStatus] = useState(null);
 	const [statusText, setStatusText] = useState('');
 	const [message, setMessage] = useState('');
+	const handleNotification = (type) => {
+		if(!socket)socket=io("http://localhost:5011");
+		socket.emit("sendNotification", {
+		  senderName: "We",
+		  receiverName:"" ,
+		  type,
+		});
+	  };
 
 	const handleButtonClick = (e) => {
+		handleNotification("Created New");
 		setIsPending(true);
 		const body = {
 			title: title,

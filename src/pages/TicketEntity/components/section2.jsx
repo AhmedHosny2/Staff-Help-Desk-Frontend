@@ -3,14 +3,14 @@ import JoditEditor from "jodit-react";
 import { customFetch } from "../../../utils/Fetch";
 import { useNavigate } from "react-router-dom";
 import { Parser } from "html-to-react";
-
-export default function Section2({ data, userData }) {
+import { io } from "socket.io-client";
+export default function Section2({ data, userData, socket }) {
   const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fixes, setFixes] = useState([]);
-
+  if (!socket) socket = io("http://localhost:5011");
   const editor = useRef(null);
   const buttonRef = useRef(null);
 
@@ -19,10 +19,27 @@ export default function Section2({ data, userData }) {
     month: "long",
     day: "numeric",
   });
+  //noti
 
+  useEffect(() => {
+    if (userData && socket) {
+      socket.emit("newUser", {
+        username: userData.firstName,
+      });
+    }
+  }, [socket, userData]);
+
+  const handleNotification = (type) => {
+    socket.emit("sendNotification", {
+      senderName: "We",
+      receiverName: userData.firstName,
+      type,
+    });
+  };
   const handleButtonClick = async (e) => {
     setLoading(true);
     console.log(e.target.value);
+    handleNotification(e.target.value);
     const body = {
       ticketId: window.location.pathname.split("/")[2],
       title: data.title,
@@ -183,25 +200,15 @@ export default function Section2({ data, userData }) {
                 </div>
                 <div className="collapse-content">
                   {data.ticketSolution.length > 0 ? (
-                    <>
-                      {" "}
-                      <div>
-                        {data.ticketSolution.map((sol, index) => (
-                          <div
-                            key={index}
-                            dangerouslySetInnerHTML={{ __html: sol }}
-                          />
-                        ))}
-                      </div>
-                      <button
-                        className="btn btn-active btn-accent"
-                        onClick={() => {
-                          navigate("/chat");
-                        }}
-                      >
-                        Live Chat
-                      </button>
-                    </>
+                    // add spcae here
+                    <div>
+                      {data.ticketSolution.map((sol, index) => (
+                        <div
+                          key={index}
+                          dangerouslySetInnerHTML={{ __html: sol }}
+                        />
+                      ))}
+                    </div>
                   ) : (
                     <p>
                       Our agents are working on it

@@ -55,6 +55,7 @@ const privateRoutes = [
   `/EditCustomWorkflow`,
   `/EditAutomaticWorkflow`,
   `/changeBrand`,
+  `/addUser`,
   '*',
 ];
 
@@ -111,6 +112,7 @@ const roleHierarchy = {
     '/knowledgeBase',
     '/test',
     `/changeBrand`,
+    `/addUser`
 
   ],
 };
@@ -194,7 +196,7 @@ function App() {
           <Route path="/home/manager" element={<ManagerHomePage />} />
           <Route path="/logs" element={<Logs />} />
           <Route path="/manageUsers" element={<ManageUsers />} />
-          <Route path="/AddUser" element={<AddUser />} />
+          <Route path="/addUser" element={<AddUser />} />
           <Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
           <Route path="/profile/:id" element={<ProfileGeneral />} />
           <Route path="/report" element={<Report />} />

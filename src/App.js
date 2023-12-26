@@ -187,6 +187,7 @@ function App() {
 		if (!isAuthCookieExists) {
 			localStorage.removeItem('loggedin');
 		}
+		// Define an object to represent the role hierarchy and allowed pages for each role
 
 		// Check if the user is not logged in and is trying to access a private route
 		if (
@@ -253,13 +254,12 @@ function App() {
 					<Route path="/createTicket" element={<CreatTicketComponent />} />
 					<Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
 					<Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />
-					<Route path="/changeBrand" element={<ChangeBrandPage />} />
-					<Route path="/chat" element={<ChatMain />} />
-					<Route path="/lightChat" element={<LightChat />} />
 					<Route
 						path="/changeBrand"
 						element={<ChangeBrandPage setCurrentTheme={setCurrentTheme} />}
 					/>
+					<Route path="/chat" element={<ChatMain />} />
+					<Route path="/lightChat" element={<LightChat />} />
 					<Route path="*" element={<Error />} />
 				</Routes>
 			</AnimatePresence>

@@ -1,7 +1,6 @@
 import "./ChangeBrand.css";
 import React, { useState, useEffect } from 'react';
 import { customFetch } from '../../utils/Fetch';
-import { useForm } from 'react-hook-form';
 import { motion, useAnimation } from 'framer-motion';
 import scrollIntoView from 'scroll-into-view';
 import { getToastStyle, removeToast } from '../../utils/toastStyle';
@@ -58,16 +57,18 @@ const themeImages = {
 
 const ChangeBrand = ({ setCurrentTheme }) => {
     const controls = useAnimation();
-    const [brandData, setBrandData] = useState([]);
+    // const [brandData, setBrandData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [name, setName] = useState('');
-    const [theme, setTheme] = useState('');
     const [originalName, setOriginalName] = useState('');
-    const [originalTheme, setOriginaTheme] = useState('');
+    const [originalTheme, setOriginalTheme] = useState('');0
+    const [name, setName] = useState(originalName);
+    const [theme, setTheme] = useState(originalTheme);
+   
     const [pic, setPic] = useState('');
     const [originalPic, setOriginalPic] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isChosen, setIsChosen] = useState(false);
+    const [isChanged, setIsChanged] = useState(false);
 
 
     // const animateScroll = () => {
@@ -89,15 +90,19 @@ const ChangeBrand = ({ setCurrentTheme }) => {
         }
     };
     useEffect(() => {
+
+
         const fetchData = async () => {
+            setIsChanged(name !== originalName || theme !== originalTheme);
             setIsLoading(true);
             try {
                 const { newData } = await customFetch(process.env.REACT_APP_BRANDINFO_URL + '/getBrandInfo', 'GET');
-                setOriginalName(newData[0].name.toString());
-                setOriginaTheme(newData[0].theme.toString());
-                console.log("tets now " + newData[0].theme.toString());
+                setOriginalName(newData[0].name);
+                setOriginalTheme(newData[0].theme);
                 setOriginalPic(themeImages[newData[0].theme.toString()]);
-                setBrandData(newData[0].name.toString());
+                
+
+                // setBrandData(newData[0].name.toString());
                 // document.querySelector("html").setAttribute("data-theme", newData[0].theme);
                 // localStorage.setItem("theme", theme);
                 setIsLoading(false);
@@ -109,21 +114,25 @@ const ChangeBrand = ({ setCurrentTheme }) => {
     }, []);
 
     const onSubmit = async (data) => {
-        if (name === originalName && theme === originalTheme) {
-            var toastId = toast.error('Nothing To Save', getToastStyle());
-            return;
-        }
+        // if (name === originalName && theme === originalTheme) {
+        //     var toastId = toast.error('Nothing To Save', getToastStyle());
+        //     return;
+        // }
 
-        if (name !== originalName && theme === originalTheme) {
-            toastId = toast.success('Name changed', getToastStyle());
-        }
+        // if (name !== originalName && theme === originalTheme) {
+        //     toastId = toast.success('Name changed', getToastStyle());
+        // }
 
-        if (name === originalName && theme !== originalTheme) {
-            toastId = toast.success('Theme changed', getToastStyle());
-        }
-        else {
-            toastId = toast.success('Brand Info Updated Successfully', getToastStyle());
-        }
+        // if (name === originalName && theme !== originalTheme) {
+        //     toastId = toast.success('Theme changed', getToastStyle());
+        // }
+        // else if (name !== originalName && theme !== originalTheme) {
+        //     toastId = toast.success('Brand Info Updated Successfully', getToastStyle());
+        // }
+        // else {
+        //     toastId = toast.error('Error updating brand info', getToastStyle());
+        // }
+
         setIsSubmitting(true);
         const body = {
             name,
@@ -134,9 +143,10 @@ const ChangeBrand = ({ setCurrentTheme }) => {
             await customFetch(process.env.REACT_APP_BRANDINFO_URL + '/createBrandInfo', 'POST', body);
             setCurrentTheme(theme);
 
+
         } catch (error) {
             console.error('Error updating brand name:', error);
-            toastId = toast.error(error, getToastStyle());
+            var toastId = toast.error(error, getToastStyle());
         }
 
         removeToast(toast, toastId);
@@ -167,7 +177,7 @@ const ChangeBrand = ({ setCurrentTheme }) => {
                                 id="name"
                                 name="name"
                                 defaultValue={originalName}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => { setName(e.target.value); }}
                                 className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                             />
                         </div>
@@ -185,7 +195,7 @@ const ChangeBrand = ({ setCurrentTheme }) => {
                                                 name="theme"
                                                 className=" btn btn-sm btn-block btn-ghost justify-start"
                                                 aria-label={theme}
-                                                onChange={(e) => { setTheme(e.target.value); setPic(themeImages[e.target.value]); setIsChosen(true); }}
+                                                onChange={() => { setTheme(theme); setPic(themeImages[theme]); setIsChosen(true); }}
                                                 value={theme}
                                             />
                                         </li>
@@ -197,7 +207,7 @@ const ChangeBrand = ({ setCurrentTheme }) => {
                                 onClick={onSubmit}
                                 value="Update"
                                 className="bg-neutral  transform transition duration-9000 ease-in-out rounded-box  hover:scale-105 hover:bg-accent text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
-                                disabled={isSubmitting}
+                                disabled={!isChanged || isSubmitting}
                             />
                             {isSubmitting && (
                                 <svg

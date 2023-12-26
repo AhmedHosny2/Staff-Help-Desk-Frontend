@@ -21,10 +21,10 @@ const TableLogs = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const columns = [
-		{ id: 'statuscode', label: 'Status Code', minWidth: 120 },
-		{ id: 'method', label: 'Method', minWidth: 100 },
-		{ id: 'api', label: 'API', minWidth: 100 },
-		{ id: 'time', label: 'Time', minWidth: 100 },
+		{ id: 'statuscode', label: 'Status Code' },
+		{ id: 'method', label: 'Method' },
+		{ id: 'api', label: 'API' },
+		{ id: 'time', label: 'Time' },
 	];
 
 	useEffect(() => {
@@ -45,38 +45,43 @@ const TableLogs = () => {
 	return (
 		<>
 			<motion.div variants={heroVariant} initial="hidden" animate="visible">
-				<div className="flex justify-center items-center min-h-screen">
-					{isLoading ? (
-						<p>Loading data...</p>
-					) : (
-						<>
-							<div className="flex flex-col">
-								<div className="flex flex-col items-center my-8">
-									<div className="indicator">
-										<span className="indicator-item badge badge-secondary">LOGS</span>
-										<h2 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
-											Recent Logs
-										</h2>
-									</div>
-									<Link to="/logs" className="link link-hover text-sm">
-										View Full Logs Details?
-									</Link>
+				{isLoading ? (
+					<>
+						<div className="flex justify-center items-center min-h-screen">
+							<h2 className="text-center text-lg sm:text-sm md:text-md lg:text-xl xl:text-2xl font-bold">
+								Loading
+							</h2>
+							<span className="loading loading-spinner loading-md ml-4"></span>
+						</div>
+					</>
+				) : (
+					<>
+						<div className="flex flex-col">
+							<div className="flex flex-col items-center my-8">
+								<div className="indicator">
+									<span className="indicator-item badge badge-secondary">LOGS</span>
+									<h2 className="text-center text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
+										Recent Logs
+									</h2>
 								</div>
-								<div className="overflow-x-auto border rounded shadow-md mb-4">
-									<table>
-										<thead>
-											<tr className="bg-secondary">
-												{columns.map((column) => (
-													<th
-														key={column.id}
-														className={`px-6 py-4 min-w-[${column.minWidth}]`}
-													>
-														{column.label}
-													</th>
-												))}
-											</tr>
-										</thead>
-										<tbody>
+								<Link to="/logs" className="link link-hover text-sm">
+									View Full Logs Details?
+								</Link>
+							</div>
+							{/* TABLE */}
+							<div className="overflow-x-auto mt-10 mb-20 mx-4 xl:mx-10 rounded-xl">
+								<table className="table">
+									<thead>
+										<tr className="bg-secondary">
+											{columns.map((column) => (
+												<th key={column.id} className={`px-6 py-4`}>
+													{column.label}
+												</th>
+											))}
+										</tr>
+									</thead>
+									<tbody>
+										<>
 											{rowsData.map((row) => (
 												<tr key={row.id} className="hover:bg-base-300">
 													{Object.entries(row).map(([key, value]) => (
@@ -90,13 +95,24 @@ const TableLogs = () => {
 													))}
 												</tr>
 											))}
-										</tbody>
-									</table>
-								</div>
+										</>
+									</tbody>
+									{/* foot */}
+									<tfoot>
+										<tr className="bg-secondary">
+											{columns.map((column) => (
+												<th key={column.id} className={`px-6 py-4`}>
+													{column.label}
+												</th>
+											))}
+										</tr>
+									</tfoot>
+								</table>
 							</div>
-						</>
-					)}
-				</div>
+							{/* TABLE */}
+						</div>
+					</>
+				)}
 			</motion.div>
 		</>
 	);

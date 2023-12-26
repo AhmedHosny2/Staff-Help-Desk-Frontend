@@ -219,7 +219,7 @@ const ChangeBrand = ({ setCurrentTheme }) => {
 			<motion.div className="mx-4 md:mx-8 lg:mx-16" animate={controls}>
 				<div className={`container flex-col block wrap mx-auto p-4 md:p-8 ${theme}`}>
 					<h1 className="text-2xl font-bold mb-4 text-center">Change Brand</h1>
-					<div className="bg-base-200 shadow-xl flex-col block wrap rounded-lg px-8 pt-6 mb-4 w-96 h-56 mx-auto relative">
+					<div className="bg-base-200 shadow-xl flex-col block wrap rounded-lg px-8 pt-6 mb-4 lg:w-4/12 h-56 mx-auto relative">
 						<div className="mb-4">
 							<label htmlFor="name" className="block wrap text-sm font-bold mb-2">
 								Company Name
@@ -294,12 +294,12 @@ const ChangeBrand = ({ setCurrentTheme }) => {
 				<h2 className=" text-xl font-bold mb-4 text-center">Website Preview</h2>
 				<div
 					id="websitePreview"
-					className="mockup-browser shadow-2xl border w-10/12 h-4/5 mx-auto relative"
+					className="mockup-browser shadow-2xl border w-9/12 h-4/5 mx-auto relative"
 				>
 					<div className="mockup-browser-toolbar ">
 						<div className="input">https://Staff-help-desk.com</div>
 					</div>
-					<div className="flex justify-center items-center  py-50 text-font-primary bg-base-200 relative">
+					<div className="flex justify-center items-center py-50 text-font-primary bg-base-200 relative">
 						{isChosen && (
 							<img
 								defaultValue={originalPic}

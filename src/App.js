@@ -1,4 +1,4 @@
-import { customFetch } from './utils/Fetch.js';
+// import { customFetch } from './utils/Fetch.js';
 import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";

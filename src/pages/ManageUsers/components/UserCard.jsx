@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ChangeRole from './ChangeRole';
 import defaultProfile from '../../../assets/defaultProfile.jpg';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
-function UserCard({ userType, userName, email, userID, profilePicture }) {
+function UserCard({ userType, userName, email, userID, role, profilePicture }) {
+  const [isModalOpen, setModalOpen] = useState(false);
+
   let iconComponent;
 
   switch (userType) {
@@ -36,6 +39,14 @@ function UserCard({ userType, userName, email, userID, profilePicture }) {
     }
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div className="w-full max-w-sm bg-base-100 border border-base-200 rounded-lg shadow">
       <div className="flex justify-end px-4 pt-4">
@@ -59,12 +70,16 @@ function UserCard({ userType, userName, email, userID, profilePicture }) {
 
           <button
             type="button"
+            onClick={openModal}
             className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-primary-content bg-secondary rounded-lg hover:bg-base-100 ms-3"
           >
             Change Role
           </button>
         </div>
       </div>
+
+      <ChangeRole isModalOpen={isModalOpen} closeModal={closeModal} userId={userID} role={role} />
+
     </div>
   );
 }

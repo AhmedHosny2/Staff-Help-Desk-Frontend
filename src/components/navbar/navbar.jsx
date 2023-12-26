@@ -91,7 +91,6 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 		setModalOpen(false);
 	};
 
-
 	const closeModalESC = (e) => {
 		if (e.key === 'Escape') {
 			closeModal();
@@ -138,8 +137,11 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 					</div>
 
 					<div className="navbar-end">
-						<button className="btn btn-ghost btn-circle"
-							onClick={openModal} onKeyDown={closeModalESC}>
+						<button
+							className="btn btn-ghost btn-circle"
+							onClick={openModal}
+							onKeyDown={closeModalESC}
+						>
 							<SmartToyIcon />
 						</button>
 						{/* NOTIFICATION DROP DOWN START */}
@@ -218,7 +220,7 @@ export default function NavbarComponent({ profilePic, setProfilePic }) {
 										</svg>
 									) : (
 										<img
-											className="custom-file-upload border-4 border-secondary rounded"
+											className="custom-file-upload border-4 border-secondary"
 											src={profilePic}
 											alt=""
 										></img>

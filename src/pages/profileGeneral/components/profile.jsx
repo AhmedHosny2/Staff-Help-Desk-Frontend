@@ -98,7 +98,7 @@ export default function ProfileComponent() {
 											</div>
 										) : (
 											<img
-												className="custom-file-upload border-4 border-secondary rounded"
+												className="custom-file-upload border-4 border-secondary"
 												src={profileData.profilePic}
 												alt=""
 											></img>

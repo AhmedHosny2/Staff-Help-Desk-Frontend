@@ -25,7 +25,8 @@ export default function MFAValidationComponent({ email }) {
     if (newStatusText === 'confirmed') {
       // Redirect to home if MFA validation is successful
       console.log('MFA validated successfully');
-      
+      localStorage.setItem('role', newData.role);
+      localStorage.setItem('MFA','');
       navigate('/home/user'); // Adjust the route as needed
     } else {
       // Handle error case

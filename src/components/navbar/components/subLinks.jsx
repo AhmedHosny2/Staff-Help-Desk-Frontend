@@ -90,10 +90,19 @@ export default function SubLinks() {
 								<summary>Site Management</summary>
 								<ul className="w-44">
 									<li>
+										<Link to="/addUser">Add User</Link>
+									</li>
+									<li>
+										<Link to="/manageUsers">Manage Users</Link>
+									</li>
+									<li>
 										<Link to="/report">Generate Report</Link>
 									</li>
 									<li>
 										<Link to="/changeBrand">Customize Website</Link>
+									</li>
+									<li>
+										<Link to="/logs">Logs</Link>
 									</li>
 								</ul>
 							</details>

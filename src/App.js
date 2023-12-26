@@ -2,35 +2,36 @@ import "./App.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { customFetch } from "./utils/Fetch.js";
 
 // Imported Components
 
 import NavbarParent from "./components/navbarParent/navbarParent.jsx";
 
 // Imported Pages
-import LandingPage from './pages/landing/landing.jsx';
-import UserHomePage from './pages/home-user/home.jsx';
-import AdminHomePage from './pages/home-admin/home.jsx';
-import AgentHomePage from './pages/home-agent/home.jsx';
-import ManagerHomePage from './pages/home-manager/home.jsx';
-import Login from './pages/login/login.jsx';
-import Signup from './pages/signup/signup.jsx';
-import Profile from './pages/profile/profile.jsx';
-import ProfileGeneral from './pages/profileGeneral/profile.jsx';
-import Logs from './pages/Logs/Logs.jsx';
-import ManageUsers from './pages/ManageUsers/ManageUsers.jsx';
-import AddUser from './pages/AddUser/AddUser.jsx';
-import Report from './pages/report/report.jsx';
-import KnowledgeBaseHomePage from './pages/knowledgeBase/knowledgeBase-home.jsx';
-import MFAValidationComponent from './pages/MFA/MFAValidationComponent.jsx';
-import EnableMFAComponent from './pages/MFA/EnableMFAComponent.jsx';
-import ResetPasswordRequestComponent from './pages/resetPassword/ResetPasswordComponent.jsx';
-import ConfirmResetPasswordComponent from './pages/resetPassword/ConfirmResetPasswordComponent.jsx';
-import Ticket from './pages/Tickets/tickets.jsx';
-import CreatTicketComponent from './pages/Tickets/components/createTicket.jsx';
-import EditAutomaticWorkflow from './pages/EditAutomaticWorkflow/EditAutomaticWorkflow.jsx';
-import EditCustomWorkflow from './pages/EditCustomWorkflow/EditCustomWorkflow.jsx';
-import Error from './pages/error/error.jsx';
+import LandingPage from "./pages/landing/landing.jsx";
+import UserHomePage from "./pages/home-user/home.jsx";
+import AdminHomePage from "./pages/home-admin/home.jsx";
+import AgentHomePage from "./pages/home-agent/home.jsx";
+import ManagerHomePage from "./pages/home-manager/home.jsx";
+import Login from "./pages/login/login.jsx";
+import Signup from "./pages/signup/signup.jsx";
+import Profile from "./pages/profile/profile.jsx";
+import ProfileGeneral from "./pages/profileGeneral/profile.jsx";
+import Logs from "./pages/Logs/Logs.jsx";
+import ManageUsers from "./pages/ManageUsers/ManageUsers.jsx";
+import AddUser from "./pages/AddUser/AddUser.jsx";
+import Report from "./pages/report/report.jsx";
+import KnowledgeBaseHomePage from "./pages/knowledgeBase/knowledgeBase-home.jsx";
+import MFAValidationComponent from "./pages/MFA/MFAValidationComponent.jsx";
+import EnableMFAComponent from "./pages/MFA/EnableMFAComponent.jsx";
+import ResetPasswordRequestComponent from "./pages/resetPassword/ResetPasswordComponent.jsx";
+import ConfirmResetPasswordComponent from "./pages/resetPassword/ConfirmResetPasswordComponent.jsx";
+import Ticket from "./pages/Tickets/tickets.jsx";
+import CreatTicketComponent from "./pages/Tickets/components/createTicket.jsx";
+import EditAutomaticWorkflow from "./pages/EditAutomaticWorkflow/EditAutomaticWorkflow.jsx";
+import EditCustomWorkflow from "./pages/EditCustomWorkflow/EditCustomWorkflow.jsx";
+import Error from "./pages/error/error.jsx";
 import ChangeBrandPage from "./pages/ChangeBrand/ChangeBrand.jsx";
 import TicketEntity from "./pages/TicketEntity/entityTicket.jsx";
 /// osama imoprts ==================================
@@ -63,13 +64,13 @@ const privateRoutes = [
   `/EditCustomWorkflow`,
   `/EditAutomaticWorkflow`,
   `/changeBrand`,
-  '*',
+  "*",
 ];
 
 const roleHierarchy = {
   user: [
-    '/home/user',
-    '/profile',
+    "/home/user",
+    "/profile",
     `/profileGeneral`,
     "/mfa/validate",
     "/mfa/enable-mfa",
@@ -78,53 +79,53 @@ const roleHierarchy = {
     "/knowledgeBase",
     `/lightChat`,
     "/chat",
-    '/ticket',
+    "/ticket",
   ],
   agent: [
-    '/home/agent',
-    '/profile',
+    "/home/agent",
+    "/profile",
     `/profileGeneral`,
-    '/mfa/validate',
-    '/mfa/enable-mfa',
-    '/ticket',
-    '/ticketEntity/:id',
-    '/knowledgeBase',
+    "/mfa/validate",
+    "/mfa/enable-mfa",
+    "/ticket",
+    "/ticketEntity/:id",
+    "/knowledgeBase",
     `/EditCustomWorkflow`,
+    `/changeBrand`,
     `/lightChat`,
     "/chat",
-    
   ],
   manager: [
-    '/home/manager',
-    '/logs',
-    '/manageUsers',
-    '/profile',
+    "/home/manager",
+    "/logs",
+    "/manageUsers",
+    "/profile",
     `/profileGeneral`,
-    '/report',
-    '/mfa/validate',
-    '/mfa/enable-mfa',
-    '/ticket',
-    '/ticketEntity/:id',
-    '/knowledgeBase',
-    '/EditAutomaticWorkflow',
+    "/report",
+    "/mfa/validate",
+    "/mfa/enable-mfa",
+    "/ticket",
+    "/ticketEntity/:id",
+    "/knowledgeBase",
+    "/EditAutomaticWorkflow",
     `/lightChat`,
     "/chat",
   ],
   admin: [
-    '/home/admin',
-    '/logs',
-    '/manageUsers',
-    '/AddUser',
-    '/profile',
+    "/home/admin",
+    "/logs",
+    "/manageUsers",
+    "/AddUser",
+    "/profile",
     `/profileGeneral`,
-    '/report',
-    '/mfa/validate',
-    '/mfa/enable-mfa',
-    '/ticket',
-    '/ticketEntity/:id',
-    '/createTicket',
-    '/knowledgeBase',
-    '/test',
+    "/report",
+    "/mfa/validate",
+    "/mfa/enable-mfa",
+    "/ticket",
+    "/ticketEntity/:id",
+    "/createTicket",
+    "/knowledgeBase",
+    "/test",
     `/changeBrand`,
     `/lightChat`,
     "/chat",
@@ -135,6 +136,28 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { newData } = await customFetch(
+          process.env.REACT_APP_BRANDINFO_URL + "/getBrandInfo",
+          "GET"
+        );
+        console.log("Fetched brand data:", newData[0]);
+        setCurrentTheme(newData[0].theme);
+        localStorage.setItem("theme", newData[0]);
+        document
+          .querySelector("html")
+          .setAttribute("data-theme", newData[0].theme);
+        console.log("documentTheme:", newData[0].theme);
+      } catch (error) {
+        console.error("Error fetching brand data:", error);
+      }
+    };
+    fetchData();
+  }, [currentTheme]);
 
   useEffect(() => {
     // Function to check if a cookie exists
@@ -221,10 +244,16 @@ function App() {
           <Route path="/logs" element={<Logs />} />
           <Route path="/manageUsers" element={<ManageUsers />} />
           <Route path="/AddUser" element={<AddUser />} />
-          <Route path="/profile" element={<Profile setProfilePic={setProfilePic} />} />
+          <Route
+            path="/profile"
+            element={<Profile setProfilePic={setProfilePic} />}
+          />
           <Route path="/profile/:id" element={<ProfileGeneral />} />
           <Route path="/report" element={<Report />} />
-          <Route path="/EditAutomaticWorkflow" element={<EditAutomaticWorkflow />} />
+          <Route
+            path="/EditAutomaticWorkflow"
+            element={<EditAutomaticWorkflow />}
+          />
           <Route path="/mfa/validate" element={<MFAValidationComponent />} />
           <Route path="/mfa/enable-mfa" element={<EnableMFAComponent />} />
           <Route path="/ticket" element={<Ticket />} />
@@ -232,12 +261,16 @@ function App() {
           <Route path="/createTicket" element={<CreatTicketComponent />} />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />
-          <Route path="/changeBrand" element={<ChangeBrandPage />} />
+
+          <Route
+            path="/changeBrand"
+            element={<ChangeBrandPage setCurrentTheme={setCurrentTheme} />}
+          />
+
           <Route path="/chat" element={<ChatMain />} />
           <Route path="/lightChat" element={<LightChat />} />
 
           <Route path="*" element={<Error />} />
-
         </Routes>
       </AnimatePresence>
     </>

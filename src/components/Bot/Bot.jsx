@@ -1,4 +1,3 @@
-// Bot.jsx
 import React, { useEffect, useState, useRef } from 'react';
 import { customFetch } from '../../utils/Fetch';
 import defaultProfile from '../../assets/defaultProfile.jpg';

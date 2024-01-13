@@ -52,34 +52,34 @@ Desk Mate is a Help Desk Software project designed with a microservices architec
         </ol>
     <h2>.env.example</h2>
 <p>
-  # Users Microservice <br>
+  Users Microservice <br>
   REACT_APP_USERS_URL=http://localhost:5001/user/ <br><br>
 
-  # Tickets Microservice <br>
+  Tickets Microservice <br>
   REACT_APP_TICKETS_URL=http://localhost:5002/ticket <br><br>
 
-  # Notifications Microservice <br>
+  Notifications Microservice <br>
   REACT_APP_NOTIFICATIONS_URL=http://localhost:5003/notification <br><br>
 
-  # Chat Microservice <br>
+  Chat Microservice <br>
   REACT_APP_CHAT_URL=http://localhost:5004/chat <br><br>
 
-  # Middleware Microservice <br>
+  Middleware Microservice <br>
   REACT_APP_MIDDLEWARE_URL=http://localhost:5005 <br><br>
 
-  # Knowledgebase Microservice <br>
+  Knowledgebase Microservice <br>
   REACT_APP_KNOWLEDGEBASE_URL=http://localhost:5006/knowledgebase <br><br>
 
-  # Logging Microservice <br>
+  Logging Microservice <br>
   REACT_APP_LOGGING_URL=http://localhost:5007/logging <br><br>
 
-  # Bot Microservice <br>
+  Bot Microservice <br>
   REACT_APP_BOT_URL=http://localhost:5004/bot <br><br>
 
-  # Brandinfo Route <br>
+  Brandinfo Route <br>
   REACT_APP_BRANDINFO_URL=http://localhost:5001/brandInfo <br><br>
 
-  # Ticket Classifier Microservice <br>
+  Ticket Classifier Microservice <br>
   REACT_APP_TICKET_CLASSIFIER_URL=http://localhost:5012
 </p>
 

@@ -1,73 +1,194 @@
-rfc
+<html>
+<h1>Desk Mate</h1>
+   <img src="README_Files/Landing.gif" alt="Alt text" title="Homepage" width="1000">
+       <h4>Backend Reposiery <a href="https://github.com/AhmedHosny2/Staff-Help-Desk-Backend" target="_blank">Here</a></h4>
+   <h3></h3>
+       <h2>Demo</h2>
+        <h4>You can watch a walkthrough of the website from <a href="" target="_blank">Here</a></h4>
+    <h2>
+    Table of contents
+    </h2>
+    <h3> 
+        <ul>
+            <li>Project Title</li>
+            <li>Demo</li>
+            <li>Table of contents</li>
+            <li>Description</li>
+            <li>Technology Stack</li>
+            <li>Usage</li>
+            <li>.env.example</li>
+            <li>List of Features</li>
+            <li>Preview</li>
+            <li>Contributers</li>
+        </ul>
+    </h3>
+    <br>
+    <h2>Description</h2>
+    <h4>
+Desk Mate is a Help Desk Software project designed with a microservices architecture, aimed at creating a robust application using the MERN stack (MongoDB, Express.js, React.js, Node.js), complemented by Tailwind CSS for streamlined and efficient styling. Focused on improving support and ticketing processes, the software incorporates features such as user management with role-based access, a comprehensive ticketing system for issue categorization and prioritization, an organized Knowledge Base for quick problem resolution, and communication tools including an integrated email and notification system and real-time chat functionality. Additionally, Desk Mate integrates an advanced AI chatbot, providing users with intelligent and instant assistance. The AI chatbot enhances the user experience by offering prompt responses and solutions. The system further includes responsive design for seamless usage across various devices, robust logs for real-time issue tracking, and Multi-Factor Authentication (MFA) to enhance overall security. Reporting and analytics features provide insights into ticket status, resolution time, and agent performance, while automation and workflows streamline repetitive tasks. The emphasis on customization, branding, security measures, and data protection ensures a well-rounded solution.
+    </h4>
+    <h2>Technology Stack</h2>
+       <ul>
+    <li>React.js - Frontend Framework</li>
+    <li>Node.js with Express.js - Backend Framework</li>
+    <li>MongoDB - Database</li>
+    <li>Tailwind CSS - CSS Framework</li>
+    <li>JSON Web Tokens (JWT) - Authentication</li>
+    <li>Socket.io - Real-Time Communication </li>
+    <li>JOI - Backend Input Validation</li>
+</ul>
+    <h2>Usage</h2>
+    <ol>
+            <li>Clone this project</li>
+            <li>Download Dependencies (MongoDB,node,react...)</li>
+            <li>Make a .env file and use the .env.example</li>
+            <li>Open terminal in the front end project folder then run npm i command</li>
+            <li>Run npm start in the frontend folder and wait a min or two</li>
+            <li>Clone the Back End files from this repo : <a href="https://github.com/AhmedHosny2/Staff-Help-Desk-Backend" target="_blank">Link</a></li>
+            <li>Make a .env file and use the .env.example from the backend repositries</li>
+            <li>Open terminal in the project folder then run python .\initializeAll.py</li>
+            <li>Then run python .\runAll.py</li>
+            <li>Enter in your browser http://localhost:3000/</li>
+        </ol>
+    <h2>.env.example</h2>
+<p>
+  # Users Microservice <br>
+  REACT_APP_USERS_URL=http://localhost:5001/user/ <br><br>
 
-# Getting Started with Create React App
+  # Tickets Microservice <br>
+  REACT_APP_TICKETS_URL=http://localhost:5002/ticket <br><br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  # Notifications Microservice <br>
+  REACT_APP_NOTIFICATIONS_URL=http://localhost:5003/notification <br><br>
 
-## Available Scripts
+  # Chat Microservice <br>
+  REACT_APP_CHAT_URL=http://localhost:5004/chat <br><br>
 
-In the project directory, you can run:
+  # Middleware Microservice <br>
+  REACT_APP_MIDDLEWARE_URL=http://localhost:5005 <br><br>
 
-### `npm start`
+  # Knowledgebase Microservice <br>
+  REACT_APP_KNOWLEDGEBASE_URL=http://localhost:5006/knowledgebase <br><br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  # Logging Microservice <br>
+  REACT_APP_LOGGING_URL=http://localhost:5007/logging <br><br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  # Bot Microservice <br>
+  REACT_APP_BOT_URL=http://localhost:5004/bot <br><br>
 
-### `npm test`
+  # Brandinfo Route <br>
+  REACT_APP_BRANDINFO_URL=http://localhost:5001/brandInfo <br><br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  # Ticket Classifier Microservice <br>
+  REACT_APP_TICKET_CLASSIFIER_URL=http://localhost:5012
+</p>
 
-### `npm run build`
+    <h2>List of Features</h2>
+<ul>
+    <li>Ticketing System with Categorization and Prioritization</li>
+    <li>Custom Workflow for Issue Reporting</li>
+    <li>Knowledge Base with Organized Repository of FAQs and Solutions</li>
+    <li>Integrated Email and Notification System</li>
+    <li>Real-Time Chat Functionality for Immediate Assistance</li>
+    <li>Reporting and Analytics on Ticket Status, Resolution Time, and Agent Performance</li>
+    <li>Automation of Repetitive Tasks</li>
+    <li>Customization of Help Desk's Appearance</li>
+    <li>AI Chat Bot for imediate assistance</li>
+    <li>Implementation of Security Measures including Encryption and Decryption of chat</li>
+    <li>Data Backup and Recovery Procedures</li>
+    <li>AI Ticket Routing System </li>
+    <li>Multi-Factor Authentication (MFA) for Enhanced Security </li>
+    <li>Error and Exception Logging for Robust Troubleshooting</li>
+    <li>Rate Limiting for Logins and Other Sensitive Requests</li>
+    <li>Progressive Web App</li>
+    <li>Responsive Design for Seamless Usage Across Various Devices</li>
+</ul>
+    <h2>Preview</h2>
+    <br>
+<h3>Home Page</h3>
+<br>
+<img src="README_Files/HomePage.png" alt="Home Page Screenshot" title="Home Page" width="1000">
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<h3>Profile Page</h3>
+<br>
+<img src="README_Files/ProfilePage.png" alt="Profile Page Screenshot" title="Profile Page" width="1000">
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h3>Create Ticket</h3>
+<br>
+<img src="README_Files/CreateTicket.png" alt="Create Ticket Screenshot" title="Create Ticket" width="1000">
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h3>Tickets</h3>
+<br>
+<img src="README_Files/Tickets.png" alt="Tickets Screenshot" title="Tickets" width="1000">
+<br>
 
-### `npm run eject`
+<h3>Ticket</h3>
+<br>
+<img src="README_Files/Ticket1.png" alt="Ticket 1 Screenshot" title="Ticket 1" width="1000">
+<br>
+<br>
+<img src="README_Files/Ticket2.png" alt="Ticket 2 Screenshot" title="Ticket 2" width="1000">
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<h3>Knowledge Base</h3>
+<br>
+<img src="README_Files/knowledgeBase.png" alt="Knowledge Base Screenshot" title="Knowledge Base" width="1000">
+<br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<!-- <h3>Chat</h3>
+<br>
+<img src="README_Files/chat.png" alt="Chat Screenshot" title="Chat" width="1000">
+<br> -->
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h3>User Management</h3>
+<br>
+<img src="README_Files/ManageUsers.png" alt="User Management Screenshot" title="User Management" width="1000">
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<h3>Website Customization</h3>
+<br>
+<img src="README_Files/Customize.png" alt="Website Customization Screenshot" title="Website Customization" width="1000">
+<br>
 
-## Learn More
+<h3>Reports</h3>
+<br>
+<img src="README_Files/Report1.png" alt="Report 1 Screenshot" title="Report 1" width="1000">
+<br>
+<img src="README_Files/Report2.png" alt="Report 2 Screenshot" title="Report 2" width="1000">
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h3>Chat Bot</h3>
+<br>
+<img src="README_Files/ChatBot.png" alt="Chat Bot Screenshot" title="Chat Bot" width="1000">
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h3>Emails</h3>
+<br>
+<img src="README_Files/email2.png" alt="Emails Screenshot" title="Emails" width="1000">
+<br>
 
-### Code Splitting
+<h3>Multi-Factor Authentication</h3>
+<br>
+<img src="README_Files/MFA1.png" alt="MFA 1 Screenshot" title="Multi-Factor Authentication 1" width="1000">
+<br>
+<img src="README_Files/MFA2.png" alt="MFA 2 Screenshot" title="Multi-Factor Authentication 2" width="1000">
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+<h3>Logs</h3>
+<br>
+<img src="README_Files/Logs.png" alt="Logs Screenshot" title="Logs" width="1000">
+<br>
+    <h2>Contributers</h2>
+        <ul>
+            <li>Ahmed Osama <a href="https://github.com/AhmedOsamaAli" target="_blank">Github</a> <a href="https://www.linkedin.com/in/ahmedosamadiab/" target="_blank">Linkedin</a></li>
+            <li>Ahmed Yehia <a href="https://github.com/AhmedHosny2" target="_blank">Github</a> <a href="https://www.linkedin.com/in/ahmed-yehia-155629206/" target="_blank">Linkedin</a></li>
+            <li>Bahy Mohamed <a href="https://github.com/bahylol" target="_blank">Github</a> <a href="https://www.linkedin.com/in/bahy-salama/" target="_blank">Linkedin</a></li>
+            <li>Mohamed Tamer <a href="https://github.com/MooTamer" target="_blank">Github</a> <a href="https://www.linkedin.com/in/mohamed-tamer-020a5221a/" target="_blank">Linkedin</a></li>
+            <li>Omar Abdelrazik <a href="https://github.com/ParsianNight" target="_blank">Github</a> <a href="https://www.linkedin.com/in/omarabdelrazek0/"
+            target="_blank">Linkedin</a></li>
+            <li>Youssef Elwy <a href="https://github.com/youfiElwy" target="_blank">Github</a> <a href="https://www.linkedin.com/in/youssef-elwy-427682268/" target="_blank">Linkedin</a></li>
+        </ul>
+</html>

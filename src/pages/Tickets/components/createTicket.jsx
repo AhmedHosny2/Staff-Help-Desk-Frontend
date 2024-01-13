@@ -4,8 +4,7 @@ import { customFetch } from '../../../utils/Fetch';
 import SaveIcon from '@mui/icons-material/Save';
 import { getToastStyle, removeToast } from '../../../utils/toastStyle';
 import toast, { Toaster } from 'react-hot-toast';
-import { io } from "socket.io-client";
-export default function CreatTicketComponent({socket}) {
+export default function CreatTicketComponent() {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		issue_type: null,
@@ -24,12 +23,7 @@ export default function CreatTicketComponent({socket}) {
 //notf 
 
 const handleNotification = (type) => {
-	if(!socket)socket=io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL);
-	socket.emit("sendNotification", {
-	  senderName: "We",
-	  receiverName:"" ,
-	  type,
-	});
+
   };
 
 

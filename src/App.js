@@ -40,7 +40,6 @@ import { socketEmitEvent } from "./pages/chat/socket/emit.js";
 import LightChat from "./pages/lightChat/lightChat.jsx";
 import ChatMain from "./pages/chat/chatMain.jsx";
 import Bot from "./pages/bot/bot.jsx";
-import { io } from "socket.io-client";
 
 const privateRoutes = [
   `/home/user`,
@@ -144,16 +143,6 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState("");
   //noti
   const [user, setUser] = useState("");
-  const [socket, setSocket] = useState(null);
-
-  useEffect(() => {
-    setSocket(io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL));
-  }, []);
-
-  useEffect(() => {
-    socket?.emit("newUser", user.firstName);
-  }, [socket, user]);
-
   //enc notif
   useEffect(() => {
     const fetchData = async () => {
@@ -232,28 +221,12 @@ function App() {
       navigate(homePath);
     }
   }, [location.pathname, navigate]); // Include location.pathname and navigate in the dependency array
-  //   const {
-  //     socketConnect,
-  //     socketValue: { socket, socketId },
-  //   } = useSocketContext();
-  //   useEffect(() => {
-  //     if (!socketId) {
-  //       socketConnect();
-  //     }
-  //   }, [socketId, socketConnect]);
-  // // TODO : change the user id to the real one
-  //   useEffect(() => {
-  //     if (socketId) {
-  //       socketEmitEvent(socket).userOnline("65814c05d03a8c84cff1b55f", socketId);
-  //     }
-  //   }, [socketId, socket]);
 
   return (
     <>
       <NavbarParent
         profilePic={profilePic}
         setProfilePic={setProfilePic}
-        socket={socket}
         user={user}
       />
       <AnimatePresence>
@@ -262,7 +235,7 @@ function App() {
           <Route
             path="/"
             element={<LandingPage />}
-            socket={socket}
+         
             user={user}
           />
           <Route path="/login" element={<Login />} />
@@ -280,25 +253,22 @@ function App() {
           <Route
             path="/home/user"
             element={<UserHomePage />}
-            socket={socket}
+         
             user={user}
           />
           <Route
             path="/home/admin"
             element={<AdminHomePage />}
-            socket={socket}
             user={user}
           />
           <Route
             path="/home/agent"
             element={<AgentHomePage />}
-            socket={socket}
             user={user}
           />
           <Route
             path="/home/manager"
             element={<ManagerHomePage />}
-            socket={socket}
             user={user}
           />
           <Route path="/logs" element={<Logs />} />
@@ -316,19 +286,16 @@ function App() {
           <Route
             path="/ticket"
             element={<Ticket />}
-            socket={socket}
             user={user}
           />
           <Route
             path="/ticketEntity/:id"
             element={<TicketEntity />}
-            socket={socket}
             user={user}
           />
           <Route
             path="/createTicket"
             element={<CreatTicketComponent />}
-            socket={socket}
           />
           <Route path="/knowledgeBase" element={<KnowledgeBaseHomePage />} />
           <Route path="/EditCustomWorkflow" element={<EditCustomWorkflow />} />

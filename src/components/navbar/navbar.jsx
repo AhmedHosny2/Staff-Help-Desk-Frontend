@@ -29,17 +29,12 @@ const navigationVariants = {
 	},
 };
 
-export default function NavbarComponent({ profilePic, setProfilePic ,socket }) {
+export default function NavbarComponent({ profilePic, setProfilePic  }) {
 	 //noti
 	 const [notifications, setNotifications] = useState([]);
 	 const [open, setOpen] = useState(false);
    
-	 useEffect(() => {
-	   socket.on("getNotification", (data) => {
-		 setNotifications((prev) => [...prev, data]);
-	   });
-	 }, [socket]);
-   
+	
 	 const displayNotification = ({ senderName, type }) => {
 	   return (
 		 <span className="notification">{`${senderName} ${type}  Ticket.`}</span>

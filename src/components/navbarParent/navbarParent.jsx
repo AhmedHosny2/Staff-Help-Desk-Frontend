@@ -1,10 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../navbar/navbar";
 import NavbarLanding from "../navbarLanding/navbarLanding";
-import { io } from "socket.io-client";
-export default function Navbar2({ profilePic, setProfilePic, socket }) {
+export default function Navbar2({ profilePic, setProfilePic }) {
   const loggedin = localStorage.getItem("loggedin");
-  if (!socket) socket = io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL);
   return (
     <>
       <div className="notifDrop">
@@ -14,7 +12,6 @@ export default function Navbar2({ profilePic, setProfilePic, socket }) {
               <Navbar
                 profilePic={profilePic}
                 setProfilePic={setProfilePic}
-                socket={socket}
               />{" "}
             </motion.div>
           ) : (

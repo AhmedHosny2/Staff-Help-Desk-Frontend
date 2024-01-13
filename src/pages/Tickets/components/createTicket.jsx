@@ -24,7 +24,7 @@ export default function CreatTicketComponent({socket}) {
 //notf 
 
 const handleNotification = (type) => {
-	if(!socket)socket=io("http://localhost:5011");
+	if(!socket)socket=io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL);
 	socket.emit("sendNotification", {
 	  senderName: "We",
 	  receiverName:"" ,

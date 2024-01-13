@@ -4,7 +4,7 @@ import NavbarLanding from "../navbarLanding/navbarLanding";
 import { io } from "socket.io-client";
 export default function Navbar2({ profilePic, setProfilePic, socket }) {
   const loggedin = localStorage.getItem("loggedin");
-  if (!socket) socket = io("http://localhost:5011");
+  if (!socket) socket = io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL);
   return (
     <>
       <div className="notifDrop">

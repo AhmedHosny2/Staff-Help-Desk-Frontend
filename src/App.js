@@ -147,7 +147,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io("http://localhost:5011"));
+    setSocket(io(process.env.REACT_APP_LIVE_NOTIFICATIONS_URL));
   }, []);
 
   useEffect(() => {

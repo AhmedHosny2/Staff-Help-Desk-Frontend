@@ -140,10 +140,13 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState(null);
-  const [currentTheme, setCurrentTheme] = useState("");
+  const [currentTheme, setCurrentTheme] = useState("nord");
   //noti
   const [user, setUser] = useState("");
   //enc notif
+  document
+  .querySelector("html")
+  .setAttribute("data-theme", "nord");
   useEffect(() => {
     const fetchData = async () => {
       try {

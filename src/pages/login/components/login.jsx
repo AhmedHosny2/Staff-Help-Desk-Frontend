@@ -177,7 +177,7 @@ export default function LoginComponent() {
               </div>
               <div className="divider">OR</div>
               <div className="grid place-items-center">
-                <GoogleButton />
+{/*                 <GoogleButton /> */}
               </div>
             </div>
           </div>
